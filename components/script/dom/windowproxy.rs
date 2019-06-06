@@ -46,7 +46,8 @@ use msg::constellation_msg::BrowsingContextId;
 use msg::constellation_msg::PipelineId;
 use msg::constellation_msg::TopLevelBrowsingContextId;
 use net_traits::request::Referrer;
-use script_traits::{AuxiliaryBrowsingContextLoadInfo, LoadData, NewLayoutInfo, ScriptMsg};
+use script_traits::{AuxiliaryBrowsingContextLoadInfo, HistoryEntryReplacement, LoadData};
+use script_traits::{NewLayoutInfo, ScriptMsg};
 use servo_url::ServoUrl;
 use std::cell::Cell;
 use std::ptr;
@@ -280,6 +281,7 @@ impl WindowProxy {
                 .unwrap();
             let blank_url = ServoUrl::parse("about:blank").ok().unwrap();
             let load_data = LoadData::new(
+                document.url().origin(),
                 blank_url,
                 None,
                 Some(Referrer::ReferrerUrl(document.url().clone())),
@@ -436,13 +438,26 @@ impl WindowProxy {
                 Referrer::Client
             };
             // Step 14.5
-            target_window.load_url(
+            let referrer_policy = target_document.get_referrer_policy();
+            let pipeline_id = target_window.upcast::<GlobalScope>().pipeline_id();
+            println!("Setting origin to {:?}", target_document.url().origin());
+            let load_data = LoadData::new(
+                // Note on security: we set the origin to that of the newly created
+                // about:blank auxiliary, otherwise a JS url passed to window.open
+                // will not pass the same-origin check performed before evaluating the JS.
+                // Normally, the origin of the document where the navigation was initiated should be used.
+                target_document.url().origin(),
                 url,
-                new,
-                false,
-                referrer,
-                target_document.get_referrer_policy(),
+                Some(pipeline_id),
+                Some(referrer),
+                referrer_policy,
             );
+            let replacement_flag = if new {
+                HistoryEntryReplacement::Enabled
+            } else {
+                HistoryEntryReplacement::Disabled
+            };
+            target_window.load_url(replacement_flag, false, load_data);
         }
         if noopener {
             // Step 15 (Dis-owning has been done in create_auxiliary_browsing_context).

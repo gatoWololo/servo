@@ -62,7 +62,8 @@ use webrender_api::{
 use webvr_traits::{WebVREvent, WebVRMsg};
 
 pub use crate::script_msg::{
-    DOMMessage, SWManagerMsg, SWManagerSenders, ScopeThings, ServiceWorkerMsg,
+    DOMMessage, HistoryEntryReplacement, SWManagerMsg, SWManagerSenders, ScopeThings,
+    ServiceWorkerMsg,
 };
 pub use crate::script_msg::{
     EventResult, IFrameSize, IFrameSizeMsg, LayoutMsg, LogEntry, ScriptMsg,
@@ -121,6 +122,9 @@ pub enum LayoutControlMsg {
 /// parameters or headers
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct LoadData {
+    /// The origin of the page when it started the load.
+    /// Used for same-origin comparisons.
+    pub source_origin: ImmutableOrigin,
     /// The URL.
     pub url: ServoUrl,
     /// The creator pipeline id if this is an about:blank load.
@@ -160,12 +164,14 @@ pub enum JsEvalResult {
 impl LoadData {
     /// Create a new `LoadData` object.
     pub fn new(
+        source_origin: ImmutableOrigin,
         url: ServoUrl,
         creator_pipeline_id: Option<PipelineId>,
         referrer: Option<Referrer>,
         referrer_policy: Option<ReferrerPolicy>,
     ) -> LoadData {
         LoadData {
+            source_origin,
             url: url,
             creator_pipeline_id: creator_pipeline_id,
             method: Method::GET,
@@ -289,7 +295,12 @@ pub enum ConstellationControlMsg {
     NotifyVisibilityChange(PipelineId, BrowsingContextId, bool),
     /// Notifies script thread that a url should be loaded in this iframe.
     /// PipelineId is for the parent, BrowsingContextId is for the nested browsing context
-    Navigate(PipelineId, BrowsingContextId, LoadData, bool),
+    NavigateIframe(
+        PipelineId,
+        BrowsingContextId,
+        LoadData,
+        HistoryEntryReplacement,
+    ),
     /// Post a message to a given window.
     PostMessage {
         /// The target of the message.
@@ -376,7 +387,7 @@ impl fmt::Debug for ConstellationControlMsg {
             SetDocumentActivity(..) => "SetDocumentActivity",
             ChangeFrameVisibilityStatus(..) => "ChangeFrameVisibilityStatus",
             NotifyVisibilityChange(..) => "NotifyVisibilityChange",
-            Navigate(..) => "Navigate",
+            NavigateIframe(..) => "NavigateIframe",
             PostMessage { .. } => "PostMessage",
             UpdatePipelineId(..) => "UpdatePipelineId",
             UpdateHistoryState(..) => "UpdateHistoryState",
@@ -658,7 +669,7 @@ pub struct IFrameLoadInfo {
     pub is_private: bool,
     /// Wether this load should replace the current entry (reload). If true, the current
     /// entry will be replaced instead of a new entry being added.
-    pub replace: bool,
+    pub replace: HistoryEntryReplacement,
 }
 
 /// Specifies the information required to load a URL in an iframe.
