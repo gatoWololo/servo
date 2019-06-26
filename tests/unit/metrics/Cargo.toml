@@ -12,7 +12,7 @@ doctest = false
 
 [dependencies]
 gfx_traits = {path = "../../../components/gfx_traits"}
-ipc-channel = "0.11"
+ipc-channel = {path = "../../../../ipc-channel/"}
 layout = {path = "../../../components/layout"}
 metrics = {path = "../../../components/metrics"}
 msg = {path = "../../../components/msg"}

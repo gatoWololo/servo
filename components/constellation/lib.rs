@@ -6,7 +6,7 @@
 #![cfg_attr(feature = "unstable", feature(conservative_impl_trait))]
 
 #[macro_use]
-extern crate crossbeam_channel;
+extern crate rr_channels;
 #[macro_use]
 extern crate log;
 #[macro_use]

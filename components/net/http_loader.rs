@@ -14,7 +14,7 @@ use crate::fetch::methods::{Data, DoneChannel, FetchContext, Target};
 use crate::hsts::HstsList;
 use crate::http_cache::HttpCache;
 use crate::resource_thread::AuthCache;
-use crossbeam_channel::{unbounded, Sender};
+use rr_channels::{unbounded, Sender};
 use devtools_traits::{
     ChromeToDevtoolsControlMsg, DevtoolsControlMsg, HttpRequest as DevtoolsHttpRequest,
 };

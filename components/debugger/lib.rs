@@ -12,7 +12,7 @@ enum Message {
     ShutdownServer,
 }
 
-pub struct Sender(crossbeam_channel::Sender<Message>);
+pub struct Sender(rr_channels::Sender<Message>);
 
 struct Connection {
     sender: ws::Sender,
@@ -35,7 +35,7 @@ impl Handler for Connection {
 
 pub fn start_server(port: u16) -> Sender {
     debug!("Starting server.");
-    let (sender, receiver) = crossbeam_channel::unbounded();
+    let (sender, receiver) = rr_channels::unbounded();
     thread::Builder::new()
         .name("debugger".to_owned())
         .spawn(move || {

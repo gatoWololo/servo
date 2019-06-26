@@ -9,7 +9,7 @@ use canvas_traits::webgl::WebGLPipeline;
 use compositing::compositor_thread::Msg as CompositorMsg;
 use compositing::CompositionPipeline;
 use compositing::CompositorProxy;
-use crossbeam_channel::Sender;
+use rr_channels::Sender;
 use devtools_traits::{DevtoolsControlMsg, ScriptToDevtoolsControlMsg};
 use euclid::{TypedScale, TypedSize2D};
 use gfx::font_cache_thread::FontCacheThread;

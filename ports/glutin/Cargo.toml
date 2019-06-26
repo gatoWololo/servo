@@ -45,7 +45,7 @@ webrender_debugger = ["libservo/webrender_debugger"]
 [target.'cfg(not(target_os = "android"))'.dependencies]
 backtrace = "0.3"
 bitflags = "1.0"
-crossbeam-channel = "0.3"
+rr_channels = {path = "../../components/rr_channels"}
 euclid = "0.19"
 gleam = "0.6"
 glutin = "0.21.0"

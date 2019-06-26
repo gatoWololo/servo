@@ -8,7 +8,7 @@ use crate::context::LayoutContext;
 use crate::display_list::items::OpaqueNode;
 use crate::flow::{Flow, GetBaseFlow};
 use crate::opaque_node::OpaqueNodeMethods;
-use crossbeam_channel::Receiver;
+use rr_channels::Receiver;
 use fxhash::{FxHashMap, FxHashSet};
 use ipc_channel::ipc::IpcSender;
 use msg::constellation_msg::PipelineId;

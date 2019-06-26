@@ -6,7 +6,7 @@
 
 #![deny(missing_docs)]
 
-use crossbeam_channel::Sender;
+use rr_channels::Sender;
 use ipc_channel::ipc::{self, IpcSender};
 use ipc_channel::router::ROUTER;
 use std::marker::Send;

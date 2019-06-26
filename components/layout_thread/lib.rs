@@ -6,7 +6,7 @@
 //! painted.
 
 #[macro_use]
-extern crate crossbeam_channel;
+extern crate rr_channels;
 #[macro_use]
 extern crate html5ever;
 #[macro_use]
@@ -23,7 +23,7 @@ mod dom_wrapper;
 use crate::dom_wrapper::drop_style_and_layout_data;
 use crate::dom_wrapper::{ServoLayoutDocument, ServoLayoutElement, ServoLayoutNode};
 use app_units::Au;
-use crossbeam_channel::{unbounded, Receiver, Sender};
+use rr_channels::{unbounded, Receiver, Sender};
 use embedder_traits::resources::{self, Resource};
 use euclid::{Point2D, Rect, Size2D, TypedScale, TypedSize2D};
 use fnv::FnvHashMap;

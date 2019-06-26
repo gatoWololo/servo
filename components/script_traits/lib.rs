@@ -22,7 +22,7 @@ pub mod webdriver_msg;
 use crate::webdriver_msg::{LoadStatus, WebDriverScriptCommand};
 use bluetooth_traits::BluetoothRequest;
 use canvas_traits::webgl::WebGLPipeline;
-use crossbeam_channel::{Receiver, RecvTimeoutError, Sender};
+use rr_channels::{Receiver, RecvTimeoutError, Sender};
 use devtools_traits::{DevtoolScriptControlMsg, ScriptToDevtoolsControlMsg, WorkerId};
 use embedder_traits::Cursor;
 use euclid::{Length, Point2D, Rect, TypedScale, TypedSize2D, Vector2D};

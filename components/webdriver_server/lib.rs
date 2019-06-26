@@ -17,7 +17,7 @@ mod capabilities;
 
 use base64;
 use capabilities::ServoCapabilities;
-use crossbeam_channel::Sender;
+use rr_channels::Sender;
 use euclid::TypedSize2D;
 use hyper::Method;
 use image::{DynamicImage, ImageFormat, RgbImage};

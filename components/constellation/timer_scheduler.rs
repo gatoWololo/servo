@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use crossbeam_channel::{self, TryRecvError};
+use rr_channels::{self, TryRecvError};
 use ipc_channel::ipc::{self, IpcSender};
 use script_traits::{TimerEvent, TimerEventRequest, TimerSchedulerMsg};
 use std::cmp::{self, Ord};
@@ -39,7 +39,7 @@ impl PartialEq for ScheduledEvent {
 impl TimerScheduler {
     pub fn start() -> IpcSender<TimerSchedulerMsg> {
         let (req_ipc_sender, req_ipc_receiver) = ipc::channel().expect("Channel creation failed.");
-        let (req_sender, req_receiver) = crossbeam_channel::bounded(1);
+        let (req_sender, req_receiver) = rr_channels::bounded(1);
 
         // We could do this much more directly with recv_timeout
         // (https://github.com/rust-lang/rfcs/issues/962).

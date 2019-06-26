@@ -23,7 +23,7 @@ use crate::dom::worklet::WorkletExecutor;
 use crate::dom::workletglobalscope::WorkletGlobalScope;
 use crate::dom::workletglobalscope::WorkletGlobalScopeInit;
 use crate::dom::workletglobalscope::WorkletTask;
-use crossbeam_channel::{unbounded, Sender};
+use rr_channels::{unbounded, Sender};
 use dom_struct::dom_struct;
 use euclid::TypedScale;
 use euclid::TypedSize2D;

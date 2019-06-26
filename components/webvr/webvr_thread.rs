@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use canvas_traits::webgl;
-use crossbeam_channel::{unbounded, Receiver, Sender};
+use rr_channels::{unbounded, Receiver, Sender};
 use euclid::Size2D;
 use gleam::gl::Gl;
 use ipc_channel::ipc;

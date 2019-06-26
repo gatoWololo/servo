@@ -6,7 +6,7 @@
 
 use crate::compositor::CompositingReason;
 use crate::SendableFrameTree;
-use crossbeam_channel::{Receiver, Sender};
+use rr_channels::{Receiver, Sender};
 use embedder_traits::EventLoopWaker;
 use gfx_traits::Epoch;
 use ipc_channel::ipc::IpcSender;

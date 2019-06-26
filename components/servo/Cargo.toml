@@ -46,7 +46,7 @@ canvas = {path = "../canvas", default-features = false}
 canvas_traits = {path = "../canvas_traits"}
 compositing = {path = "../compositing", features = ["gl"]}
 constellation = {path = "../constellation"}
-crossbeam-channel = "0.3"
+rr_channels = {path = "../rr_channels"}
 debugger = {path = "../debugger"}
 devtools = {path = "../devtools"}
 devtools_traits = {path = "../devtools_traits"}
@@ -55,7 +55,7 @@ env_logger = "0.6"
 euclid = "0.19"
 gfx = {path = "../gfx"}
 gleam = "0.6"
-ipc-channel = "0.11"
+ipc-channel = {path = "../../../ipc-channel/"}
 keyboard-types = "0.4"
 layout_thread = {path = "../layout_thread"}
 log = "0.4"
@@ -69,7 +69,7 @@ script_layout_interface = {path = "../script_layout_interface"}
 script_traits = {path = "../script_traits"}
 servo_config = {path = "../config"}
 servo_geometry = {path = "../geometry"}
-servo-media = {git = "https://github.com/servo/media"}
+servo-media = {path = "../../../media/servo-media"}
 servo_url = {path = "../url"}
 style = {path = "../style", features = ["servo"]}
 style_traits = {path = "../style_traits", features = ["servo"]}
@@ -83,10 +83,10 @@ webvr_traits = {path = "../webvr_traits"}
 gaol = {git = "https://github.com/servo/gaol"}
 
 [target.'cfg(any(all(target_os = "android", target_arch = "arm"), target_arch = "x86_64"))'.dependencies.servo-media-gstreamer]
-git = "https://github.com/servo/media"
+path = "../../../media/backends/gstreamer"
 
 [target.'cfg(not(any(all(target_os = "android", target_arch = "arm"), target_arch = "x86_64")))'.dependencies.servo-media-dummy]
-git = "https://github.com/servo/media"
+path = "../../../media/backends/dummy"
 
 [target.'cfg(target_os = "windows")'.dependencies]
 mozangle = { version = "0.2", features = ["egl"] }

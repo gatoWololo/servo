@@ -12,6 +12,6 @@ path = "lib.rs"
 crate_type = ["rlib"]
 
 [dependencies]
-crossbeam-channel = "0.3"
+rr_channels = {path = "../rr_channels"}
 log = "0.4"
 ws = "0.8"

@@ -15,7 +15,7 @@ use crate::http_cache::HttpCache;
 use crate::http_loader::{http_redirect_fetch, HttpState, HANDLE};
 use crate::storage_thread::StorageThreadFactory;
 use crate::websocket_loader;
-use crossbeam_channel::Sender;
+use rr_channels::Sender;
 use devtools_traits::DevtoolsControlMsg;
 use embedder_traits::resources::{self, Resource};
 use embedder_traits::EmbedderProxy;

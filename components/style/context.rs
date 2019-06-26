@@ -30,7 +30,7 @@ use crate::traversal::DomTraversal;
 use crate::traversal_flags::TraversalFlags;
 use app_units::Au;
 #[cfg(feature = "servo")]
-use crossbeam_channel::Sender;
+use rr_channels::Sender;
 use euclid::Size2D;
 use euclid::TypedScale;
 use fxhash::FxHashMap;

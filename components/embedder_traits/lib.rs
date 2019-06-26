@@ -13,7 +13,7 @@ extern crate serde;
 
 pub mod resources;
 
-use crossbeam_channel::{Receiver, Sender};
+use rr_channels::{Receiver, Sender};
 use ipc_channel::ipc::IpcSender;
 use keyboard_types::KeyboardEvent;
 use msg::constellation_msg::{InputMethodType, PipelineId, TopLevelBrowsingContextId};

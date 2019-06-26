@@ -6,7 +6,7 @@
 //! Any redirects that are encountered are followed. Whenever a non-redirect
 //! response is received, it is forwarded to the appropriate script thread.
 
-use crossbeam_channel::Sender;
+use rr_channels::Sender;
 use http::header::LOCATION;
 use ipc_channel::ipc;
 use ipc_channel::router::ROUTER;

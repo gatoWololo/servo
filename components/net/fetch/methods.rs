@@ -8,7 +8,7 @@ use crate::filemanager_thread::{fetch_file_in_chunks, FileManager, FILE_CHUNK_SI
 use crate::http_loader::{determine_request_referrer, http_fetch, HttpState};
 use crate::http_loader::{set_default_accept, set_default_accept_language};
 use crate::subresource_integrity::is_response_integrity_valid;
-use crossbeam_channel::{unbounded, Receiver, Sender};
+use rr_channels::{unbounded, Receiver, Sender};
 use devtools_traits::DevtoolsControlMsg;
 use headers::{AccessControlExposeHeaders, ContentType, HeaderMapExt, Range};
 use http::header::{self, HeaderMap, HeaderName, HeaderValue};

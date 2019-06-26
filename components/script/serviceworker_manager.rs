@@ -11,7 +11,7 @@ use crate::dom::abstractworker::WorkerScriptMsg;
 use crate::dom::bindings::structuredclone::StructuredCloneData;
 use crate::dom::serviceworkerglobalscope::{ServiceWorkerGlobalScope, ServiceWorkerScriptMsg};
 use crate::dom::serviceworkerregistration::longest_prefix_match;
-use crossbeam_channel::{unbounded, Receiver, RecvError, Sender};
+use rr_channels::{unbounded, Receiver, RecvError, Sender};
 use devtools_traits::{DevtoolsPageInfo, ScriptToDevtoolsControlMsg};
 use ipc_channel::ipc::{self, IpcSender};
 use ipc_channel::router::ROUTER;

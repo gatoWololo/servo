@@ -11,7 +11,7 @@ use crate::dom::testworkletglobalscope::TestWorkletGlobalScope;
 use crate::dom::testworkletglobalscope::TestWorkletTask;
 use crate::dom::worklet::WorkletExecutor;
 use crate::script_thread::MainThreadScriptMsg;
-use crossbeam_channel::Sender;
+use rr_channels::Sender;
 use devtools_traits::ScriptToDevtoolsControlMsg;
 use dom_struct::dom_struct;
 use ipc_channel::ipc;

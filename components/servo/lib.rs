@@ -79,7 +79,7 @@ use compositing::{CompositingReason, IOCompositor, ShutdownState};
 use constellation::content_process_sandbox_profile;
 use constellation::{Constellation, InitialConstellationState, UnprivilegedPipelineContent};
 use constellation::{FromCompositorLogger, FromScriptLogger};
-use crossbeam_channel::{unbounded, Sender};
+use rr_channels::{unbounded, Sender};
 use embedder_traits::{EmbedderMsg, EmbedderProxy, EmbedderReceiver, EventLoopWaker};
 use env_logger::Builder as EnvLoggerBuilder;
 #[cfg(all(

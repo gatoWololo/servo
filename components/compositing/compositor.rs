@@ -12,7 +12,7 @@ use crate::windowing::{
 };
 use crate::CompositionPipeline;
 use crate::SendableFrameTree;
-use crossbeam_channel::Sender;
+use rr_channels::Sender;
 use embedder_traits::Cursor;
 use euclid::{TypedPoint2D, TypedScale, TypedVector2D};
 use gfx_traits::Epoch;

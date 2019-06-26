@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::sampler::{NativeStack, Sampler};
-use crossbeam_channel::{after, unbounded, Receiver, Sender};
+use rr_channels::{after, unbounded, Receiver, Sender};
 use ipc_channel::ipc::{IpcReceiver, IpcSender};
 use ipc_channel::router::ROUTER;
 use msg::constellation_msg::MonitoredComponentId;
@@ -175,6 +175,7 @@ impl BackgroundHangMonitorWorker {
         port: Receiver<(MonitoredComponentId, MonitoredComponentMsg)>,
     ) -> Self {
         let control_port = ROUTER.route_ipc_receiver_to_new_crossbeam_receiver(control_port);
+
         Self {
             component_names: Default::default(),
             monitored_components: Default::default(),

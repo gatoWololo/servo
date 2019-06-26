@@ -86,7 +86,7 @@ use crate::task_source::TaskSourceName;
 use crate::webdriver_handlers;
 use bluetooth_traits::BluetoothRequest;
 use canvas_traits::webgl::WebGLPipeline;
-use crossbeam_channel::{unbounded, Receiver, Sender};
+use rr_channels::{unbounded, Receiver, Sender};
 use devtools_traits::CSSError;
 use devtools_traits::{DevtoolScriptControlMsg, DevtoolsPageInfo};
 use devtools_traits::{ScriptToDevtoolsControlMsg, WorkerId};
@@ -1211,7 +1211,7 @@ impl ScriptThread {
             },
             recv(self.control_port) -> msg => FromConstellation(msg.unwrap()),
             recv(self.timer_event_port) -> msg => FromScheduler(msg.unwrap()),
-            recv(self.devtools_chan.as_ref().map(|_| &self.devtools_port).unwrap_or(&crossbeam_channel::never())) -> msg
+            recv(self.devtools_chan.as_ref().map(|_| &self.devtools_port).unwrap_or(&rr_channels::never())) -> msg
                 => FromDevtools(msg.unwrap()),
             recv(self.image_cache_port) -> msg => FromImageCache(msg.unwrap()),
         };

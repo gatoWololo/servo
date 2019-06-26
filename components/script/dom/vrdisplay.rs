@@ -43,7 +43,7 @@ use crate::script_runtime::CommonScriptMsg;
 use crate::script_runtime::ScriptThreadEventCategory::WebVREvent;
 use crate::task_source::{TaskSource, TaskSourceName};
 use canvas_traits::webgl::{webgl_channel, WebGLMsgSender, WebGLReceiver, WebVRCommand};
-use crossbeam_channel::{unbounded, Sender};
+use rr_channels::{unbounded, Sender};
 use dom_struct::dom_struct;
 use ipc_channel::ipc::IpcSender;
 use profile_traits::ipc;

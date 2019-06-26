@@ -5,7 +5,7 @@
 use crate::rpc::LayoutRPC;
 use crate::{OpaqueStyleAndLayoutData, PendingImage, TrustedNodeAddress};
 use app_units::Au;
-use crossbeam_channel::{Receiver, Sender};
+use rr_channels::{Receiver, Sender};
 use euclid::{Point2D, Rect};
 use gfx_traits::Epoch;
 use ipc_channel::ipc::{IpcReceiver, IpcSender};

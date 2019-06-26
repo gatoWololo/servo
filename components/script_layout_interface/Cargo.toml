@@ -15,11 +15,11 @@ app_units = "0.7"
 atomic_refcell = "0.1"
 canvas_traits = {path = "../canvas_traits"}
 cssparser = "0.25"
-crossbeam-channel = "0.3"
+rr_channels = {path = "../rr_channels"}
 euclid = "0.19"
 gfx_traits = {path = "../gfx_traits"}
 html5ever = "0.23"
-ipc-channel = "0.11"
+ipc-channel = {path = "../../../ipc-channel/"}
 libc = "0.2"
 time = "0.1.17"
 malloc_size_of = { path = "../malloc_size_of" }

@@ -9,7 +9,7 @@
 // The traits are here instead of in layout so
 //   that these modules won't have to depend on layout.
 
-use crossbeam_channel::{Receiver, Sender};
+use rr_channels::{Receiver, Sender};
 use euclid::TypedSize2D;
 use gfx::font_cache_thread::FontCacheThread;
 use ipc_channel::ipc::{IpcReceiver, IpcSender};

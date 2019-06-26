@@ -33,7 +33,7 @@ use crate::actors::thread::ThreadActor;
 use crate::actors::timeline::TimelineActor;
 use crate::actors::worker::WorkerActor;
 use crate::protocol::JsonPacketStream;
-use crossbeam_channel::{unbounded, Receiver, Sender};
+use rr_channels::{unbounded, Receiver, Sender};
 use devtools_traits::{ChromeToDevtoolsControlMsg, ConsoleMessage, DevtoolsControlMsg};
 use devtools_traits::{DevtoolScriptControlMsg, DevtoolsPageInfo, LogLevel, NetworkEvent};
 use devtools_traits::{ScriptToDevtoolsControlMsg, WorkerId};
