@@ -22,7 +22,7 @@ use devtools_traits::TimelineMarkerType;
 use devtools_traits::{AutoMargins, CachedConsoleMessage, CachedConsoleMessageTypes};
 use devtools_traits::{ComputedNodeLayout, ConsoleAPI, PageError};
 use devtools_traits::{EvaluateJSReply, Modification, NodeInfo, TimelineMarker};
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use js::jsapi::JSAutoRealm;
 use js::jsval::UndefinedValue;
 use js::rust::wrappers::ObjectClassName;

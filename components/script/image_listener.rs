@@ -7,8 +7,8 @@ use crate::dom::bindings::refcounted::Trusted;
 use crate::dom::bindings::reflector::DomObject;
 use crate::dom::node::{window_from_node, Node};
 use crate::task_source::TaskSource;
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc;
+use rr_channel::router::ROUTER;
 use net_traits::image_cache::{ImageCache, ImageResponder, ImageResponse, PendingImageId};
 use std::sync::Arc;
 
@@ -31,10 +31,10 @@ pub fn add_cache_listener_for_element<T: ImageCacheListener + DerivedFrom<Node> 
         .networking_task_source_with_canceller();
     let generation = elem.generation_id();
     ROUTER.add_route(
-        responder_receiver.to_opaque(),
+        responder_receiver,//.to_opaque(),
         Box::new(move |message| {
             let element = trusted_node.clone();
-            let image = message.to().unwrap();
+            let image = unimplemented!(); //message.unwrap();
             debug!("Got image {:?}", image);
             let _ = task_source.queue_with_canceller(
                 task!(process_image_response: move || {

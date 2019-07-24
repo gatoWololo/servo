@@ -111,15 +111,16 @@ use clipboard::{ClipboardContext, ClipboardProvider};
 use compositing::compositor_thread::CompositorProxy;
 use compositing::compositor_thread::Msg as ToCompositorMsg;
 use compositing::SendableFrameTree;
-use rr_channels::{unbounded, Receiver, Sender};
+use rr_channel::{unbounded, Receiver, Sender};
 use devtools_traits::{ChromeToDevtoolsControlMsg, DevtoolsControlMsg};
 use embedder_traits::{Cursor, EmbedderMsg, EmbedderProxy};
 use euclid::{Size2D, TypedScale, TypedSize2D};
 use gfx::font_cache_thread::FontCacheThread;
 use gfx_traits::Epoch;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
-use ipc_channel::Error as IpcError;
+use ipc_channel;
+use rr_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::router::ROUTER;
+use rr_channel::ipc::Error as IpcError;
 use keyboard_types::webdriver::Event as WebDriverInputEvent;
 use keyboard_types::KeyboardEvent;
 use layout_traits::LayoutThreadFactory;
@@ -166,7 +167,7 @@ use std::mem::replace;
 use std::process;
 use std::rc::{Rc, Weak};
 use std::sync::Arc;
-use std::thread;
+use rr_channel::thread;
 use style_traits::viewport::ViewportConstraints;
 use style_traits::CSSPixel;
 use webvr_traits::{WebVREvent, WebVRMsg};
@@ -616,8 +617,8 @@ where
 {
     let (mpsc_sender, mpsc_receiver) = unbounded();
     ROUTER.add_route(
-        ipc_receiver.to_opaque(),
-        Box::new(move |message| drop(mpsc_sender.send(message.to::<T>()))),
+        ipc_receiver,//.to_opaque(),
+        Box::new(move |message: Result<T, _>| drop(mpsc_sender.send(message))),
     );
     mpsc_receiver
 }
@@ -2161,7 +2162,7 @@ where
         &self,
         id: PipelineId,
         request_builder: RequestBuilder,
-        cancel_chan: IpcReceiver<()>,
+        cancel_chan: ipc::IpcReceiver<()>,
     ) {
         let listener = NetworkListener::new(
             request_builder,

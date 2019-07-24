@@ -6,13 +6,13 @@
 extern crate lazy_static;
 
 use background_hang_monitor::HangMonitorRegister;
-use ipc_channel::ipc;
+use rr_channel::ipc;
 use msg::constellation_msg::ScriptHangAnnotation;
 use msg::constellation_msg::TEST_PIPELINE_ID;
 use msg::constellation_msg::{HangAlert, HangAnnotation, HangMonitorAlert};
 use msg::constellation_msg::{MonitoredComponentId, MonitoredComponentType};
 use std::sync::Mutex;
-use std::thread;
+use rr_channel::thread;
 use std::time::Duration;
 
 lazy_static! {

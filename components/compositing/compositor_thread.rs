@@ -6,10 +6,10 @@
 
 use crate::compositor::CompositingReason;
 use crate::SendableFrameTree;
-use rr_channels::{Receiver, Sender};
+use rr_channel::{Receiver, Sender};
 use embedder_traits::EventLoopWaker;
 use gfx_traits::Epoch;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use msg::constellation_msg::{PipelineId, TopLevelBrowsingContextId};
 use net_traits::image::base::Image;
 use profile_traits::mem;

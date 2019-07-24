@@ -8,7 +8,7 @@
 //! and <http://tools.ietf.org/html/rfc7232>.
 
 use crate::fetch::methods::{Data, DoneChannel};
-use rr_channels::{unbounded, Sender};
+use crossbeam_channel::{unbounded, Sender};
 use headers::{
     CacheControl, ContentRange, Expires, HeaderMapExt, LastModified, Pragma, Range, Vary,
 };

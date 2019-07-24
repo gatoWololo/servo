@@ -13,7 +13,7 @@
 use servo_remutex::{ReentrantMutex, ReentrantMutexGuard};
 use std::cell::RefCell;
 use std::sync::Arc;
-use std::thread;
+use rr_channel::thread;
 
 #[test]
 fn smoke() {

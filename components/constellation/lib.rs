@@ -6,7 +6,7 @@
 #![cfg_attr(feature = "unstable", feature(conservative_impl_trait))]
 
 #[macro_use]
-extern crate rr_channels;
+extern crate rr_channel;
 #[macro_use]
 extern crate log;
 #[macro_use]

@@ -16,7 +16,8 @@ webgl_backtrace = []
 [dependencies]
 cssparser = "0.25"
 euclid = "0.19"
-ipc-channel = {path = "../../../ipc-channel/"}
+ipc-channel = "0.12"
+rr_channel = { path = "../rr_channel"}
 gleam = "0.6.7"
 lazy_static = "1"
 malloc_size_of = { path = "../malloc_size_of" }

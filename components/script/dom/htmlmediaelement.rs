@@ -62,8 +62,8 @@ use dom_struct::dom_struct;
 use headers::{ContentLength, ContentRange, HeaderMapExt};
 use html5ever::{LocalName, Prefix};
 use http::header::{self, HeaderMap, HeaderValue};
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc;
+use rr_channel::router::ROUTER;
 use net_traits::image::base::Image;
 use net_traits::image_cache::ImageResponse;
 use net_traits::request::{CredentialsMode, Destination, Referrer, RequestBuilder, RequestMode};
@@ -762,9 +762,9 @@ impl HTMLMediaElement {
             canceller: Some(canceller),
         };
         ROUTER.add_route(
-            action_receiver.to_opaque(),
+            action_receiver,//.to_opaque(),
             Box::new(move |message| {
-                network_listener.notify_fetch(message.to().unwrap());
+                network_listener.notify_fetch(message.unwrap());
             }),
         );
         let global = self.global();
@@ -1242,9 +1242,9 @@ impl HTMLMediaElement {
             .task_manager()
             .media_element_task_source_with_canceller();
         ROUTER.add_route(
-            action_receiver.to_opaque(),
+            action_receiver,//.to_opaque(),
             Box::new(move |message| {
-                let event: PlayerEvent = message.to().unwrap();
+                let event: PlayerEvent = message.unwrap();
                 trace!("Player event {:?}", event);
                 let this = trusted_node.clone();
                 if let Err(err) = task_source.queue_with_canceller(

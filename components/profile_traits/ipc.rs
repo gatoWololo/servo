@@ -5,7 +5,7 @@
 use crate::time;
 use crate::time::ProfilerCategory;
 use crate::time::ProfilerChan;
-use ipc_channel::ipc;
+use rr_channel::ipc;
 use serde::{Deserialize, Serialize};
 use std::io::Error;
 
@@ -36,6 +36,10 @@ where
 
     pub fn to_opaque(self) -> ipc::OpaqueIpcReceiver {
         self.ipc_receiver.to_opaque()
+    }
+
+    pub fn to_ipc_receiver(self) -> ipc::IpcReceiver<T> {
+        self.ipc_receiver
     }
 }
 

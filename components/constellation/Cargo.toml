@@ -23,7 +23,7 @@ canvas = {path = "../canvas", default-features = false}
 clipboard = "0.5"
 canvas_traits = {path = "../canvas_traits"}
 compositing = {path = "../compositing"}
-rr_channels = {path = "../rr_channels"}
+rr_channel = {path = "../rr_channel"}
 debugger = {path = "../debugger"}
 devtools_traits = {path = "../devtools_traits"}
 euclid = "0.19"
@@ -31,7 +31,7 @@ embedder_traits = { path = "../embedder_traits" }
 gfx = {path = "../gfx"}
 gfx_traits = {path = "../gfx_traits"}
 http = "0.1"
-ipc-channel = {path = "../../../ipc-channel/"}
+ipc-channel = "0.12"
 layout_traits = {path = "../layout_traits"}
 keyboard-types = "0.4.3"
 log = "0.4"

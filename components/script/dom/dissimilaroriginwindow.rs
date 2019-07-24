@@ -12,7 +12,7 @@ use crate::dom::dissimilaroriginlocation::DissimilarOriginLocation;
 use crate::dom::globalscope::GlobalScope;
 use crate::dom::windowproxy::WindowProxy;
 use dom_struct::dom_struct;
-use ipc_channel::ipc;
+use rr_channel::ipc;
 use js::jsapi::JSContext;
 use js::jsval::{JSVal, UndefinedValue};
 use js::rust::HandleValue;

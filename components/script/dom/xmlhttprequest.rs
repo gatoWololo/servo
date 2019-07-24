@@ -50,8 +50,8 @@ use html5ever::serialize::SerializeOpts;
 use http::header::{self, HeaderMap, HeaderName, HeaderValue};
 use hyper::Method;
 use hyper_serde::Serde;
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc;
+use rr_channel::router::ROUTER;
 use js::jsapi::JS_ClearPendingException;
 use js::jsapi::{Heap, JSContext, JSObject};
 use js::jsval::{JSVal, NullValue, UndefinedValue};
@@ -306,9 +306,9 @@ impl XMLHttpRequest {
             canceller: Some(global.task_canceller(TaskSourceName::Networking)),
         };
         ROUTER.add_route(
-            action_receiver.to_opaque(),
+            action_receiver,//.to_opaque(),
             Box::new(move |message| {
-                listener.notify_fetch(message.to().unwrap());
+                listener.notify_fetch(message.unwrap());
             }),
         );
         global

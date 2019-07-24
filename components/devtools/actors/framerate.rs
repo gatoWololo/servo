@@ -5,7 +5,7 @@
 use crate::actor::{Actor, ActorMessageStatus, ActorRegistry};
 use crate::actors::timeline::HighResolutionStamp;
 use devtools_traits::DevtoolScriptControlMsg;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use msg::constellation_msg::PipelineId;
 use serde_json::{Map, Value};
 use std::mem;

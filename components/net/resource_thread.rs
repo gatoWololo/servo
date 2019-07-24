@@ -15,12 +15,12 @@ use crate::http_cache::HttpCache;
 use crate::http_loader::{http_redirect_fetch, HttpState, HANDLE};
 use crate::storage_thread::StorageThreadFactory;
 use crate::websocket_loader;
-use rr_channels::Sender;
+use rr_channel::Sender;
 use devtools_traits::DevtoolsControlMsg;
 use embedder_traits::resources::{self, Resource};
 use embedder_traits::EmbedderProxy;
 use hyper_serde::Serde;
-use ipc_channel::ipc::{self, IpcReceiver, IpcReceiverSet, IpcSender};
+use rr_channel::ipc::{self, IpcReceiver, IpcReceiverSet, IpcSender};
 use malloc_size_of::{MallocSizeOf, MallocSizeOfOps};
 use net_traits::request::{Destination, RequestBuilder};
 use net_traits::response::{Response, ResponseInit};
@@ -43,7 +43,7 @@ use std::io::prelude::*;
 use std::ops::Deref;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, RwLock};
-use std::thread;
+use rr_channel::thread;
 
 /// Returns a tuple of (public, private) senders to the new threads.
 pub fn new_resource_threads(
@@ -162,6 +162,7 @@ impl ResourceChannelManager {
         private_receiver: IpcReceiver<CoreResourceMsg>,
         memory_reporter: IpcReceiver<ReportsChan>,
     ) {
+        use rr_channel::DetThreadId;
         let (public_http_state, private_http_state) = create_http_states(
             self.config_dir.as_ref().map(Deref::deref),
             self.certificate_path.clone(),
@@ -182,7 +183,8 @@ impl ResourceChannelManager {
                 let (id, data) = receiver.unwrap();
                 // If message is memory report, get the size_of of public and private http caches
                 if id == reporter_id {
-                    if let Ok(msg) = data.to() {
+                    // TODO Non deterministic for now.
+                    if let Ok((_, msg)) = data.to::<(Option<DetThreadId>, _)>() {
                         self.process_report(msg, &private_http_state, &public_http_state);
                         continue;
                     }
@@ -193,7 +195,7 @@ impl ResourceChannelManager {
                         assert_eq!(id, public_id);
                         &public_http_state
                     };
-                    if let Ok(msg) = data.to() {
+                    if let Ok((id, msg)) = data.to::<(Option<DetThreadId>, _)>() {
                         if !self.process_msg(msg, group) {
                             return;
                         }

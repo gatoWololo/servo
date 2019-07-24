@@ -3,9 +3,9 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::sampler::{NativeStack, Sampler};
-use rr_channels::{after, unbounded, Receiver, Sender};
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::{after, unbounded, Receiver, Sender};
+use rr_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::router::ROUTER;
 use msg::constellation_msg::MonitoredComponentId;
 use msg::constellation_msg::{
     BackgroundHangMonitor, BackgroundHangMonitorClone, BackgroundHangMonitorRegister,
@@ -13,7 +13,7 @@ use msg::constellation_msg::{
 use msg::constellation_msg::{HangAlert, HangAnnotation, HangMonitorAlert, SamplerControlMsg};
 use std::cell::Cell;
 use std::collections::{HashMap, VecDeque};
-use std::thread;
+use rr_channel::thread;
 use std::time::{Duration, Instant};
 
 #[derive(Clone)]

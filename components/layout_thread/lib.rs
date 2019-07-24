@@ -6,7 +6,7 @@
 //! painted.
 
 #[macro_use]
-extern crate rr_channels;
+extern crate rr_channel;
 #[macro_use]
 extern crate html5ever;
 #[macro_use]
@@ -23,7 +23,7 @@ mod dom_wrapper;
 use crate::dom_wrapper::drop_style_and_layout_data;
 use crate::dom_wrapper::{ServoLayoutDocument, ServoLayoutElement, ServoLayoutNode};
 use app_units::Au;
-use rr_channels::{unbounded, Receiver, Sender};
+use rr_channel::{unbounded, Receiver, Sender};
 use embedder_traits::resources::{self, Resource};
 use euclid::{Point2D, Rect, Size2D, TypedScale, TypedSize2D};
 use fnv::FnvHashMap;
@@ -33,8 +33,8 @@ use gfx::font_cache_thread::FontCacheThread;
 use gfx::font_context;
 use gfx_traits::{node_id_from_scroll_id, Epoch};
 use histogram::Histogram;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::router::ROUTER;
 use layout::animation;
 use layout::construct::ConstructionResult;
 use layout::context::malloc_size_of_persistent_local_context;
@@ -98,7 +98,7 @@ use std::ops::{Deref, DerefMut};
 use std::process;
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex, MutexGuard};
-use std::thread;
+use rr_channel::thread;
 use std::time::Duration;
 use style::animation::Animation;
 use style::context::{QuirksMode, RegisteredSpeculativePainter, RegisteredSpeculativePainters};

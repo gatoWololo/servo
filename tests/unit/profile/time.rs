@@ -2,12 +2,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use ipc_channel::ipc;
+use rr_channel::ipc;
 use profile::time;
 use profile_traits::ipc as ProfiledIpc;
 use profile_traits::time::{ProfilerCategory, ProfilerData, ProfilerMsg};
 use servo_config::opts::OutputOptions;
-use std::thread;
+use rr_channel::thread;
 use std::time::Duration;
 
 #[test]

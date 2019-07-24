@@ -38,7 +38,7 @@ use servo_atoms::Atom;
 use std::cell::Cell;
 use std::ptr;
 use std::sync::Arc;
-use std::thread;
+use rr_channel::thread;
 
 #[derive(Clone, Copy, JSTraceable, MallocSizeOf, PartialEq)]
 pub enum FileReaderFunction {

@@ -28,11 +28,11 @@ use crate::script_runtime::ScriptThreadEventCategory::WorkerEvent;
 use crate::script_runtime::{new_child_runtime, CommonScriptMsg, Runtime, ScriptChan, ScriptPort};
 use crate::task_queue::{QueuedTask, QueuedTaskConversion, TaskQueue};
 use crate::task_source::TaskSourceName;
-use rr_channels::{unbounded, Receiver, Sender};
+use rr_channel::{unbounded, Receiver, Sender};
 use devtools_traits::DevtoolScriptControlMsg;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::router::ROUTER;
 use js::jsapi::JS_AddInterruptCallback;
 use js::jsapi::{JSAutoRealm, JSContext};
 use js::jsval::UndefinedValue;
@@ -48,7 +48,7 @@ use servo_url::ServoUrl;
 use std::mem::replace;
 use std::sync::atomic::AtomicBool;
 use std::sync::Arc;
-use std::thread;
+use rr_channel::thread;
 use style::thread_state::{self, ThreadState};
 
 /// Set the `worker` field of a related DedicatedWorkerGlobalScope object to a particular
@@ -351,9 +351,9 @@ impl DedicatedWorkerGlobalScope {
                 let (timer_ipc_chan, timer_ipc_port) = ipc::channel().unwrap();
                 let worker_for_route = worker.clone();
                 ROUTER.add_route(
-                    timer_ipc_port.to_opaque(),
+                    timer_ipc_port,//.to_opaque(),
                     Box::new(move |message| {
-                        let event = message.to().unwrap();
+                        let event = message.unwrap();
                         timer_tx.send((worker_for_route.clone(), event)).unwrap();
                     }),
                 );

@@ -51,8 +51,8 @@ use cssparser::{Parser, ParserInput};
 use dom_struct::dom_struct;
 use euclid::Point2D;
 use html5ever::{LocalName, Prefix};
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc;
+use rr_channel::router::ROUTER;
 use mime::{self, Mime};
 use net_traits::image::base::{Image, ImageMetadata};
 use net_traits::image_cache::UsePlaceholder;
@@ -321,9 +321,9 @@ impl HTMLImageElement {
             canceller: Some(canceller),
         };
         ROUTER.add_route(
-            action_receiver.to_opaque(),
+            action_receiver,//.to_opaque(),
             Box::new(move |message| {
-                listener.notify_fetch(message.to().unwrap());
+                listener.notify_fetch(message.unwrap());
             }),
         );
 
@@ -983,20 +983,26 @@ impl HTMLImageElement {
             selected_source: String,
             selected_pixel_density: f64,
         ) {
+            use rr_channel::ipc::IpcSender;
+            use net_traits::image_cache::PendingImageResponse;
+            use rr_channel::ipc::IpcReceiver;
+
             let trusted_node = Trusted::new(elem);
-            let (responder_sender, responder_receiver) = ipc::channel().unwrap();
+            let (responder_sender, responder_receiver): (IpcSender<PendingImageResponse>,
+                                                         IpcReceiver<_>) = ipc::channel().unwrap();
 
             let window = window_from_node(elem);
             let (task_source, canceller) = window
                 .task_manager()
                 .networking_task_source_with_canceller();
             let generation = elem.generation.get();
-            ROUTER.add_route(responder_receiver.to_opaque(), Box::new(move |message| {
+
+            ROUTER.add_route(responder_receiver, Box::new(move |message: Result<_, _>| {
                 debug!("Got image {:?}", message);
                 // Return the image via a message to the script thread, which marks
                 // the element as dirty and triggers a reflow.
                 let element = trusted_node.clone();
-                let image = message.to().unwrap();
+                let image = unimplemented!();//message.unwrap();
                 let selected_source_clone = selected_source.clone();
                 let _ = task_source.queue_with_canceller(
                     task!(process_image_response_for_environment_change: move || {

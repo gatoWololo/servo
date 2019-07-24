@@ -5,14 +5,15 @@
 #[macro_use]
 extern crate log;
 
-use std::thread;
+use rr_channel::thread;
 use ws::{self, Builder, CloseCode, Handler, Handshake};
 
+#[derive(Debug)]
 enum Message {
     ShutdownServer,
 }
 
-pub struct Sender(rr_channels::Sender<Message>);
+pub struct Sender(rr_channel::Sender<Message>);
 
 struct Connection {
     sender: ws::Sender,
@@ -35,7 +36,7 @@ impl Handler for Connection {
 
 pub fn start_server(port: u16) -> Sender {
     debug!("Starting server.");
-    let (sender, receiver) = rr_channels::unbounded();
+    let (sender, receiver) = rr_channel::unbounded();
     thread::Builder::new()
         .name("debugger".to_owned())
         .spawn(move || {

@@ -12,6 +12,6 @@ path = "lib.rs"
 crate_type = ["rlib"]
 
 [dependencies]
-rr_channels = {path = "../rr_channels"}
+rr_channel = {path = "../rr_channel"}
 log = "0.4"
 ws = "0.8"

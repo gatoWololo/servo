@@ -19,8 +19,8 @@ use crate::dom::shadowroot::ShadowRoot;
 use crate::network_listener::{self, NetworkListener, PreInvoke, ResourceTimingListener};
 use cssparser::SourceLocation;
 use encoding_rs::UTF_8;
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc;
+use rr_channel::router::ROUTER;
 use mime::{self, Mime};
 use net_traits::request::{
     CorsSettings, CredentialsMode, Destination, Referrer, RequestBuilder, RequestMode,
@@ -299,9 +299,9 @@ impl<'a> StylesheetLoader<'a> {
             canceller: Some(canceller),
         };
         ROUTER.add_route(
-            action_receiver.to_opaque(),
+            action_receiver,//.to_opaque(),
             Box::new(move |message| {
-                listener.notify_fetch(message.to().unwrap());
+                listener.notify_fetch(message.unwrap());
             }),
         );
 

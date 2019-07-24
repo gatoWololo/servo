@@ -5,10 +5,10 @@
 use crate::rpc::LayoutRPC;
 use crate::{OpaqueStyleAndLayoutData, PendingImage, TrustedNodeAddress};
 use app_units::Au;
-use rr_channels::{Receiver, Sender};
+use rr_channel::{Receiver, Sender};
 use euclid::{Point2D, Rect};
 use gfx_traits::Epoch;
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::ipc::{IpcReceiver, IpcSender};
 use metrics::PaintTimeMetrics;
 use msg::constellation_msg::{BackgroundHangMonitorRegister, PipelineId};
 use net_traits::image_cache::ImageCache;

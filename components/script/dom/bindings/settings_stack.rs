@@ -11,7 +11,7 @@ use js::jsapi::JSTracer;
 use js::jsapi::UnhideScriptedCaller;
 use js::rust::Runtime;
 use std::cell::RefCell;
-use std::thread;
+use rr_channel::thread;
 
 thread_local!(static STACK: RefCell<Vec<StackEntry>> = RefCell::new(Vec::new()));
 

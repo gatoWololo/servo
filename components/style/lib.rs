@@ -33,7 +33,7 @@ extern crate bitflags;
 #[allow(unused_extern_crates)]
 extern crate byteorder;
 #[cfg(feature = "servo")]
-extern crate rr_channels;
+extern crate rr_channel;
 #[macro_use]
 extern crate cssparser;
 #[macro_use]

@@ -5,7 +5,7 @@
 #![deny(unsafe_code)]
 
 #[macro_use]
-extern crate rr_channels;
+extern crate rr_channel;
 #[macro_use]
 extern crate log;
 

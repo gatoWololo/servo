@@ -4,7 +4,7 @@
 
 use servo::config::opts;
 use std::ptr;
-use std::thread;
+use rr_channel::thread;
 use std::time::Duration;
 
 pub fn deinit() {

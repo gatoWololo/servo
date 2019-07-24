@@ -3,11 +3,11 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::fetch::methods::{CancellationListener, Data, RangeRequestBounds};
-use rr_channels::Sender;
+use crossbeam_channel::Sender;
 use embedder_traits::{EmbedderMsg, EmbedderProxy, FilterPattern};
 use headers::{ContentLength, ContentType, HeaderMap, HeaderMapExt};
 use http::header::{self, HeaderValue};
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc::{self, IpcSender};
 use mime::{self, Mime};
 use mime_guess::guess_mime_type_opt;
 use net_traits::blob_url_store::{BlobBuf, BlobURLStoreError};
@@ -26,7 +26,7 @@ use std::ops::Index;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{self, AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex, RwLock};
-use std::thread;
+use rr_channel::thread;
 use url::Url;
 use uuid::Uuid;
 

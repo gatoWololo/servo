@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::energy::read_energy_uj;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use servo_config::opts;
 use time::precise_time_ns;
 

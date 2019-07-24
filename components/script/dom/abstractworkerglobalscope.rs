@@ -11,7 +11,7 @@ use crate::dom::worker::TrustedWorkerAddress;
 use crate::dom::workerglobalscope::WorkerGlobalScope;
 use crate::script_runtime::{CommonScriptMsg, ScriptChan, ScriptPort};
 use crate::task_queue::{QueuedTaskConversion, TaskQueue};
-use rr_channels::{Receiver, Sender};
+use rr_channel::{Receiver, Sender};
 use devtools_traits::DevtoolScriptControlMsg;
 
 /// A ScriptChan that can be cloned freely and will silently send a TrustedWorkerAddress with
@@ -118,7 +118,7 @@ pub fn run_worker_event_loop<T, TimerMsg, WorkerMsg, Event>(
             worker_scope.from_worker_msg(task_queue.recv().unwrap())
         },
         recv(timer_event_port) -> msg => worker_scope.from_timer_msg(msg.unwrap()),
-        recv(devtools_port.unwrap_or(&rr_channels::never())) -> msg =>
+        recv(devtools_port.unwrap_or(&rr_channel::never())) -> msg =>
             worker_scope.from_devtools_msg(msg.unwrap()),
     };
     let mut sequential = vec![];

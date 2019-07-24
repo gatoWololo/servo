@@ -4,7 +4,7 @@
 
 use crate::image::base::{Image, ImageMetadata};
 use crate::FetchResponseMsg;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use servo_url::ServoUrl;
 use std::sync::Arc;
 

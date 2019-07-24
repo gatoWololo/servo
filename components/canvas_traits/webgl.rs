@@ -5,7 +5,7 @@
 use euclid::{Rect, Size2D};
 use gleam::gl;
 use gleam::gl::Gl;
-use ipc_channel::ipc::{IpcBytesReceiver, IpcBytesSender, IpcSharedMemory};
+use rr_channel::ipc::{IpcBytesReceiver, IpcBytesSender, IpcSharedMemory};
 use pixels::PixelFormat;
 use std::borrow::Cow;
 use std::fmt;

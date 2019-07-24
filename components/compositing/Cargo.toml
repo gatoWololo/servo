@@ -16,13 +16,13 @@ default = []
 gl = ["gleam", "pixels"]
 
 [dependencies]
-rr_channels = {path = "../rr_channels"}
+rr_channel = {path = "../rr_channel"}
 embedder_traits = {path = "../embedder_traits"}
 euclid = "0.19"
 gfx_traits = {path = "../gfx_traits"}
 gleam = {version = "0.6", optional = true}
 image = "0.21"
-ipc-channel = {path = "../../../ipc-channel/"}
+ipc-channel = "0.12"
 libc = "0.2"
 keyboard-types = "0.4.3"
 log = "0.4"

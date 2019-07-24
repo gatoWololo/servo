@@ -33,7 +33,7 @@ use cssparser::Color as CSSColor;
 use cssparser::{Parser, ParserInput, RGBA};
 use dom_struct::dom_struct;
 use euclid::{vec2, Point2D, Rect, Size2D, Transform2D};
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc::{self, IpcSender};
 use net_traits::image_cache::CanRequestImages;
 use net_traits::image_cache::ImageCache;
 use net_traits::image_cache::ImageOrMetadataAvailable;

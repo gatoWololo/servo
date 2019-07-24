@@ -13,7 +13,7 @@ use crate::dom::webglrenderingcontext::WebGLRenderingContext;
 use canvas_traits::webgl::webgl_channel;
 use canvas_traits::webgl::{WebGLBufferId, WebGLCommand, WebGLError, WebGLResult};
 use dom_struct::dom_struct;
-use ipc_channel::ipc;
+use rr_channel::ipc;
 use std::cell::Cell;
 
 #[dom_struct]

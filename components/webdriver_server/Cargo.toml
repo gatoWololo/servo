@@ -13,11 +13,11 @@ path = "lib.rs"
 [dependencies]
 base64 = "0.10"
 cookie = "0.11"
-rr_channels = {path = "../rr_channels"}
+rr_channel = {path = "../rr_channel"}
 euclid = "0.19"
 hyper = "0.12"
 image = "0.21"
-ipc-channel = {path = "../../../ipc-channel/"}
+ipc-channel = "0.12"
 keyboard-types = "0.4.3"
 log = "0.4"
 msg = {path = "../msg"}

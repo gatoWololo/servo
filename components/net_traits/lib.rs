@@ -27,9 +27,10 @@ use http::{Error as HttpError, HeaderMap};
 use hyper::Error as HyperError;
 use hyper::StatusCode;
 use hyper_serde::Serde;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
-use ipc_channel::Error as IpcError;
+
+use rr_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::router::ROUTER;
+use rr_channel::ipc::Error as IpcError;
 use mime::Mime;
 use msg::constellation_msg::HistoryStateId;
 use servo_url::ServoUrl;
@@ -365,7 +366,7 @@ pub enum WebSocketNetworkEvent {
 pub enum FetchChannels {
     ResponseMsg(
         IpcSender<FetchResponseMsg>,
-        /* cancel_chan */ Option<IpcReceiver<()>>,
+        /* cancel_chan */ Option<ipc::IpcReceiver<()>>,
     ),
     WebSocket {
         event_sender: IpcSender<WebSocketNetworkEvent>,
@@ -381,7 +382,7 @@ pub enum CoreResourceMsg {
         RequestBuilder,
         ResponseInit,
         IpcSender<FetchResponseMsg>,
-        /* cancel_chan */ Option<IpcReceiver<()>>,
+        /* cancel_chan */ Option<ipc::IpcReceiver<()>>,
     ),
     /// Store a cookie for a given originating URL
     SetCookieForUrl(ServoUrl, Serde<Cookie<'static>>, CookieSource),
@@ -420,8 +421,8 @@ where
 {
     let (action_sender, action_receiver) = ipc::channel().unwrap();
     ROUTER.add_route(
-        action_receiver.to_opaque(),
-        Box::new(move |message| f(message.to().unwrap())),
+        action_receiver,//.to_opaque()
+        Box::new(move |message| f(message.unwrap())),
     );
     core_resource_thread
         .send(CoreResourceMsg::Fetch(

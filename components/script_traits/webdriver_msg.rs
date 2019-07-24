@@ -7,7 +7,7 @@
 use cookie::Cookie;
 use euclid::Rect;
 use hyper_serde::Serde;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use msg::constellation_msg::BrowsingContextId;
 use servo_url::ServoUrl;
 

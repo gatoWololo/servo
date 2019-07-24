@@ -24,11 +24,11 @@ use crate::fetch::load_whole_resource;
 use crate::script_runtime::{new_rt_and_cx, CommonScriptMsg, Runtime, ScriptChan};
 use crate::task_queue::{QueuedTask, QueuedTaskConversion, TaskQueue};
 use crate::task_source::TaskSourceName;
-use rr_channels::{unbounded, Receiver, Sender};
+use rr_channel::{unbounded, Receiver, Sender};
 use devtools_traits::DevtoolScriptControlMsg;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::router::ROUTER;
 use js::jsapi::{JSAutoRealm, JSContext, JS_AddInterruptCallback};
 use js::jsval::UndefinedValue;
 use msg::constellation_msg::PipelineId;
@@ -40,7 +40,7 @@ use script_traits::{
 use servo_config::pref;
 use servo_rand::random;
 use servo_url::ServoUrl;
-use std::thread;
+use rr_channel::thread;
 use std::time::Duration;
 use style::thread_state::{self, ThreadState};
 

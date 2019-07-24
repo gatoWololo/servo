@@ -10,7 +10,7 @@ use crate::script_runtime::ScriptThreadEventCategory;
 use crate::script_thread::ScriptThread;
 use crate::task::TaskBox;
 use crate::task_source::TaskSourceName;
-use rr_channels::{self, Receiver, Sender};
+use rr_channel::{self, Receiver, Sender};
 use msg::constellation_msg::PipelineId;
 use std::cell::Cell;
 use std::collections::{HashMap, HashSet, VecDeque};
@@ -165,7 +165,7 @@ impl<T: QueuedTaskConversion> TaskQueue<T> {
 
     /// Reset the queue for a new iteration of the event-loop,
     /// returning the port about whose readiness we want to be notified.
-    pub fn select(&self) -> &rr_channels::Receiver<T> {
+    pub fn select(&self) -> &rr_channel::Receiver<T> {
         // This is a new iteration of the event-loop, so we reset the "business" counter.
         self.taken_task_counter.set(0);
         // We want to be notified when the script-port is ready to receive.

@@ -8,13 +8,13 @@ use crate::filemanager_thread::{fetch_file_in_chunks, FileManager, FILE_CHUNK_SI
 use crate::http_loader::{determine_request_referrer, http_fetch, HttpState};
 use crate::http_loader::{set_default_accept, set_default_accept_language};
 use crate::subresource_integrity::is_response_integrity_valid;
-use rr_channels::{unbounded, Receiver, Sender};
+use crossbeam_channel::{unbounded, Receiver, Sender};
 use devtools_traits::DevtoolsControlMsg;
 use headers::{AccessControlExposeHeaders, ContentType, HeaderMapExt, Range};
 use http::header::{self, HeaderMap, HeaderName, HeaderValue};
 use hyper::Method;
 use hyper::StatusCode;
-use ipc_channel::ipc::IpcReceiver;
+use rr_channel::ipc::IpcReceiver;
 use mime::{self, Mime};
 use mime_guess::guess_mime_type;
 use net_traits::blob_url_store::{parse_blob_url, BlobURLStoreError};
@@ -50,7 +50,7 @@ pub enum Data {
 pub struct FetchContext {
     pub state: Arc<HttpState>,
     pub user_agent: Cow<'static, str>,
-    pub devtools_chan: Option<Sender<DevtoolsControlMsg>>,
+    pub devtools_chan: Option<rr_channel::Sender<DevtoolsControlMsg>>,
     pub filemanager: FileManager,
     pub cancellation_listener: Arc<Mutex<CancellationListener>>,
     pub timing: Arc<Mutex<ResourceFetchTiming>>,
@@ -70,10 +70,13 @@ impl CancellationListener {
     }
 
     pub fn cancelled(&mut self) -> bool {
-        if let Some(ref cancel_chan) = self.cancel_chan {
+        if let Some(cancel_chan) = &mut self.cancel_chan {
             if self.cancelled {
                 true
-            } else if cancel_chan.try_recv().is_ok() {
+            }
+            // We are inside rayon (TODO is this always true?)
+            // Do not use rr_channel => escape hatch!
+            else if cancel_chan.try_recv().is_ok() {
                 self.cancelled = true;
                 true
             } else {

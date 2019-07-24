@@ -10,7 +10,7 @@ use servo::embedder_traits::EventLoopWaker;
 use std::sync::Arc;
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::thread;
+use rr_channel::thread;
 use std::time;
 
 pub struct EventsLoop(Option<glutin::EventsLoop>);

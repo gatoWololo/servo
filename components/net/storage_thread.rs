@@ -3,14 +3,14 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::resource_thread;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc::{self, IpcReceiver, IpcSender};
 use net_traits::storage_thread::{StorageThreadMsg, StorageType};
 use servo_url::ServoUrl;
 use std::borrow::ToOwned;
 use std::collections::BTreeMap;
 use std::collections::HashMap;
 use std::path::PathBuf;
-use std::thread;
+use rr_channel::thread;
 
 const QUOTA_SIZE_LIMIT: usize = 5 * 1024 * 1024;
 

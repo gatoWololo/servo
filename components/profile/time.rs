@@ -9,7 +9,7 @@ use crate::trace_dump::TraceDump;
 use influent::client::{Client, Credentials};
 use influent::create_client;
 use influent::measurement::{Measurement, Value};
-use ipc_channel::ipc::{self, IpcReceiver};
+use rr_channel::ipc::{self, IpcReceiver};
 use profile_traits::energy::{energy_interval_ms, read_energy_uj};
 use profile_traits::time::{
     ProfilerCategory, ProfilerChan, ProfilerData, ProfilerMsg, TimerMetadata,
@@ -24,7 +24,8 @@ use std::fs::File;
 use std::io::{self, Write};
 use std::path::Path;
 use std::time::Duration;
-use std::{f64, thread, u32, u64};
+use std::{f64, u32, u64};
+use rr_channel::thread;
 use time_crate::precise_time_ns;
 use tokio::prelude::Future;
 

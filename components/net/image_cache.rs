@@ -16,7 +16,7 @@ use std::collections::HashMap;
 use std::io;
 use std::mem;
 use std::sync::{Arc, Mutex};
-use std::thread;
+use rr_channel::thread;
 
 ///
 /// TODO(gw): Remaining work on image cache:

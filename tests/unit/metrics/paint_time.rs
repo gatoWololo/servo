@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use gfx_traits::Epoch;
-use ipc_channel::ipc;
+use rr_channel::ipc;
 use layout::display_list::items::{BaseDisplayItem, CommonDisplayItem, DisplayItem, DisplayList};
 use metrics::{PaintTimeMetrics, ProfilerMetadataFactory, ProgressiveWebMetric};
 use msg::constellation_msg::TEST_PIPELINE_ID;

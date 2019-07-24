@@ -23,7 +23,7 @@ use crate::dom::vrdisplayevent::VRDisplayEvent;
 use crate::dom::xrsession::XRSession;
 use crate::dom::xrtest::XRTest;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use profile_traits::ipc;
 use std::cell::Cell;
 use std::rc::Rc;

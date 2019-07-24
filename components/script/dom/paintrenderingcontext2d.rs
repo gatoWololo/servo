@@ -28,7 +28,7 @@ use dom_struct::dom_struct;
 use euclid::Size2D;
 use euclid::TypedScale;
 use euclid::TypedSize2D;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use servo_url::ServoUrl;
 use std::cell::Cell;
 use style_traits::CSSPixel;

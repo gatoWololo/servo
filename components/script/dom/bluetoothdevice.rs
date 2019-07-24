@@ -25,7 +25,7 @@ use crate::dom::promise::Promise;
 use bluetooth_traits::{BluetoothCharacteristicMsg, BluetoothDescriptorMsg};
 use bluetooth_traits::{BluetoothRequest, BluetoothResponse, BluetoothServiceMsg};
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use profile_traits::ipc;
 use std::cell::Cell;
 use std::collections::HashMap;

@@ -12,13 +12,13 @@ use crate::windowing::{
 };
 use crate::CompositionPipeline;
 use crate::SendableFrameTree;
-use rr_channels::Sender;
+use rr_channel::Sender;
 use embedder_traits::Cursor;
 use euclid::{TypedPoint2D, TypedScale, TypedVector2D};
 use gfx_traits::Epoch;
 #[cfg(feature = "gl")]
 use image::{DynamicImage, ImageFormat};
-use ipc_channel::ipc;
+use rr_channel::ipc;
 use libc::c_void;
 use msg::constellation_msg::{PipelineId, PipelineIndex, PipelineNamespaceId};
 use net_traits::image::base::Image;

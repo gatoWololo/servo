@@ -69,14 +69,14 @@ use app_units::Au;
 use base64;
 use bluetooth_traits::BluetoothRequest;
 use canvas_traits::webgl::WebGLChan;
-use rr_channels::{unbounded, Sender, TryRecvError};
+use rr_channel::{unbounded, Sender, TryRecvError};
 use cssparser::{Parser, ParserInput, SourceLocation};
 use devtools_traits::{ScriptToDevtoolsControlMsg, TimelineMarker, TimelineMarkerType};
 use dom_struct::dom_struct;
 use embedder_traits::EmbedderMsg;
 use euclid::{Point2D, Rect, Size2D, TypedPoint2D, TypedScale, TypedSize2D, Vector2D};
-use ipc_channel::ipc::{channel, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc::{channel, IpcSender};
+use rr_channel::router::ROUTER;
 use js::jsapi::JSAutoRealm;
 use js::jsapi::JSContext;
 use js::jsapi::JSPROP_ENUMERATE;
@@ -1479,9 +1479,9 @@ impl Window {
                 let pipeline = self.upcast::<GlobalScope>().pipeline_id();
                 let image_cache_chan = self.image_cache_chan.clone();
                 ROUTER.add_route(
-                    responder_listener.to_opaque(),
+                    responder_listener.to_ipc_receiver(),
                     Box::new(move |message| {
-                        let _ = image_cache_chan.send((pipeline, message.to().unwrap()));
+                        let _ = image_cache_chan.send((pipeline, message.unwrap()));
                     }),
                 );
                 self.image_cache

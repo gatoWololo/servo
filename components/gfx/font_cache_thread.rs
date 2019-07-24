@@ -12,7 +12,7 @@ use crate::platform::font_list::system_default_family;
 use crate::platform::font_list::SANS_SERIF_FONT_FAMILY;
 use crate::platform::font_template::FontTemplateData;
 use app_units::Au;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc::{self, IpcReceiver, IpcSender};
 use net_traits::request::{Destination, RequestBuilder};
 use net_traits::{fetch_async, CoreResourceThread, FetchResponseMsg};
 use servo_atoms::Atom;
@@ -21,7 +21,8 @@ use std::borrow::ToOwned;
 use std::collections::HashMap;
 use std::ops::Deref;
 use std::sync::{Arc, Mutex};
-use std::{f32, fmt, mem, thread};
+use std::{f32, fmt, mem};
+use rr_channel::thread;
 use style::font_face::{EffectiveSources, Source};
 use style::values::computed::font::FamilyName;
 

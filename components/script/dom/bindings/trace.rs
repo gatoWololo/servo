@@ -51,7 +51,7 @@ use canvas_traits::webgl::{WebGLBufferId, WebGLChan, WebGLContextShareMode, WebG
 use canvas_traits::webgl::{WebGLFramebufferId, WebGLMsgSender, WebGLPipeline, WebGLProgramId};
 use canvas_traits::webgl::{WebGLReceiver, WebGLRenderbufferId, WebGLSLVersion, WebGLSender};
 use canvas_traits::webgl::{WebGLShaderId, WebGLTextureId, WebGLVersion, WebGLVertexArrayId};
-use rr_channels::{Receiver, Sender};
+use rr_channel::{Receiver, Sender};
 use cssparser::RGBA;
 use devtools_traits::{CSSError, TimelineMarkerType, WorkerId};
 use encoding_rs::{Decoder, Encoding};
@@ -66,7 +66,7 @@ use http::header::HeaderMap;
 use hyper::Method;
 use hyper::StatusCode;
 use indexmap::IndexMap;
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::ipc::{IpcReceiver, IpcSender};
 use js::glue::{CallObjectTracer, CallValueTracer};
 use js::jsapi::{GCTraceKindToAscii, Heap, JSObject, JSTracer, TraceKind};
 use js::jsval::JSVal;

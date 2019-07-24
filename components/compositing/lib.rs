@@ -11,7 +11,7 @@ pub use crate::compositor::CompositingReason;
 pub use crate::compositor::IOCompositor;
 pub use crate::compositor::ShutdownState;
 pub use crate::compositor_thread::CompositorProxy;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use msg::constellation_msg::PipelineId;
 use msg::constellation_msg::TopLevelBrowsingContextId;
 use script_traits::{ConstellationControlMsg, LayoutControlMsg};

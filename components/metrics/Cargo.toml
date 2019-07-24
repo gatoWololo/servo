@@ -12,7 +12,8 @@ path = "lib.rs"
 
 [dependencies]
 gfx_traits = {path = "../gfx_traits"}
-ipc-channel = {path = "../../../ipc-channel/"}
+ipc-channel = "0.12"
+rr_channel = { path = "../rr_channel"}
 log = "0.4"
 malloc_size_of = { path = "../malloc_size_of" }
 malloc_size_of_derive = "0.1"

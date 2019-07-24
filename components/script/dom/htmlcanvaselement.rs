@@ -36,7 +36,7 @@ use euclid::{Rect, Size2D};
 use html5ever::{LocalName, Prefix};
 use image::png::PNGEncoder;
 use image::ColorType;
-use ipc_channel::ipc::IpcSharedMemory;
+use rr_channel::ipc::IpcSharedMemory;
 use js::error::throw_type_error;
 use js::jsapi::JSContext;
 use js::rust::HandleValue;

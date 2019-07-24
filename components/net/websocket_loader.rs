@@ -11,7 +11,7 @@ use embedder_traits::resources::{self, Resource};
 use headers::Host;
 use http::header::{self, HeaderMap, HeaderName, HeaderValue};
 use http::uri::Authority;
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::ipc::{IpcReceiver, IpcSender};
 use net_traits::request::{RequestBuilder, RequestMode};
 use net_traits::{CookieSource, MessageData};
 use net_traits::{WebSocketDomAction, WebSocketNetworkEvent};
@@ -20,7 +20,7 @@ use servo_url::ServoUrl;
 use std::fs;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
-use std::thread;
+use rr_channel::thread;
 use url::Url;
 use ws::util::TcpStream;
 use ws::{

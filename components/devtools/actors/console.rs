@@ -14,7 +14,7 @@ use devtools_traits::CachedConsoleMessage;
 use devtools_traits::EvaluateJSReply::{ActorValue, BooleanValue, StringValue};
 use devtools_traits::EvaluateJSReply::{NullValue, NumberValue, VoidValue};
 use devtools_traits::{CachedConsoleMessageTypes, DevtoolScriptControlMsg};
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc::{self, IpcSender};
 use msg::constellation_msg::PipelineId;
 use serde_json::{self, Map, Number, Value};
 use std::cell::RefCell;

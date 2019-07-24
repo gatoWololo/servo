@@ -21,7 +21,7 @@ use std::fs::File;
 use std::io::Write;
 use std::mem;
 use std::rc::Rc;
-use std::thread;
+use rr_channel::thread;
 use std::time::Duration;
 use tinyfiledialogs::{self, MessageBoxIcon};
 

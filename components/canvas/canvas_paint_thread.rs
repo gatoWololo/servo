@@ -5,10 +5,10 @@
 use crate::canvas_data::*;
 use canvas_traits::canvas::*;
 use euclid::Size2D;
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc::{self, IpcSender};
 use std::borrow::ToOwned;
 use std::collections::HashMap;
-use std::thread;
+use rr_channel::thread;
 
 pub enum AntialiasMode {
     Default,

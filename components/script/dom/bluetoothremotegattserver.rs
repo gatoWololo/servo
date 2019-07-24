@@ -17,7 +17,7 @@ use crate::dom::globalscope::GlobalScope;
 use crate::dom::promise::Promise;
 use bluetooth_traits::{BluetoothRequest, BluetoothResponse, GATTType};
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use std::cell::Cell;
 use std::rc::Rc;
 

@@ -28,7 +28,7 @@ use std::os::raw::c_char;
 use std::os::raw::c_int;
 use std::os::raw::c_void;
 use std::rc::Rc;
-use std::thread;
+use rr_channel::thread;
 use std::time::Duration;
 use std::time::Instant;
 

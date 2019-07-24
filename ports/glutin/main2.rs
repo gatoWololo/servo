@@ -29,7 +29,7 @@ use servo::config::servo_version;
 use std::env;
 use std::panic;
 use std::process;
-use std::thread;
+use rr_channel::thread;
 
 pub mod platform {
     #[cfg(target_os = "macos")]
@@ -53,7 +53,7 @@ fn install_crash_handler() {
     use backtrace::Backtrace;
     use libc::_exit;
     use sig::ffi::Sig;
-    use std::thread;
+    use rr_channel::thread;
 
     extern "C" fn handler(sig: i32) {
         let name = thread::current()

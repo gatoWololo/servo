@@ -20,7 +20,7 @@ use crate::dom::node::Node;
 use crate::dom::processinginstruction::ProcessingInstruction;
 use crate::dom::servoparser::{create_element_for_token, ElementAttribute, ParsingAlgorithm};
 use crate::dom::virtualmethods::vtable_for;
-use rr_channels::{unbounded, Receiver, Sender};
+use rr_channel::{unbounded, Receiver, Sender};
 use html5ever::buffer_queue::BufferQueue;
 use html5ever::tendril::fmt::UTF8;
 use html5ever::tendril::{SendTendril, StrTendril, Tendril};
@@ -35,7 +35,7 @@ use std::borrow::Cow;
 use std::cell::Cell;
 use std::collections::vec_deque::VecDeque;
 use std::collections::HashMap;
-use std::thread;
+use rr_channel::thread;
 use style::context::QuirksMode as ServoQuirksMode;
 
 type ParseNodeId = usize;

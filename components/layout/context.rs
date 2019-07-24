@@ -23,7 +23,7 @@ use std::cell::{RefCell, RefMut};
 use std::collections::HashMap;
 use std::hash::BuildHasherDefault;
 use std::sync::{Arc, Mutex};
-use std::thread;
+use rr_channel::thread;
 use style::context::RegisteredSpeculativePainter;
 use style::context::SharedStyleContext;
 

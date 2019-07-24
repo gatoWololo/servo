@@ -48,7 +48,7 @@
 
 extern crate app_units;
 #[cfg(feature = "servo")]
-extern crate rr_channels;
+extern crate rr_channel;
 extern crate cssparser;
 extern crate euclid;
 extern crate hashglobe;
@@ -925,7 +925,16 @@ where
 // Placeholder for unique case where internals of Sender cannot be measured.
 // malloc size of is 0 macro complains about type supplied!
 #[cfg(feature = "servo")]
-impl<T> MallocSizeOf for rr_channels::Sender<T> {
+impl<T> MallocSizeOf for rr_channel::Sender<T> {
+    fn size_of(&self, _ops: &mut MallocSizeOfOps) -> usize {
+        0
+    }
+}
+
+// Placeholder for unique case where internals of Sender cannot be measured.
+// malloc size of is 0 macro complains about type supplied!
+#[cfg(feature = "servo")]
+impl<T> MallocSizeOf for crossbeam_channel::Sender<T> {
     fn size_of(&self, _ops: &mut MallocSizeOfOps) -> usize {
         0
     }

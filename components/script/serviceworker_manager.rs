@@ -11,16 +11,16 @@ use crate::dom::abstractworker::WorkerScriptMsg;
 use crate::dom::bindings::structuredclone::StructuredCloneData;
 use crate::dom::serviceworkerglobalscope::{ServiceWorkerGlobalScope, ServiceWorkerScriptMsg};
 use crate::dom::serviceworkerregistration::longest_prefix_match;
-use rr_channels::{unbounded, Receiver, RecvError, Sender};
+use rr_channel::{unbounded, Receiver, RecvError, Sender};
 use devtools_traits::{DevtoolsPageInfo, ScriptToDevtoolsControlMsg};
-use ipc_channel::ipc::{self, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc::{self, IpcSender};
+use rr_channel::router::ROUTER;
 use net_traits::{CoreResourceMsg, CustomResponseMediator};
 use script_traits::{DOMMessage, SWManagerMsg, SWManagerSenders, ScopeThings, ServiceWorkerMsg};
 use servo_config::pref;
 use servo_url::ServoUrl;
 use std::collections::HashMap;
-use std::thread;
+use rr_channel::thread;
 
 enum Message {
     FromResource(CustomResponseMediator),

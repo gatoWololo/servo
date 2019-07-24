@@ -16,7 +16,7 @@ use crate::sequential;
 use crate::wrapper::LayoutNodeLayoutData;
 use app_units::Au;
 use euclid::{Point2D, Rect, Size2D, Vector2D};
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use msg::constellation_msg::PipelineId;
 use script_layout_interface::rpc::TextIndexResponse;
 use script_layout_interface::rpc::{ContentBoxResponse, ContentBoxesResponse, LayoutRPC};

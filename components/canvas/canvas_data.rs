@@ -6,7 +6,7 @@ use crate::canvas_paint_thread::AntialiasMode;
 use canvas_traits::canvas::*;
 use cssparser::RGBA;
 use euclid::{Point2D, Rect, Size2D, Transform2D, Vector2D};
-use ipc_channel::ipc::{IpcSender, IpcSharedMemory};
+use rr_channel::ipc::{IpcSender, IpcSharedMemory};
 use num_traits::ToPrimitive;
 #[allow(unused_imports)]
 use std::marker::PhantomData;

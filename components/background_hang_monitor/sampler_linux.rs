@@ -13,7 +13,7 @@ use std::mem;
 use std::process;
 use std::ptr;
 use std::sync::atomic::{AtomicPtr, Ordering};
-use std::thread;
+use rr_channel::thread;
 use unwind_sys::{
     unw_cursor_t, unw_get_reg, unw_init_local, unw_step, UNW_ESUCCESS, UNW_REG_IP, UNW_REG_SP,
 };

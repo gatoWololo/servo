@@ -19,13 +19,13 @@ use bluetooth_traits::{BluetoothError, BluetoothResponseResult, BluetoothResult}
 use device::bluetooth::{BluetoothAdapter, BluetoothDevice, BluetoothGATTCharacteristic};
 use device::bluetooth::{BluetoothGATTDescriptor, BluetoothGATTService};
 use embedder_traits::{EmbedderMsg, EmbedderProxy};
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc::{self, IpcReceiver, IpcSender};
 use servo_config::pref;
 use servo_rand::{self, Rng};
 use std::borrow::ToOwned;
 use std::collections::{HashMap, HashSet};
 use std::string::String;
-use std::thread;
+use rr_channel::thread;
 use std::time::Duration;
 
 // A transaction not completed within 30 seconds shall time out. Such a transaction shall be considered to have failed.

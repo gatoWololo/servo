@@ -60,7 +60,7 @@ use canvas_traits::webgl::{
 };
 use dom_struct::dom_struct;
 use euclid::{Point2D, Rect, Size2D};
-use ipc_channel::ipc::{self, IpcSharedMemory};
+use rr_channel::ipc::{self, IpcSharedMemory};
 use js::jsapi::{JSContext, JSObject, Type};
 use js::jsval::{BooleanValue, DoubleValue, Int32Value, JSVal, UInt32Value};
 use js::jsval::{NullValue, ObjectValue, UndefinedValue};

@@ -9,13 +9,13 @@ use canvas_traits::webgl::WebGLPipeline;
 use compositing::compositor_thread::Msg as CompositorMsg;
 use compositing::CompositionPipeline;
 use compositing::CompositorProxy;
-use rr_channels::Sender;
+use rr_channel::Sender;
 use devtools_traits::{DevtoolsControlMsg, ScriptToDevtoolsControlMsg};
 use euclid::{TypedScale, TypedSize2D};
 use gfx::font_cache_thread::FontCacheThread;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
-use ipc_channel::Error;
+use rr_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::router::ROUTER;
+use rr_channel::ipc::Error;
 use layout_traits::LayoutThreadFactory;
 use metrics::PaintTimeMetrics;
 use msg::constellation_msg::TopLevelBrowsingContextId;
@@ -247,9 +247,9 @@ impl Pipeline {
                         ipc::channel().expect("Pipeline script to devtools chan");
                     let devtools_chan = (*devtools_chan).clone();
                     ROUTER.add_route(
-                        script_to_devtools_port.to_opaque(),
+                        script_to_devtools_port,//.to_opaque(),
                         Box::new(
-                            move |message| match message.to::<ScriptToDevtoolsControlMsg>() {
+                            move |message| match message {
                                 Err(e) => {
                                     error!("Cast to ScriptToDevtoolsControlMsg failed ({}).", e)
                                 },
@@ -605,7 +605,7 @@ impl UnprivilegedPipelineContent {
         all(target_arch = "aarch64", not(target_os = "windows"))
     ))]
     pub fn spawn_multiprocess(self) -> Result<(), Error> {
-        use ipc_channel::ipc::IpcOneShotServer;
+        use rr_channel::ipc::IpcOneShotServer;
         // Note that this function can panic, due to process creation,
         // avoiding this panic would require a mechanism for dealing
         // with low-resource scenarios.
@@ -635,7 +635,7 @@ impl UnprivilegedPipelineContent {
     pub fn spawn_multiprocess(self) -> Result<(), Error> {
         use crate::sandboxing::content_process_sandbox_profile;
         use gaol::sandbox::{self, Sandbox, SandboxMethods};
-        use ipc_channel::ipc::IpcOneShotServer;
+        use rr_channel::ipc::IpcOneShotServer;
 
         impl CommandMethods for sandbox::Command {
             fn arg<T>(&mut self, arg: T)

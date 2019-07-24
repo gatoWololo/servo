@@ -6,9 +6,9 @@
 
 #![deny(missing_docs)]
 
-use rr_channels::Sender;
-use ipc_channel::ipc::{self, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::Sender;
+use rr_channel::ipc::{self, IpcSender};
+use rr_channel::router::ROUTER;
 use std::marker::Send;
 
 /// A trait to abstract away the various kinds of message senders we use.
@@ -71,12 +71,13 @@ impl ProfilerChan {
         C: OpaqueSender<T> + Send + 'static,
     {
         // Register the memory reporter.
-        let (reporter_sender, reporter_receiver) = ipc::channel().unwrap();
+        let (reporter_sender, reporter_receiver) =
+            ipc::channel::<ReporterRequest>().unwrap();
         ROUTER.add_route(
-            reporter_receiver.to_opaque(),
-            Box::new(move |message| {
+            reporter_receiver,//.to_opaque(),
+            Box::new(move |message: Result<ReporterRequest, _>| {
                 // Just injects an appropriate event into the paint thread's queue.
-                let request: ReporterRequest = message.to().unwrap();
+                let request: ReporterRequest = message.unwrap();
                 channel_for_reporter.send(msg(request.reports_channel));
             }),
         );

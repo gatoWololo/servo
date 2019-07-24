@@ -17,7 +17,7 @@ use simpleservo::{self, gl_glue, ServoGlue, SERVO};
 use simpleservo::{Coordinates, EventLoopWaker, HostTrait, InitOptions, VRInitOptions};
 use std::os::raw::{c_char, c_int, c_void};
 use std::sync::Arc;
-use std::thread;
+use rr_channel::thread;
 
 struct HostCallbacks {
     callbacks: GlobalRef,

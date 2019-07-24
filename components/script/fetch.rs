@@ -24,8 +24,8 @@ use crate::network_listener::{
     self, submit_timing_data, NetworkListener, PreInvoke, ResourceTimingListener,
 };
 use crate::task_source::TaskSourceName;
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc;
+use rr_channel::router::ROUTER;
 use js::jsapi::JSAutoRealm;
 use net_traits::request::RequestBuilder;
 use net_traits::request::{Request as NetTraitsRequest, ServiceWorkersMode};
@@ -177,9 +177,9 @@ pub fn Fetch(
     };
 
     ROUTER.add_route(
-        action_receiver.to_opaque(),
+        action_receiver,//.to_opaque(),
         Box::new(move |message| {
-            listener.notify_fetch(message.to().unwrap());
+            listener.notify_fetch(message.unwrap());
         }),
     );
     core_resource_thread

@@ -3,11 +3,11 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use canvas_traits::webgl;
-use rr_channels::{unbounded, Receiver, Sender};
+use rr_channel::{unbounded, Receiver, Sender};
 use euclid::Size2D;
 use gleam::gl::Gl;
-use ipc_channel::ipc;
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::ipc;
+use rr_channel::ipc::{IpcReceiver, IpcSender};
 use msg::constellation_msg::PipelineId;
 use rust_webvr::VRServiceManager;
 use script_traits::ConstellationMsg;
@@ -15,7 +15,8 @@ use servo_config::pref;
 use std::collections::hash_map::Entry;
 use std::collections::{HashMap, HashSet};
 use std::sync::mpsc;
-use std::{thread, time};
+use std::time;
+use rr_channel::thread;
 use webvr_traits::webvr::*;
 use webvr_traits::{WebVRMsg, WebVRPoseInformation, WebVRResult};
 

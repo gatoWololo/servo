@@ -33,7 +33,7 @@ pub use devtools_traits;
 pub use embedder_traits;
 pub use euclid;
 pub use gfx;
-pub use ipc_channel;
+pub use rr_channel;
 pub use layout_thread;
 pub use msg;
 pub use net;
@@ -79,7 +79,7 @@ use compositing::{CompositingReason, IOCompositor, ShutdownState};
 use constellation::content_process_sandbox_profile;
 use constellation::{Constellation, InitialConstellationState, UnprivilegedPipelineContent};
 use constellation::{FromCompositorLogger, FromScriptLogger};
-use rr_channels::{unbounded, Sender};
+use rr_channel::{unbounded, Sender};
 use embedder_traits::{EmbedderMsg, EmbedderProxy, EmbedderReceiver, EventLoopWaker};
 use env_logger::Builder as EnvLoggerBuilder;
 #[cfg(all(
@@ -91,7 +91,7 @@ use env_logger::Builder as EnvLoggerBuilder;
 ))]
 use gaol::sandbox::{ChildSandbox, ChildSandboxMethods};
 use gfx::font_cache_thread::FontCacheThread;
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc::{self, IpcSender};
 use log::{Log, Metadata, Record};
 use msg::constellation_msg::{PipelineNamespace, PipelineNamespaceId};
 use net::resource_thread::new_resource_threads;

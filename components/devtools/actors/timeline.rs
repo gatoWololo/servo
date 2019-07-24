@@ -9,14 +9,14 @@ use crate::protocol::JsonPacketStream;
 use devtools_traits::DevtoolScriptControlMsg;
 use devtools_traits::DevtoolScriptControlMsg::{DropTimelineMarkers, SetTimelineMarkers};
 use devtools_traits::{PreciseTime, TimelineMarker, TimelineMarkerType};
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc::{self, IpcReceiver, IpcSender};
 use msg::constellation_msg::PipelineId;
 use serde::{Serialize, Serializer};
 use serde_json::{Map, Value};
 use std::cell::RefCell;
 use std::net::TcpStream;
 use std::sync::{Arc, Mutex};
-use std::thread;
+use rr_channel::thread;
 use std::time::Duration;
 
 pub struct TimelineActor {

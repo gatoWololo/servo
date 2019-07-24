@@ -6,10 +6,10 @@
 //! Any redirects that are encountered are followed. Whenever a non-redirect
 //! response is received, it is forwarded to the appropriate script thread.
 
-use rr_channels::Sender;
+use rr_channel::Sender;
 use http::header::LOCATION;
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc;
+use rr_channel::router::ROUTER;
 use msg::constellation_msg::PipelineId;
 use net::http_loader::{set_default_accept, set_default_accept_language};
 use net_traits::request::{Destination, Referrer, RequestBuilder};
@@ -74,10 +74,10 @@ impl NetworkListener {
         };
 
         ROUTER.add_route(
-            ipc_receiver.to_opaque(),
+            ipc_receiver,//.to_opaque(),
             Box::new(move |message| {
-                let msg = message.to();
-                match msg {
+                // let msg = message.to();
+                match message {
                     Ok(FetchResponseMsg::ProcessResponse(res)) => listener.check_redirect(res),
                     Ok(msg_) => listener.send(msg_),
                     Err(e) => warn!("Error while receiving network listener message: {}", e),

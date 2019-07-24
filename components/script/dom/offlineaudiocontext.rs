@@ -28,7 +28,7 @@ use std::cell::Cell;
 use std::rc::Rc;
 use std::sync::mpsc;
 use std::sync::{Arc, Mutex};
-use std::thread::Builder;
+use rr_channel::thread::Builder;
 
 #[dom_struct]
 pub struct OfflineAudioContext {

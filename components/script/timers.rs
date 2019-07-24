@@ -13,7 +13,7 @@ use crate::dom::globalscope::GlobalScope;
 use crate::dom::testbinding::TestBindingCallback;
 use crate::dom::xmlhttprequest::XHRTimeoutCallback;
 use euclid::Length;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc::IpcSender;
 use js::jsapi::Heap;
 use js::jsval::{JSVal, UndefinedValue};
 use js::rust::HandleValue;

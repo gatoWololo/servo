@@ -7,7 +7,7 @@ use crate::fetch_with_context;
 use crate::make_server;
 use crate::new_fetch_context;
 use cookie_rs::Cookie as CookiePair;
-use rr_channels::{unbounded, Receiver};
+use rr_channel::{unbounded, Receiver};
 use devtools_traits::HttpRequest as DevtoolsHttpRequest;
 use devtools_traits::HttpResponse as DevtoolsHttpResponse;
 use devtools_traits::{ChromeToDevtoolsControlMsg, DevtoolsControlMsg, NetworkEvent};

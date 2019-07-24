@@ -20,7 +20,7 @@ mod mime_classifier;
 mod resource_thread;
 mod subresource_integrity;
 
-use rr_channels::{unbounded, Sender};
+use rr_channel::{unbounded, Sender};
 use devtools_traits::DevtoolsControlMsg;
 use embedder_traits::resources::{self, Resource};
 use embedder_traits::{EmbedderProxy, EventLoopWaker};
