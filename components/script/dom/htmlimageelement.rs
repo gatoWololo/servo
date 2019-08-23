@@ -1002,7 +1002,7 @@ impl HTMLImageElement {
                 // Return the image via a message to the script thread, which marks
                 // the element as dirty and triggers a reflow.
                 let element = trusted_node.clone();
-                let image = unimplemented!();//message.unwrap();
+                let image = unimplemented!("We got here Omar fix me now </3"); //message.unwrap();
                 let selected_source_clone = selected_source.clone();
                 let _ = task_source.queue_with_canceller(
                     task!(process_image_response_for_environment_change: move || {

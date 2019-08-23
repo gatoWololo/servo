@@ -57,7 +57,6 @@ class ServoTestharnessExecutor(ProcessTestExecutor):
     def do_test(self, test):
         self.result_data = None
         self.result_flag = threading.Event()
-
         args = [
             "--hard-fail", "-u", "Servo/wptrunner",
             "-Z", "replace-surrogates", "-z", self.test_url(test),
@@ -71,6 +70,7 @@ class ServoTestharnessExecutor(ProcessTestExecutor):
         args += self.browser.binary_args
         debug_args, command = browser_command(self.binary, args, self.debug_info)
 
+        print("OMAR", command)
         self.command = command
 
         if self.pause_after_test:
@@ -82,6 +82,18 @@ class ServoTestharnessExecutor(ProcessTestExecutor):
         env["HOST_FILE"] = self.hosts_path
         env["RUST_BACKTRACE"] = "1"
 
+        # Do RR
+        if "RR_RECORDS_PATH" in env:
+            env["RR_CHANNEL"] = "replay"
+            record_path = env["RR_RECORDS_PATH"]
+
+            # The name of the record file is just the name of the test with / replaced
+            # by underscores.
+            test_name = test.url.replace("-ref.html", ".html").replace("_ref.html", ".html")
+            record_file = test_name.replace('/', '_') + ".record"
+            env["RR_RECORD_FILE"] = record_path + "/" + record_file
+        else:
+            print("NO RR specified. Doing NoRR run!!!")
 
         if not self.interactive:
             self.proc = ProcessHandler(self.command,
@@ -193,8 +205,6 @@ class ServoRefTestExecutor(ProcessTestExecutor):
         ProcessTestExecutor.teardown(self)
 
     def screenshot(self, test, viewport_size, dpi):
-        full_url = self.test_url(test)
-
         with TempFilename(self.tempdir) as output_path:
             debug_args, command = browser_command(
                 self.binary,
@@ -202,7 +212,7 @@ class ServoRefTestExecutor(ProcessTestExecutor):
                     "--hard-fail", "--exit",
                     "-u", "Servo/wptrunner",
                     "-Z", "disable-text-aa,load-webfonts-synchronously,replace-surrogates",
-                    "--output=%s" % output_path, full_url
+                    "--output=%s" % output_path, self.test_url(test)
                 ] + self.browser.binary_args,
                 self.debug_info)
 
@@ -224,10 +234,22 @@ class ServoRefTestExecutor(ProcessTestExecutor):
             command += ["-z"]
 
             self.command = debug_args + command
-
             env = os.environ.copy()
             env["HOST_FILE"] = self.hosts_path
             env["RUST_BACKTRACE"] = "1"
+
+            # Do RR
+            if "RR_RECORDS_PATH" in env:
+                env["RR_CHANNEL"] = "replay"
+                record_path = env["RR_RECORDS_PATH"]
+
+                # The name of the record file is just the name of the test with / replaced
+                # by underscores.
+                test_name = test.url.replace("-ref.html", ".html").replace("_ref.html", ".html")
+                record_file = test_name.replace('/', '_') + ".record"
+                env["RR_RECORD_FILE"] = record_path + "/" + record_file
+            else:
+                print("NO RR specified. Doing NoRR run!!!")
 
             if not self.interactive:
                 self.proc = ProcessHandler(self.command,

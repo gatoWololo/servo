@@ -16,8 +16,8 @@ webgl_backtrace = []
 [dependencies]
 cssparser = "0.25"
 euclid = "0.19"
-ipc-channel = "0.12"
-rr_channel = { path = "../rr_channel"}
+# ipc-channel = "0.12"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 gleam = "0.6.7"
 lazy_static = "1"
 malloc_size_of = { path = "../malloc_size_of" }
@@ -26,5 +26,5 @@ pixels = {path = "../pixels"}
 serde = "1.0"
 serde_bytes = "0.10"
 servo_config = {path = "../config"}
-webrender_api = {git = "https://github.com/servo/webrender", features = ["ipc"]}
+webrender_api = {git = "https://github.com/servo/webrender"}
 webvr_traits = {path = "../webvr_traits"}

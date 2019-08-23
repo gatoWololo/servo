@@ -21,14 +21,14 @@ no_wgl = ["offscreen_gl_context/no_wgl"]
 azure = {git = "https://github.com/servo/rust-azure", optional = true}
 byteorder = "1"
 canvas_traits = {path = "../canvas_traits"}
-rr_channel = {path = "../rr_channel"}
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 compositing = {path = "../compositing"}
 cssparser = "0.25"
 euclid = "0.19"
 fnv = "1.0"
 gleam = "0.6.7"
 half = "1"
-ipc-channel = "0.12"
+# ipc-channel = "0.12"
 log = "0.4"
 num-traits = "0.2"
 offscreen_gl_context = {version = "0.22", features = ["serde", "osmesa"]}
@@ -37,4 +37,4 @@ pixels = {path = "../pixels"}
 serde_bytes = "0.10"
 servo_config = {path = "../config"}
 webrender = {git = "https://github.com/servo/webrender"}
-webrender_api = {git = "https://github.com/servo/webrender", features = ["ipc"]}
+webrender_api = {git = "https://github.com/servo/webrender"}

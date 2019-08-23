@@ -162,7 +162,6 @@ impl ResourceChannelManager {
         private_receiver: IpcReceiver<CoreResourceMsg>,
         memory_reporter: IpcReceiver<ReportsChan>,
     ) {
-        use rr_channel::DetThreadId;
         let (public_http_state, private_http_state) = create_http_states(
             self.config_dir.as_ref().map(Deref::deref),
             self.certificate_path.clone(),
@@ -183,8 +182,7 @@ impl ResourceChannelManager {
                 let (id, data) = receiver.unwrap();
                 // If message is memory report, get the size_of of public and private http caches
                 if id == reporter_id {
-                    // TODO Non deterministic for now.
-                    if let Ok((_, msg)) = data.to::<(Option<DetThreadId>, _)>() {
+                    if let Ok(msg) = data.to() {
                         self.process_report(msg, &private_http_state, &public_http_state);
                         continue;
                     }
@@ -195,7 +193,7 @@ impl ResourceChannelManager {
                         assert_eq!(id, public_id);
                         &public_http_state
                     };
-                    if let Ok((id, msg)) = data.to::<(Option<DetThreadId>, _)>() {
+                    if let Ok(msg) = data.to() {
                         if !self.process_msg(msg, group) {
                             return;
                         }

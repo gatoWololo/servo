@@ -26,7 +26,7 @@ servo = [
 [dependencies]
 app_units = "0.7"
 crossbeam-channel = { version = "0.3", optional = true }
-rr_channel = {path = "../rr_channel"}
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 cssparser = "0.25"
 euclid = "0.19"
 hashglobe = { path = "../hashglobe" }
@@ -43,6 +43,7 @@ string_cache = { version = "0.7", optional = true }
 thin-slice = "0.1.0"
 time = { version = "0.1.17", optional = true }
 url = { version = "1.2", optional = true }
-webrender_api = { git = "https://github.com/servo/webrender", features = ["ipc"], optional = true }
+# webrender_api = { git = "https://github.com/servo/webrender", optional = true }
+webrender_api = { git = "https://github.com/servo/webrender", optional = true }
 xml5ever = { version = "0.14", optional = true }
 void = "1.0.2"

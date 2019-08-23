@@ -30,6 +30,7 @@ use std::env;
 use std::panic;
 use std::process;
 use rr_channel::thread;
+use rr_channel::router::ROUTER;
 
 pub mod platform {
     #[cfg(target_os = "macos")]
@@ -73,6 +74,7 @@ fn install_crash_handler() {
 }
 
 pub fn main() {
+    lazy_static::initialize(&ROUTER);
     install_crash_handler();
 
     resources::init();

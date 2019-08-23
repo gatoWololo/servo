@@ -29,10 +29,12 @@ opt-level = 3
 mio = { git = "https://github.com/servo/mio.git", branch = "servo" }
 iovec = { git = "https://github.com/servo/iovec.git", branch = "servo" }
 cmake = { git = "https://github.com/alexcrichton/cmake-rs" }
-ipc-channel = { path = "../ipc-channel" }
 
 [patch."https://github.com/servo/webrender"]
-"webrender" = { path = "../webrender/webrender" }
-"webrender_api" = { path = "../webrender/webrender_api" }
+webrender = { git = "https://github.com/gatoWololo/webrender", branch = "rr-changes" }
+webrender_api = { git = "https://github.com/gatoWololo/webrender", branch = "rr-changes" }
 
-
+[patch."https://github.com/servo/media"]
+servo-media = {git = "https://github.com/gatoWololo/servo-media", branch = "rr_channels"}
+servo-media-gstreamer = { git = "https://github.com/gatoWololo/servo-media", branch = "rr_channels"}
+servo-media-dummy = { git = "https://github.com/gatoWololo/servo-media", branch = "rr_channels"}

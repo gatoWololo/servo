@@ -572,7 +572,7 @@ where
         let filter = max(env_logger.filter(), con_logger.filter());
         let logger = BothLogger(env_logger, con_logger);
 
-        log::set_boxed_logger(Box::new(logger)).expect("Failed to set logger.");
+        log::set_boxed_logger(Box::new(logger));
         log::set_max_level(filter);
     }
 
@@ -765,7 +765,7 @@ pub fn set_logger(script_to_constellation_chan: ScriptToConstellationChan) {
     let filter = max(env_logger.filter(), con_logger.filter());
     let logger = BothLogger(env_logger, con_logger);
 
-    log::set_boxed_logger(Box::new(logger)).expect("Failed to set logger.");
+    log::set_boxed_logger(Box::new(logger));
     log::set_max_level(filter);
 }
 

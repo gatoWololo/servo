@@ -117,7 +117,6 @@ use embedder_traits::{Cursor, EmbedderMsg, EmbedderProxy};
 use euclid::{Size2D, TypedScale, TypedSize2D};
 use gfx::font_cache_thread::FontCacheThread;
 use gfx_traits::Epoch;
-use ipc_channel;
 use rr_channel::ipc::{self, IpcReceiver, IpcSender};
 use rr_channel::router::ROUTER;
 use rr_channel::ipc::Error as IpcError;

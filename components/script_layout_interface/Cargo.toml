@@ -15,11 +15,11 @@ app_units = "0.7"
 atomic_refcell = "0.1"
 canvas_traits = {path = "../canvas_traits"}
 cssparser = "0.25"
-rr_channel = {path = "../rr_channel"}
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 euclid = "0.19"
 gfx_traits = {path = "../gfx_traits"}
 html5ever = "0.23"
-ipc-channel = "0.12"
+# ipc-channel = "0.12"
 libc = "0.2"
 time = "0.1.17"
 malloc_size_of = { path = "../malloc_size_of" }
@@ -35,4 +35,4 @@ servo_arc = {path = "../servo_arc"}
 servo_atoms = {path = "../atoms"}
 servo_url = {path = "../url"}
 style = {path = "../style", features = ["servo"]}
-webrender_api = {git = "https://github.com/servo/webrender", features = ["ipc"]}
+webrender_api = {git = "https://github.com/servo/webrender"}

@@ -16,10 +16,10 @@ oculusvr = ['rust-webvr/oculusvr']
 
 [dependencies]
 canvas_traits = {path = "../canvas_traits"}
-rr_channel = {path = "../rr_channel"}
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 euclid = "0.19"
 gleam = "0.6"
-ipc-channel = "0.12"
+# ipc-channel = "0.12"
 log = "0.4"
 msg = {path = "../msg"}
 rust-webvr = {version = "0.11.4", features = ["mock", "openvr", "vrexternal"]}

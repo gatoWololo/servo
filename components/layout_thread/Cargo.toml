@@ -16,7 +16,7 @@ unstable = ["parking_lot/nightly"]
 [dependencies]
 app_units = "0.7"
 atomic_refcell = "0.1"
-rr_channel = {path = "../rr_channel"}
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 embedder_traits = {path = "../embedder_traits"}
 euclid = "0.19"
 fnv = "1.0"
@@ -25,7 +25,7 @@ gfx = {path = "../gfx"}
 gfx_traits = {path = "../gfx_traits"}
 histogram = "0.6.8"
 html5ever = "0.23"
-ipc-channel = "0.12"
+# ipc-channel = "0.12"
 layout = {path = "../layout"}
 layout_traits = {path = "../layout_traits"}
 lazy_static = "1"
@@ -53,4 +53,4 @@ servo_geometry = {path = "../geometry"}
 servo_url = {path = "../url"}
 style = {path = "../style"}
 style_traits = {path = "../style_traits"}
-webrender_api = {git = "https://github.com/servo/webrender", features = ["ipc"]}
+webrender_api = {git = "https://github.com/servo/webrender"}

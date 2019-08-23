@@ -32,7 +32,7 @@ atomic_refcell = "0.1"
 bitflags = "1.0"
 byteorder = "1.0"
 cssparser = "0.25"
-rr_channel = {path = "../rr_channel"}
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 derive_more = "0.13"
 new_debug_unreachable = "1.0"
 encoding_rs = {version = "0.8", optional = true}

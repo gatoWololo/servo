@@ -11,8 +11,8 @@ name = "embedder_traits"
 path = "lib.rs"
 
 [dependencies]
-rr_channel = {path = "../rr_channel"}
-ipc-channel = "0.12"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
+# ipc-channel = "0.12"
 keyboard-types = "0.4.3"
 lazy_static = "1"
 log = "0.4"
@@ -22,4 +22,4 @@ num-derive = "0.2"
 serde = "1.0"
 servo_url = {path = "../url"}
 style_traits = {path = "../style_traits", features = ["servo"]}
-webrender_api = {git = "https://github.com/servo/webrender", features = ["ipc"]}
+webrender_api = {git = "https://github.com/servo/webrender"}

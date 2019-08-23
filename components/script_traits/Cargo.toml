@@ -14,7 +14,7 @@ path = "lib.rs"
 bluetooth_traits = {path = "../bluetooth_traits"}
 canvas_traits = {path = "../canvas_traits"}
 cookie = "0.11"
-rr_channel = {path = "../rr_channel"}
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 devtools_traits = {path = "../devtools_traits"}
 embedder_traits = {path = "../embedder_traits"}
 euclid = "0.19"
@@ -22,7 +22,7 @@ gfx_traits = {path = "../gfx_traits"}
 http = "0.1"
 hyper = "0.12"
 hyper_serde = "0.11"
-ipc-channel = "0.12"
+# ipc-channel = "0.12"
 keyboard-types = "0.4.3"
 libc = "0.2"
 malloc_size_of = { path = "../malloc_size_of" }
@@ -37,5 +37,5 @@ servo_url = {path = "../url"}
 style_traits = {path = "../style_traits", features = ["servo"]}
 time = "0.1.12"
 url = "1.2"
-webrender_api = {git = "https://github.com/servo/webrender", features = ["ipc"]}
+webrender_api = {git = "https://github.com/servo/webrender"}
 webvr_traits = {path = "../webvr_traits"}

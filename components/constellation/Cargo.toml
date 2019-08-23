@@ -23,7 +23,7 @@ canvas = {path = "../canvas", default-features = false}
 clipboard = "0.5"
 canvas_traits = {path = "../canvas_traits"}
 compositing = {path = "../compositing"}
-rr_channel = {path = "../rr_channel"}
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 debugger = {path = "../debugger"}
 devtools_traits = {path = "../devtools_traits"}
 euclid = "0.19"
@@ -31,7 +31,7 @@ embedder_traits = { path = "../embedder_traits" }
 gfx = {path = "../gfx"}
 gfx_traits = {path = "../gfx_traits"}
 http = "0.1"
-ipc-channel = "0.12"
+# ipc-channel = "0.12"
 layout_traits = {path = "../layout_traits"}
 keyboard-types = "0.4.3"
 log = "0.4"
@@ -49,7 +49,7 @@ servo_rand = {path = "../rand"}
 servo_remutex = {path = "../remutex"}
 servo_url = {path = "../url"}
 webvr_traits = {path = "../webvr_traits"}
-webrender_api = {git = "https://github.com/servo/webrender", features = ["ipc"]}
+webrender_api = {git = "https://github.com/servo/webrender"}
 
 [target.'cfg(all(not(target_os = "windows"), not(target_os = "ios"), not(target_os="android"), not(target_arch="arm"), not(target_arch="aarch64")))'.dependencies]
 gaol = {git = "https://github.com/servo/gaol"}

@@ -16,8 +16,8 @@ unstable = ["servo_allocator"]
 [dependencies]
 profile_traits = {path = "../profile_traits"}
 influent = "0.5"
-ipc-channel = "0.12"
-rr_channel = {path = "../rr_channel"}
+# ipc-channel = "0.12"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 heartbeats-simple = "0.4"
 log = "0.4"
 serde = "1.0"

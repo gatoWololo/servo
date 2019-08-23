@@ -9,7 +9,7 @@ use crate::dom::node::{window_from_node, Node};
 use crate::task_source::TaskSource;
 use rr_channel::ipc;
 use rr_channel::router::ROUTER;
-use net_traits::image_cache::{ImageCache, ImageResponder, ImageResponse, PendingImageId};
+use net_traits::image_cache::{ImageCache, ImageResponder, ImageResponse, PendingImageId, PendingImageResponse};
 use std::sync::Arc;
 
 pub trait ImageCacheListener {
@@ -23,7 +23,8 @@ pub fn add_cache_listener_for_element<T: ImageCacheListener + DerivedFrom<Node> 
     elem: &T,
 ) {
     let trusted_node = Trusted::new(elem);
-    let (responder_sender, responder_receiver) = ipc::channel().unwrap();
+    let (responder_sender, responder_receiver) =
+        ipc::channel::<PendingImageResponse>().unwrap();
 
     let window = window_from_node(elem);
     let (task_source, canceller) = window
@@ -31,11 +32,11 @@ pub fn add_cache_listener_for_element<T: ImageCacheListener + DerivedFrom<Node> 
         .networking_task_source_with_canceller();
     let generation = elem.generation_id();
     ROUTER.add_route(
-        responder_receiver,//.to_opaque(),
+        responder_receiver,
         Box::new(move |message| {
             let element = trusted_node.clone();
-            let image = unimplemented!(); //message.unwrap();
-            debug!("Got image {:?}", image);
+            let image = message.unwrap().response;
+
             let _ = task_source.queue_with_canceller(
                 task!(process_image_response: move || {
                     let element = element.root();

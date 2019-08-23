@@ -380,8 +380,8 @@ mod bindings {
                 filter: env::var("STYLO_BUILD_FILTER")
                     .ok()
                     .unwrap_or_else(|| "bindgen".to_owned()),
-            }))
-            .expect("Failed to set logger.");
+            }));
+            // .expect("Failed to set logger.");
 
             true
         } else {

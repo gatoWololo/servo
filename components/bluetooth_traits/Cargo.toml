@@ -11,8 +11,8 @@ name = "bluetooth_traits"
 path = "lib.rs"
 
 [dependencies]
-ipc-channel = "0.12"
-rr_channel = { path = "../rr_channel"}
+# ipc-channel = "0.12"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel"}
 regex = "1.1"
 serde = "1.0"
 embedder_traits = { path = "../embedder_traits" }
