@@ -4,7 +4,7 @@
 
 use crate::blob_url_store::{BlobBuf, BlobURLStoreError};
 use embedder_traits::FilterPattern;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use num_traits::ToPrimitive;
 use std::cmp::{max, min};
 use std::ops::Range;

@@ -5,7 +5,7 @@
 use crate::time;
 use crate::time::ProfilerCategory;
 use crate::time::ProfilerChan;
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use serde::{Deserialize, Serialize};
 use std::io::Error;
 
@@ -32,6 +32,13 @@ where
 
     pub fn try_recv(&self) -> Result<T, ipc::TryRecvError> {
         self.ipc_receiver.try_recv()
+    }
+
+    // Extra method needed since we changed the router API for ipc-channel.
+    // It moves `self` since that's what the to_opaque method below does (which is the functionality)
+    // we're trying to copy.
+    pub fn get_inner_receiver(self) -> ipc::IpcReceiver<T> {
+        self.ipc_receiver
     }
 
     pub fn to_opaque(self) -> ipc::OpaqueIpcReceiver {

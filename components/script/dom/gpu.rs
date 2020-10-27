@@ -15,8 +15,8 @@ use crate::dom::promise::Promise;
 use crate::realms::InRealm;
 use crate::task_source::{TaskSource, TaskSourceName};
 use dom_struct::dom_struct;
-use ipc_channel::ipc::{self, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use js::jsapi::Heap;
 use script_traits::ScriptMsg;
 use std::rc::Rc;
@@ -69,7 +69,7 @@ pub fn response_async<T: AsyncWGPUListener + DomObject + 'static>(
     let mut trusted = Some(TrustedPromise::new(promise.clone()));
     let trusted_receiver = Trusted::new(receiver);
     ROUTER.add_route(
-        action_receiver.to_opaque(),
+        action_receiver,
         Box::new(move |message| {
             let trusted = if let Some(trusted) = trusted.take() {
                 trusted
@@ -84,7 +84,7 @@ pub fn response_async<T: AsyncWGPUListener + DomObject + 'static>(
             };
             let result = task_source.queue_with_canceller(
                 task!(process_webgpu_task: move|| {
-                    context.response(message.to().unwrap());
+                    context.response(message.unwrap());
                 }),
                 &canceller,
             );

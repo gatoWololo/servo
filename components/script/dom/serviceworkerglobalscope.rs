@@ -29,11 +29,11 @@ use crate::script_runtime::{
 };
 use crate::task_queue::{QueuedTask, QueuedTaskConversion, TaskQueue};
 use crate::task_source::TaskSourceName;
-use crossbeam_channel::{after, unbounded, Receiver, Sender};
+use rr_channel::crossbeam_channel::{after, unbounded, Receiver, Sender};
 use devtools_traits::DevtoolScriptControlMsg;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use js::jsapi::{JSContext, JS_AddInterruptCallback};
 use js::jsval::UndefinedValue;
 use msg::constellation_msg::PipelineId;

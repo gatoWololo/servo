@@ -6,7 +6,7 @@ use crate::image::base::{Image, ImageMetadata};
 use crate::request::CorsSettings;
 use crate::FetchResponseMsg;
 use crate::WebrenderIpcSender;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use servo_url::{ImmutableOrigin, ServoUrl};
 use std::sync::Arc;
 

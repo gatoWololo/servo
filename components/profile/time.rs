@@ -5,7 +5,7 @@
 //! Timing functions.
 
 use crate::trace_dump::TraceDump;
-use ipc_channel::ipc::{self, IpcReceiver};
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver};
 use profile_traits::time::{
     ProfilerCategory, ProfilerChan, ProfilerData, ProfilerMsg, TimerMetadata,
 };

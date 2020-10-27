@@ -19,7 +19,7 @@ use crate::script_runtime::JSContext;
 use canvas_traits::canvas::{CanvasMsg, FromScriptMsg};
 use dom_struct::dom_struct;
 use euclid::default::Size2D;
-use ipc_channel::ipc::IpcSharedMemory;
+use rr_channel::ipc_channel::ipc::IpcSharedMemory;
 use js::rust::HandleValue;
 use profile_traits::ipc;
 use std::cell::Cell;

@@ -4,7 +4,7 @@
 
 use crate::Handler;
 use compositing::ConstellationMsg;
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use keyboard_types::webdriver::KeyInputState;
 use script_traits::webdriver_msg::WebDriverScriptCommand;
 use script_traits::{MouseButton, MouseEventType, WebDriverCommandMsg};

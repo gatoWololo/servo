@@ -7,7 +7,7 @@ use crate::fetch_with_context;
 use crate::make_server;
 use crate::new_fetch_context;
 use cookie_rs::Cookie as CookiePair;
-use crossbeam_channel::{unbounded, Receiver};
+use rr_channel::crossbeam_channel::{unbounded, Receiver};
 use devtools_traits::HttpRequest as DevtoolsHttpRequest;
 use devtools_traits::HttpResponse as DevtoolsHttpResponse;
 use devtools_traits::{ChromeToDevtoolsControlMsg, DevtoolsControlMsg, NetworkEvent};
@@ -23,8 +23,8 @@ use http::uri::Authority;
 use http::{Method, StatusCode};
 use hyper::body::Body;
 use hyper::{Request as HyperRequest, Response as HyperResponse};
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc;
+use rr_channel::ipc_channel::router::ROUTER;
 use msg::constellation_msg::TEST_PIPELINE_ID;
 use net::cookie::Cookie;
 use net::cookie_storage::CookieStorage;
@@ -103,9 +103,9 @@ fn create_request_body_with_content(content: Vec<u8>) -> RequestBody {
 
     let (chunk_request_sender, chunk_request_receiver) = ipc::channel().unwrap();
     ROUTER.add_route(
-        chunk_request_receiver.to_opaque(),
+        chunk_request_receiver,
         Box::new(move |message| {
-            let request = message.to().unwrap();
+            let request = message.unwrap();
             if let BodyChunkRequest::Connect(sender) = request {
                 let _ = sender.send(BodyChunkResponse::Chunk(content.clone()));
                 let _ = sender.send(BodyChunkResponse::Done);

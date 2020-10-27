@@ -12,7 +12,7 @@ use crate::serviceworker::ServiceWorkerUnprivilegedContent;
     not(target_arch = "aarch64")
 ))]
 use gaol::profile::{Operation, PathPattern, Profile};
-use ipc_channel::Error;
+use rr_channel::ipc_channel::Error;
 use servo_config::opts::Opts;
 use servo_config::prefs::PrefValue;
 use std::collections::HashMap;
@@ -133,7 +133,7 @@ pub fn content_process_sandbox_profile() {
     all(target_arch = "aarch64", not(target_os = "windows"))
 ))]
 pub fn spawn_multiprocess(content: UnprivilegedContent) -> Result<(), Error> {
-    use ipc_channel::ipc::{IpcOneShotServer, IpcSender};
+    use rr_channel::ipc_channel::ipc::{IpcOneShotServer, IpcSender};
     // Note that this function can panic, due to process creation,
     // avoiding this panic would require a mechanism for dealing
     // with low-resource scenarios.
@@ -162,7 +162,7 @@ pub fn spawn_multiprocess(content: UnprivilegedContent) -> Result<(), Error> {
 ))]
 pub fn spawn_multiprocess(content: UnprivilegedContent) -> Result<(), Error> {
     use gaol::sandbox::{self, Sandbox, SandboxMethods};
-    use ipc_channel::ipc::{IpcOneShotServer, IpcSender};
+    use rr_channel::ipc_channel::ipc::{IpcOneShotServer, IpcSender};
 
     impl CommandMethods for sandbox::Command {
         fn arg<T>(&mut self, arg: T)

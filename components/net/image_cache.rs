@@ -4,7 +4,7 @@
 
 use embedder_traits::resources::{self, Resource};
 use immeta::load_from_buf;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use net_traits::image::base::{load_from_memory, Image, ImageMetadata};
 use net_traits::image_cache::{
     CorsStatus, ImageCache, ImageCacheResult, ImageResponder, PendingImageResponse,

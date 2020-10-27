@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::sandboxing::{spawn_multiprocess, UnprivilegedContent};
-use ipc_channel::Error;
+use rr_channel::ipc_channel::Error;
 use script_traits::{SWManagerSenders, ServiceWorkerManagerFactory};
 use servo_config::opts::{self, Opts};
 use servo_config::prefs::{self, PrefValue};

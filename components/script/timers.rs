@@ -15,7 +15,7 @@ use crate::dom::xmlhttprequest::XHRTimeoutCallback;
 use crate::script_module::ScriptFetchOptions;
 use crate::script_thread::ScriptThread;
 use euclid::Length;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use js::jsapi::Heap;
 use js::jsval::{JSVal, UndefinedValue};
 use js::rust::HandleValue;

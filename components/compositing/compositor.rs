@@ -14,13 +14,13 @@ use crate::windowing::{
 };
 use crate::{CompositionPipeline, ConstellationMsg, SendableFrameTree};
 use canvas::canvas_paint_thread::ImageUpdate;
-use crossbeam_channel::Sender;
+use rr_channel::crossbeam_channel::Sender;
 use embedder_traits::Cursor;
 use euclid::{Point2D, Rect, Scale, Vector2D};
 use gfx_traits::{Epoch, FontData};
 #[cfg(feature = "gl")]
 use image::{DynamicImage, ImageFormat};
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use libc::c_void;
 use log::warn;
 use msg::constellation_msg::{PipelineId, PipelineIndex, PipelineNamespaceId};

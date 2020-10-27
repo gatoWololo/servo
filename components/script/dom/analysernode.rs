@@ -19,8 +19,8 @@ use crate::dom::bindings::root::DomRoot;
 use crate::dom::window::Window;
 use crate::task_source::TaskSource;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::{self, IpcReceiver};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver};
+use rr_channel::ipc_channel::router::ROUTER;
 use js::rust::CustomAutoRooterGuard;
 use js::typedarray::{Float32Array, Uint8Array};
 use servo_media::audio::analyser_node::AnalysisEngine;
@@ -103,13 +103,13 @@ impl AnalyserNode {
         let this = Trusted::new(&*object);
 
         ROUTER.add_route(
-            recv.to_opaque(),
+            recv,
             Box::new(move |block| {
                 let this = this.clone();
                 let _ = source.queue_with_canceller(
                     task!(append_analysis_block: move || {
                         let this = this.root();
-                        this.push_block(block.to().unwrap())
+                        this.push_block(block.unwrap())
                     }),
                     &canceller,
                 );

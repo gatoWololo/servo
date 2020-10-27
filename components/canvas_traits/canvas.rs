@@ -4,7 +4,7 @@
 
 use cssparser::RGBA;
 use euclid::default::{Point2D, Rect, Size2D, Transform2D};
-use ipc_channel::ipc::{IpcBytesReceiver, IpcBytesSender, IpcSender, IpcSharedMemory};
+use rr_channel::ipc_channel::ipc::{IpcBytesReceiver, IpcBytesSender, IpcSender, IpcSharedMemory};
 use serde_bytes::ByteBuf;
 use std::default::Default;
 use std::str::FromStr;

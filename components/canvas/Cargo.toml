@@ -19,7 +19,8 @@ xr-profile = ["webxr-api/profile", "time"]
 bitflags = "1.0"
 byteorder = "1"
 canvas_traits = { path = "../canvas_traits" }
-crossbeam-channel = "0.4"
+# crossbeam-channel = "0.4"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel.git"}
 cssparser = "0.27"
 euclid = "0.20"
 font-kit = "0.10"
@@ -27,7 +28,7 @@ fnv = "1.0"
 gfx = { path = "../gfx" }
 gleam = "0.12"
 half = "1"
-ipc-channel = "0.14"
+# ipc-channel = "0.14"
 log = "0.4"
 lyon_geom = "0.14"
 num-traits = "0.2"

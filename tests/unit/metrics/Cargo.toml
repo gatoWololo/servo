@@ -12,7 +12,8 @@ doctest = false
 
 [dependencies]
 gfx_traits = {path = "../../../components/gfx_traits"}
-ipc-channel = "0.14"
+# ipc-channel = "0.14"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel.git"}
 metrics = {path = "../../../components/metrics"}
 msg = {path = "../../../components/msg"}
 profile_traits = {path = "../../../components/profile_traits"}

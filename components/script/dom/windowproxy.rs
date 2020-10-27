@@ -23,7 +23,7 @@ use crate::script_thread::ScriptThread;
 use dom_struct::dom_struct;
 use embedder_traits::EmbedderMsg;
 use indexmap::map::IndexMap;
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use js::glue::{CreateWrapperProxyHandler, ProxyTraps};
 use js::glue::{GetProxyPrivate, GetProxyReservedSlot, SetProxyReservedSlot};
 use js::jsapi::Handle as RawHandle;

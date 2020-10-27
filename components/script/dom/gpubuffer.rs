@@ -17,7 +17,7 @@ use crate::dom::promise::Promise;
 use crate::realms::InRealm;
 use crate::script_runtime::JSContext;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcSharedMemory;
+use rr_channel::ipc_channel::ipc::IpcSharedMemory;
 use js::jsapi::DetachArrayBuffer;
 use js::jsapi::NewExternalArrayBuffer;
 use js::jsapi::{Heap, JSObject};

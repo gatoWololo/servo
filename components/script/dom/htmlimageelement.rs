@@ -53,9 +53,9 @@ use cssparser::{Parser, ParserInput};
 use dom_struct::dom_struct;
 use euclid::Point2D;
 use html5ever::{LocalName, Prefix, QualName};
-use ipc_channel::ipc;
-use ipc_channel::ipc::IpcSender;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::router::ROUTER;
 use mime::{self, Mime};
 use msg::constellation_msg::PipelineId;
 use net_traits::image::base::{Image, ImageMetadata};
@@ -375,9 +375,9 @@ impl HTMLImageElement {
             canceller: Some(canceller),
         };
         ROUTER.add_route(
-            action_receiver.to_opaque(),
+            action_receiver,
             Box::new(move |message| {
-                listener.notify_fetch(message.to().unwrap());
+                listener.notify_fetch(message.unwrap());
             }),
         );
 
@@ -1019,7 +1019,7 @@ impl HTMLImageElement {
             selected_pixel_density: f64,
         ) -> IpcSender<PendingImageResponse> {
             let trusted_node = Trusted::new(elem);
-            let (responder_sender, responder_receiver) = ipc::channel().unwrap();
+            let (responder_sender, responder_receiver) = ipc::channel::<PendingImageResponse>().unwrap();
 
             let window = window_from_node(elem);
             let (task_source, canceller) = window
@@ -1027,13 +1027,14 @@ impl HTMLImageElement {
                 .networking_task_source_with_canceller();
             let generation = elem.generation.get();
             ROUTER.add_route(
-                responder_receiver.to_opaque(),
+                responder_receiver,
                 Box::new(move |message| {
                     debug!("Got image {:?}", message);
                     // Return the image via a message to the script thread, which marks
                     // the element as dirty and triggers a reflow.
                     let element = trusted_node.clone();
-                    let image = message.to().unwrap();
+                    // See https://github.com/servo/servo/issues/23818
+                    let image = message.unwrap().response;
                     let selected_source_clone = selected_source.clone();
                     let _ = task_source.queue_with_canceller(
                         task!(process_image_response_for_environment_change: move || {

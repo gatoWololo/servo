@@ -5,10 +5,10 @@
 use serde::{Deserialize, Serialize};
 use std::io;
 
-pub type GLPlayerSender<T> = ipc_channel::ipc::IpcSender<T>;
-pub type GLPlayerReceiver<T> = ipc_channel::ipc::IpcReceiver<T>;
+pub type GLPlayerSender<T> = rr_channel::ipc_channel::ipc::IpcSender<T>;
+pub type GLPlayerReceiver<T> = rr_channel::ipc_channel::ipc::IpcReceiver<T>;
 
 pub fn glplayer_channel<T: Serialize + for<'de> Deserialize<'de>>(
 ) -> Result<(GLPlayerSender<T>, GLPlayerReceiver<T>), io::Error> {
-    ipc_channel::ipc::channel()
+    rr_channel:: ipc_channel::ipc::channel()
 }

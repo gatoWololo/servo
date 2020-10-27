@@ -72,8 +72,8 @@ use euclid::default::Size2D;
 use headers::{ContentLength, ContentRange, HeaderMapExt};
 use html5ever::{LocalName, Prefix};
 use http::header::{self, HeaderMap, HeaderValue};
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc;
+use rr_channel::ipc_channel::router::ROUTER;
 use media::{glplayer_channel, GLPlayerMsg, GLPlayerMsgForward, WindowGLContext};
 use net_traits::image::base::Image;
 use net_traits::image_cache::ImageResponse;
@@ -881,9 +881,9 @@ impl HTMLMediaElement {
             canceller: Some(canceller),
         };
         ROUTER.add_route(
-            action_receiver.to_opaque(),
+            action_receiver,
             Box::new(move |message| {
-                network_listener.notify_fetch(message.to().unwrap());
+                network_listener.notify_fetch(message.unwrap());
             }),
         );
         let global = self.global();
@@ -1372,9 +1372,9 @@ impl HTMLMediaElement {
             .task_manager()
             .media_element_task_source_with_canceller();
         ROUTER.add_route(
-            action_receiver.to_opaque(),
+            action_receiver,
             Box::new(move |message| {
-                let event = message.to().unwrap();
+                let event = message.unwrap();
                 trace!("Player event {:?}", event);
                 let this = trusted_node.clone();
                 if let Err(err) = task_source.queue_with_canceller(
@@ -1415,9 +1415,9 @@ impl HTMLMediaElement {
                 .task_manager()
                 .media_element_task_source_with_canceller();
             ROUTER.add_route(
-                image_receiver.to_opaque(),
+                image_receiver.get_inner_receiver(),
                 Box::new(move |message| {
-                    let msg = message.to().unwrap();
+                    let msg = message.unwrap();
                     let this = trusted_node.clone();
                     if let Err(err) = task_source.queue_with_canceller(
                         task!(handle_glplayer_message: move || {

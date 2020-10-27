@@ -4,11 +4,11 @@
 
 use crate::fetch::methods::{CancellationListener, Data, RangeRequestBounds};
 use crate::resource_thread::CoreResourceThreadPool;
-use crossbeam_channel::Sender;
+use rr_channel::crossbeam_channel::Sender;
 use embedder_traits::{EmbedderMsg, EmbedderProxy, FilterPattern};
 use headers::{ContentLength, ContentType, HeaderMap, HeaderMapExt};
 use http::header::{self, HeaderValue};
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
 use mime::{self, Mime};
 use net_traits::blob_url_store::{BlobBuf, BlobURLStoreError};
 use net_traits::filemanager_thread::{

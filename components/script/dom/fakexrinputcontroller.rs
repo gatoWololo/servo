@@ -14,7 +14,7 @@ use crate::dom::bindings::str::DOMString;
 use crate::dom::fakexrdevice::get_origin;
 use crate::dom::globalscope::GlobalScope;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use webxr_api::{
     Handedness, InputId, MockDeviceMsg, MockInputMsg, SelectEvent, SelectKind, TargetRayMode,
 };

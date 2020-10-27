@@ -4,6 +4,7 @@
 
 use serde::{Deserialize, Serialize};
 use serde::{Deserializer, Serializer};
+use rr_channel::crossbeam_channel;
 
 #[macro_use]
 macro_rules! unreachable_serializable {

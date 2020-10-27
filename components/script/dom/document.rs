@@ -121,7 +121,7 @@ use encoding_rs::{Encoding, UTF_8};
 use euclid::default::{Point2D, Rect, Size2D};
 use html5ever::{LocalName, Namespace, QualName};
 use hyper_serde::Serde;
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
 use js::jsapi::{JSObject, JSRuntime};
 use keyboard_types::{Code, Key, KeyState};
 use metrics::{

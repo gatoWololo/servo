@@ -6,7 +6,7 @@
 extern crate lazy_static;
 
 use background_hang_monitor::HangMonitorRegister;
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use msg::constellation_msg::ScriptHangAnnotation;
 use msg::constellation_msg::TEST_PIPELINE_ID;
 use msg::constellation_msg::{

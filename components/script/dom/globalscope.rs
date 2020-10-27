@@ -72,12 +72,12 @@ use crate::task_source::TaskSourceName;
 use crate::timers::{IsInterval, OneshotTimerCallback, OneshotTimerHandle};
 use crate::timers::{OneshotTimers, TimerCallback};
 use content_security_policy::CspList;
-use crossbeam_channel::Sender;
+use rr_channel::crossbeam_channel::Sender;
 use devtools_traits::{PageError, ScriptToDevtoolsControlMsg};
 use dom_struct::dom_struct;
 use embedder_traits::EmbedderMsg;
-use ipc_channel::ipc::{self, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use js::glue::{IsWrapper, UnwrapObjectDynamic};
 use js::jsapi::Compile1;
 use js::jsapi::SetScriptPrivate;
@@ -805,9 +805,9 @@ impl GlobalScope {
             canceller,
         };
         ROUTER.add_route(
-            timer_ipc_port.to_opaque(),
+            timer_ipc_port,
             Box::new(move |message| {
-                let event = message.to().unwrap();
+                let event = message.unwrap();
                 timer_listener.handle(event);
             }),
         );
@@ -1395,10 +1395,9 @@ impl GlobalScope {
                 context,
             };
             ROUTER.add_route(
-                broadcast_control_receiver.to_opaque(),
+                broadcast_control_receiver,
                 Box::new(move |message| {
-                    let msg = message.to();
-                    match msg {
+                    match message {
                         Ok(msg) => listener.handle(msg),
                         Err(err) => warn!("Error receiving a BroadcastMsg: {:?}", err),
                     }
@@ -1451,10 +1450,9 @@ impl GlobalScope {
                 context,
             };
             ROUTER.add_route(
-                port_control_receiver.to_opaque(),
+                port_control_receiver,
                 Box::new(move |message| {
-                    let msg = message.to();
-                    match msg {
+                    match message {
                         Ok(msg) => listener.notify(msg),
                         Err(err) => warn!("Error receiving a MessagePortMsg: {:?}", err),
                     }
@@ -1987,11 +1985,10 @@ impl GlobalScope {
         };
 
         ROUTER.add_route(
-            recv.to_opaque(),
+            recv.get_inner_receiver(),
             Box::new(move |msg| {
                 file_listener.handle(
-                    msg.to()
-                        .expect("Deserialization of file listener msg failed."),
+                    msg.expect("Deserialization of file listener msg failed."),
                 );
             }),
         );
@@ -2021,11 +2018,10 @@ impl GlobalScope {
         };
 
         ROUTER.add_route(
-            recv.to_opaque(),
+            recv.get_inner_receiver(),
             Box::new(move |msg| {
                 file_listener.handle(
-                    msg.to()
-                        .expect("Deserialization of file listener msg failed."),
+                    msg.expect("Deserialization of file listener msg failed."),
                 );
             }),
         );

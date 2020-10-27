@@ -13,7 +13,7 @@ pub use crate::compositor::ShutdownState;
 pub use crate::compositor_thread::CompositorProxy;
 use embedder_traits::Cursor;
 use gfx_traits::Epoch;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use keyboard_types::KeyboardEvent;
 use msg::constellation_msg::PipelineId;
 use msg::constellation_msg::TopLevelBrowsingContextId;

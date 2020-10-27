@@ -21,7 +21,7 @@ use crate::StreamId;
 use devtools_traits::DevtoolScriptControlMsg::{self, WantsLiveNotifications};
 use devtools_traits::DevtoolsPageInfo;
 use devtools_traits::NavigationState;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use msg::constellation_msg::{BrowsingContextId, PipelineId};
 use serde_json::{Map, Value};
 use std::cell::{Cell, RefCell};

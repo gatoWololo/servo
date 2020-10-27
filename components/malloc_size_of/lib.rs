@@ -51,8 +51,11 @@ extern crate accountable_refcell;
 extern crate app_units;
 #[cfg(feature = "servo")]
 extern crate content_security_policy;
+// #[cfg(feature = "servo")]
+// extern crate crossbeam_channel;
 #[cfg(feature = "servo")]
-extern crate crossbeam_channel;
+extern crate rr_channel;
+
 extern crate cssparser;
 extern crate euclid;
 extern crate hashglobe;
@@ -943,7 +946,7 @@ where
 // Placeholder for unique case where internals of Sender cannot be measured.
 // malloc size of is 0 macro complains about type supplied!
 #[cfg(feature = "servo")]
-impl<T> MallocSizeOf for crossbeam_channel::Sender<T> {
+impl<T> MallocSizeOf for rr_channel::crossbeam_channel::Sender<T> {
     fn size_of(&self, _ops: &mut MallocSizeOfOps) -> usize {
         0
     }

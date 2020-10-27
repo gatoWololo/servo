@@ -26,7 +26,7 @@ use crate::realms::InRealm;
 use bluetooth_traits::blocklist::{uuid_is_blocklisted, Blocklist};
 use bluetooth_traits::{BluetoothRequest, BluetoothResponse, GATTType};
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use std::rc::Rc;
 
 // Maximum length of an attribute value.

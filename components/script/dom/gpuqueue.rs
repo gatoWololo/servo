@@ -20,7 +20,7 @@ use crate::dom::gpucommandbuffer::GPUCommandBuffer;
 use crate::dom::gpucommandencoder::{convert_texture_cv, convert_texture_data_layout};
 use crate::dom::gpudevice::{convert_texture_size_to_dict, convert_texture_size_to_wgt, GPUDevice};
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcSharedMemory;
+use rr_channel::ipc_channel::ipc::IpcSharedMemory;
 use webgpu::{identity::WebGPUOpResult, wgt, WebGPU, WebGPUQueue, WebGPURequest};
 
 #[dom_struct]

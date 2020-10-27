@@ -26,7 +26,7 @@ use euclid::default::{Point2D, Rect, Size2D, Vector2D};
 use gfx::text::glyph::ByteIndex;
 use gfx::text::text_run::{TextRun, TextRunSlice};
 use gfx_traits::StackingContextId;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use msg::constellation_msg::{BrowsingContextId, PipelineId};
 use net_traits::image::base::{Image, ImageMetadata};
 use net_traits::image_cache::{ImageOrMetadataAvailable, UsePlaceholder};

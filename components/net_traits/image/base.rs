@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::image_cache::CorsStatus;
-use ipc_channel::ipc::IpcSharedMemory;
+use rr_channel::ipc_channel::ipc::IpcSharedMemory;
 use piston_image::{DynamicImage, ImageFormat};
 use pixels::PixelFormat;
 use std::fmt;

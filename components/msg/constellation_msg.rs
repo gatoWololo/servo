@@ -5,7 +5,7 @@
 //! The high-level interface from script to constellation. Using this abstract interface helps
 //! reduce coupling between these two components.
 
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver, IpcSender};
 use parking_lot::Mutex;
 use std::cell::Cell;
 use std::fmt;

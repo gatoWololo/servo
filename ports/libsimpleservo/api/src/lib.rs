@@ -16,7 +16,7 @@ pub use servo::script_traits::{MediaSessionActionType, MouseButton};
 pub use servo::webrender_api::units::DeviceIntRect;
 
 use getopts::Options;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use servo::compositing::windowing::{
     AnimationState, EmbedderCoordinates, EmbedderMethods, MouseWindowEvent, WindowEvent,
     WindowMethods,
@@ -798,7 +798,7 @@ impl EmbedderMethods for ServoEmbedderCallbacks {
         registry: &mut webxr::MainThreadRegistry,
         embedder_proxy: EmbedderProxy,
     ) {
-        use ipc_channel::ipc::{self, IpcReceiver};
+        use rr_channel::ipc_channel::ipc::{self, IpcReceiver};
         use webxr::openxr;
         debug!("EmbedderMethods::register_xr");
         assert!(

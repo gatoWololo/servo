@@ -15,8 +15,8 @@ use crate::dom::globalscope::GlobalScope;
 use crate::dom::node::{document_from_node, Node};
 use crate::dom::performanceresourcetiming::InitiatorType;
 use crate::network_listener::{self, NetworkListener, PreInvoke, ResourceTimingListener};
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc;
+use rr_channel::ipc_channel::router::ROUTER;
 use net_traits::image_cache::{ImageCache, PendingImageId};
 use net_traits::request::{Destination, RequestBuilder as FetchRequestInit};
 use net_traits::{FetchMetadata, FetchResponseListener, FetchResponseMsg, NetworkError};
@@ -104,9 +104,9 @@ pub fn fetch_image_for_layout(
         canceller: Some(canceller),
     };
     ROUTER.add_route(
-        action_receiver.to_opaque(),
+        action_receiver,
         Box::new(move |message| {
-            listener.notify_fetch(message.to().unwrap());
+            listener.notify_fetch(message.unwrap());
         }),
     );
 

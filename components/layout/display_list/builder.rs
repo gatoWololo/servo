@@ -42,7 +42,7 @@ use fnv::FnvHashMap;
 use gfx::text::glyph::ByteIndex;
 use gfx::text::TextRun;
 use gfx_traits::{combine_id_with_fragment_type, FragmentType, StackingContextId};
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use msg::constellation_msg::PipelineId;
 use net_traits::image_cache::UsePlaceholder;
 use range::Range;

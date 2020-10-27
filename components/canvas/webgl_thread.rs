@@ -84,6 +84,7 @@ use webxr_api::LayerManager as WebXRLayerManager;
 use webxr_api::LayerManagerAPI as WebXRLayerManagerAPI;
 use webxr_api::LayerManagerFactory as WebXRLayerManagerFactory;
 use webxr_api::SubImages as WebXRSubImages;
+use rr_channel::crossbeam_channel;
 
 #[cfg(feature = "xr-profile")]
 fn to_ms(ns: u64) -> f64 {

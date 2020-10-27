@@ -21,7 +21,7 @@ use embedder_traits::{EmbedderMsg, MediaSessionEvent};
 use euclid::default::Size2D as UntypedSize2D;
 use euclid::Size2D;
 use gfx_traits::Epoch;
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::ipc::{IpcReceiver, IpcSender};
 use msg::constellation_msg::{
     BroadcastChannelRouterId, BrowsingContextId, MessagePortId, MessagePortRouterId, PipelineId,
     TopLevelBrowsingContextId,

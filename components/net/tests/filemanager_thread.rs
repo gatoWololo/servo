@@ -4,7 +4,7 @@
 
 use crate::create_embedder_proxy;
 use embedder_traits::FilterPattern;
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use net::filemanager_thread::FileManager;
 use net::resource_thread::CoreResourceThreadPool;
 use net_traits::blob_url_store::BlobURLStoreError;

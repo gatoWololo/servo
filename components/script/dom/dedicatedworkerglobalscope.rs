@@ -36,11 +36,11 @@ use crate::script_runtime::{
 use crate::task_queue::{QueuedTask, QueuedTaskConversion, TaskQueue};
 use crate::task_source::networking::NetworkingTaskSource;
 use crate::task_source::TaskSourceName;
-use crossbeam_channel::{unbounded, Receiver, Sender};
+use rr_channel::crossbeam_channel::{unbounded, Receiver, Sender};
 use devtools_traits::DevtoolScriptControlMsg;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcReceiver;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::IpcReceiver;
+use rr_channel::ipc_channel::router::ROUTER;
 use js::jsapi::JS_AddInterruptCallback;
 use js::jsapi::{Heap, JSContext, JSObject};
 use js::jsval::UndefinedValue;

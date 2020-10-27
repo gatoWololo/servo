@@ -12,7 +12,7 @@ use crate::StreamId;
 use devtools_traits::DevtoolScriptControlMsg::{GetChildren, GetDocumentElement, GetRootNode};
 use devtools_traits::DevtoolScriptControlMsg::{GetLayout, ModifyAttribute};
 use devtools_traits::{ComputedNodeLayout, DevtoolScriptControlMsg, NodeInfo};
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
 use msg::constellation_msg::PipelineId;
 use serde_json::{self, Map, Value};
 use std::cell::RefCell;

@@ -10,7 +10,7 @@ use crate::dom::globalscope::GlobalScope;
 use crate::script_runtime::JSContext;
 use dom_struct::dom_struct;
 use euclid::default::{Rect, Size2D};
-use ipc_channel::ipc::IpcSharedMemory;
+use rr_channel::ipc_channel::ipc::IpcSharedMemory;
 use js::jsapi::{Heap, JSObject};
 use js::rust::Runtime;
 use js::typedarray::{CreateWith, Uint8ClampedArray};

@@ -4,6 +4,7 @@
 
 use serde::{Deserialize, Serialize};
 use std::io;
+use rr_channel::ipc_channel;
 
 pub type WebGLSender<T> = ipc_channel::ipc::IpcSender<T>;
 pub type WebGLReceiver<T> = ipc_channel::ipc::IpcReceiver<T>;

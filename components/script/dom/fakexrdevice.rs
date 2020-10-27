@@ -24,8 +24,8 @@ use crate::task_source::TaskSource;
 use dom_struct::dom_struct;
 use euclid::{Point2D, Rect, Size2D};
 use euclid::{Point3D, RigidTransform3D, Rotation3D, Transform3D, Vector3D};
-use ipc_channel::ipc::IpcSender;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::router::ROUTER;
 use profile_traits::ipc;
 use std::cell::Cell;
 use std::rc::Rc;
@@ -297,7 +297,7 @@ impl FakeXRDeviceMethods for FakeXRDevice {
             .dom_manipulation_task_source_with_canceller();
         let (sender, receiver) = ipc::channel(global.time_profiler_chan().clone()).unwrap();
         ROUTER.add_route(
-            receiver.to_opaque(),
+            receiver.get_inner_receiver(),
             Box::new(move |_| {
                 let trusted = trusted
                     .take()

@@ -8,7 +8,7 @@ extern crate log;
 extern crate malloc_size_of_derive;
 
 use gfx_traits::Epoch;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use msg::constellation_msg::PipelineId;
 use profile_traits::time::TimerMetadata;
 use profile_traits::time::{send_profile_data, ProfilerCategory, ProfilerChan};

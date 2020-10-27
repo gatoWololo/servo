@@ -24,8 +24,8 @@ use crate::network_listener::{
 };
 use crate::realms::{enter_realm, InRealm};
 use crate::task_source::TaskSourceName;
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc;
+use rr_channel::ipc_channel::router::ROUTER;
 use net_traits::request::{
     CorsSettings, CredentialsMode, Destination, RequestBuilder, RequestMode,
 };
@@ -180,9 +180,9 @@ pub fn Fetch(
     };
 
     ROUTER.add_route(
-        action_receiver.to_opaque(),
+        action_receiver,
         Box::new(move |message| {
-            listener.notify_fetch(message.to().unwrap());
+            listener.notify_fetch(message.unwrap());
         }),
     );
     core_resource_thread

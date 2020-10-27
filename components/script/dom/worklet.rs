@@ -40,7 +40,7 @@ use crate::script_runtime::ScriptThreadEventCategory;
 use crate::script_thread::{MainThreadScriptMsg, ScriptThread};
 use crate::task::TaskBox;
 use crate::task_source::TaskSourceName;
-use crossbeam_channel::{unbounded, Receiver, Sender};
+use rr_channel::crossbeam_channel::{unbounded, Receiver, Sender};
 use dom_struct::dom_struct;
 use js::jsapi::JSGCParamKey;
 use js::jsapi::JSTracer;

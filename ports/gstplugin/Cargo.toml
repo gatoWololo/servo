@@ -15,7 +15,7 @@ crate-type = ["cdylib"]
 path = "lib.rs"
 
 [dependencies]
-crossbeam-channel = "0.4"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel.git"}
 euclid = "0.20"
 glib = "0.9"
 gstreamer = "0.15"

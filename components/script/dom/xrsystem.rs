@@ -22,8 +22,8 @@ use crate::realms::InRealm;
 use crate::script_thread::ScriptThread;
 use crate::task_source::TaskSource;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::{self as ipc_crate, IpcReceiver};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self as ipc_crate, IpcReceiver};
+use rr_channel::ipc_channel::router::ROUTER;
 use msg::constellation_msg::PipelineId;
 use profile_traits::ipc;
 use servo_config::pref;
@@ -117,7 +117,7 @@ impl XRSystemMethods for XRSystem {
             .dom_manipulation_task_source_with_canceller();
         let (sender, receiver) = ipc::channel(global.time_profiler_chan().clone()).unwrap();
         ROUTER.add_route(
-            receiver.to_opaque(),
+            receiver.get_inner_receiver(),
             Box::new(move |message| {
                 // router doesn't know this is only called once
                 let trusted = if let Some(trusted) = trusted.take() {
@@ -126,7 +126,7 @@ impl XRSystemMethods for XRSystem {
                     error!("supportsSession callback called twice!");
                     return;
                 };
-                let message: Result<(), webxr_api::Error> = if let Ok(message) = message.to() {
+                let message: Result<(), webxr_api::Error> = if let Ok(message) = message {
                     message
                 } else {
                     error!("supportsSession callback given incorrect payload");
@@ -232,13 +232,13 @@ impl XRSystemMethods for XRSystem {
         let (frame_sender, frame_receiver) = ipc_crate::channel().unwrap();
         let mut frame_receiver = Some(frame_receiver);
         ROUTER.add_route(
-            receiver.to_opaque(),
+            receiver.get_inner_receiver(),
             Box::new(move |message| {
                 // router doesn't know this is only called once
                 let trusted = trusted.take().unwrap();
                 let this = this.clone();
                 let frame_receiver = frame_receiver.take().unwrap();
-                let message: Result<Session, webxr_api::Error> = if let Ok(message) = message.to() {
+                let message: Result<Session, webxr_api::Error> = if let Ok(message) = message {
                     message
                 } else {
                     error!("requestSession callback given incorrect payload");

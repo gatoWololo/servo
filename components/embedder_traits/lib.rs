@@ -13,8 +13,8 @@ extern crate serde;
 
 pub mod resources;
 
-use crossbeam_channel::{Receiver, Sender};
-use ipc_channel::ipc::IpcSender;
+use rr_channel::crossbeam_channel::{Receiver, Sender};
+use rr_channel::ipc_channel::ipc::IpcSender;
 use keyboard_types::KeyboardEvent;
 use msg::constellation_msg::{InputMethodType, PipelineId, TopLevelBrowsingContextId};
 use servo_url::ServoUrl;

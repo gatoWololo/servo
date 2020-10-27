@@ -8,11 +8,12 @@ mod ipc;
 mod mpsc;
 
 use crate::webgl::WebGLMsg;
-use ipc_channel::ipc::IpcSender;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::router::ROUTER;
 use serde::{Deserialize, Serialize};
 use servo_config::opts;
 use std::fmt;
+use rr_channel::{crossbeam_channel, ipc_channel};
 
 lazy_static! {
     static ref IS_MULTIPROCESS: bool = opts::multiprocess();
@@ -123,9 +124,9 @@ impl WebGLChan {
                     ipc_channel::ipc::channel().expect("IPC Channel creation failed");
                 let mpsc_sender = mpsc_sender.clone();
                 ipc_channel::router::ROUTER.add_route(
-                    receiver.to_opaque(),
+                    receiver,
                     Box::new(move |message| {
-                        if let Ok(message) = message.to() {
+                        if let Ok(message) = message {
                             let _ = mpsc_sender.send(message);
                         }
                     }),

@@ -7,7 +7,7 @@ use crate::protocol::JsonPacketStream;
 use crate::StreamId;
 use devtools_traits::DevtoolScriptControlMsg::WantsLiveNotifications;
 use devtools_traits::{DevtoolScriptControlMsg, WorkerId};
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use msg::constellation_msg::TEST_PIPELINE_ID;
 use serde_json::{Map, Value};
 use servo_url::ServoUrl;

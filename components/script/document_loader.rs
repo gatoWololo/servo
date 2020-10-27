@@ -9,7 +9,7 @@
 use crate::dom::bindings::root::Dom;
 use crate::dom::document::Document;
 use crate::fetch::FetchCanceller;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use net_traits::request::RequestBuilder;
 use net_traits::{CoreResourceMsg, FetchChannels, FetchResponseMsg};
 use net_traits::{IpcSend, ResourceThreads};

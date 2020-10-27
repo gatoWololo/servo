@@ -13,7 +13,7 @@ use crate::platform::font_list::SANS_SERIF_FONT_FAMILY;
 use crate::platform::font_template::FontTemplateData;
 use app_units::Au;
 use gfx_traits::{FontData, WebrenderApi};
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver, IpcSender};
 use net_traits::request::{Destination, Referrer, RequestBuilder};
 use net_traits::{fetch_async, CoreResourceThread, FetchResponseMsg};
 use servo_atoms::Atom;

@@ -29,7 +29,7 @@ use crate::dom::textmetrics::TextMetrics;
 use canvas_traits::canvas::{Canvas2dMsg, CanvasId, CanvasMsg};
 use dom_struct::dom_struct;
 use euclid::default::Size2D;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 
 #[dom_struct]
 pub struct OffscreenCanvasRenderingContext2D {

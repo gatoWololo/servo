@@ -7,7 +7,7 @@
 #![deny(unsafe_code)]
 
 #[macro_use]
-extern crate crossbeam_channel;
+extern crate rr_channel;
 #[macro_use]
 extern crate log;
 #[macro_use]
@@ -20,12 +20,12 @@ use crate::actions::{InputSourceState, PointerInputState};
 use base64;
 use capabilities::ServoCapabilities;
 use compositing::ConstellationMsg;
-use crossbeam_channel::{after, unbounded, Receiver, Sender};
+use rr_channel::crossbeam_channel::{after, unbounded, Receiver, Sender};
 use euclid::{Rect, Size2D};
 use hyper::Method;
 use image::{DynamicImage, ImageFormat, RgbImage};
-use ipc_channel::ipc::{self, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use keyboard_types::webdriver::send_keys;
 use msg::constellation_msg::{BrowsingContextId, TopLevelBrowsingContextId, TraversalDirection};
 use net_traits::request::Referrer;

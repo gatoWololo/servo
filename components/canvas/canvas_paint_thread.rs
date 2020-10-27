@@ -5,11 +5,11 @@
 use crate::canvas_data::*;
 use canvas_traits::canvas::*;
 use canvas_traits::ConstellationCanvasMsg;
-use crossbeam_channel::{select, unbounded, Sender};
+use rr_channel::crossbeam_channel::{select, unbounded, Sender};
 use euclid::default::Size2D;
 use gfx::font_cache_thread::FontCacheThread;
-use ipc_channel::ipc::{self, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use std::borrow::ToOwned;
 use std::collections::HashMap;
 use std::thread;

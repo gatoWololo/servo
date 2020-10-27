@@ -17,7 +17,7 @@
 #[macro_use]
 extern crate bitflags;
 #[macro_use]
-extern crate crossbeam_channel;
+extern crate rr_channel;
 #[macro_use]
 extern crate cssparser;
 #[macro_use]

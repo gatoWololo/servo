@@ -25,8 +25,8 @@ use crate::task::{TaskCanceller, TaskOnce};
 use crate::task_source::websocket::WebsocketTaskSource;
 use crate::task_source::TaskSource;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use js::jsapi::{JSAutoRealm, JSObject};
 use js::jsval::UndefinedValue;
 use js::rust::CustomAutoRooterGuard;
@@ -209,8 +209,8 @@ impl WebSocket {
         let task_source = global.websocket_task_source();
         let canceller = global.task_canceller(WebsocketTaskSource::NAME);
         ROUTER.add_route(
-            dom_event_receiver.to_opaque(),
-            Box::new(move |message| match message.to().unwrap() {
+            dom_event_receiver.get_inner_receiver(),
+            Box::new(move |message| match message.unwrap() {
                 WebSocketNetworkEvent::ConnectionEstablished { protocol_in_use } => {
                     let open_thread = ConnectionEstablishedTask {
                         address: address.clone(),

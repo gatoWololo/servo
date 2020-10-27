@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::{ErrorScopeId, WebGPUDevice, WebGPURequest};
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use msg::constellation_msg::PipelineId;
 use serde::{Deserialize, Serialize};
 use wgpu::{

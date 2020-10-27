@@ -5,7 +5,7 @@
 #![deny(unsafe_code)]
 
 #[macro_use]
-extern crate crossbeam_channel;
+extern crate rr_channel;
 #[macro_use]
 extern crate log;
 #[macro_use]
@@ -24,5 +24,6 @@ mod timer_scheduler;
 pub use crate::constellation::{
     Constellation, FromCompositorLogger, FromScriptLogger, InitialConstellationState,
 };
+
 pub use crate::pipeline::UnprivilegedPipelineContent;
 pub use crate::sandboxing::{content_process_sandbox_profile, UnprivilegedContent};

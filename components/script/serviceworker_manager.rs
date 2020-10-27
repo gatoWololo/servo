@@ -13,9 +13,9 @@ use crate::dom::serviceworkerglobalscope::{
 };
 use crate::dom::serviceworkerregistration::longest_prefix_match;
 use crate::script_runtime::ContextForRequestInterrupt;
-use crossbeam_channel::{unbounded, Receiver, RecvError, Sender};
-use ipc_channel::ipc::{self, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::crossbeam_channel::{unbounded, Receiver, RecvError, Sender};
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use msg::constellation_msg::PipelineNamespace;
 use msg::constellation_msg::{ServiceWorkerId, ServiceWorkerRegistrationId};
 use net_traits::{CoreResourceMsg, CustomResponseMediator};

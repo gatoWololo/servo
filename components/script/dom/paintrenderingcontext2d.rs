@@ -26,7 +26,7 @@ use canvas_traits::canvas::CanvasMsg;
 use canvas_traits::canvas::FromLayoutMsg;
 use dom_struct::dom_struct;
 use euclid::{Scale, Size2D};
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use servo_url::ServoUrl;
 use std::cell::Cell;
 use style_traits::CSSPixel;

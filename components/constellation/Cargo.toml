@@ -16,14 +16,15 @@ backtrace = "0.3"
 bluetooth_traits = { path = "../bluetooth_traits" }
 canvas_traits = { path = "../canvas_traits" }
 compositing = { path = "../compositing" }
-crossbeam-channel = "0.4"
+# crossbeam-channel = "0.4"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel.git"}
 devtools_traits = { path = "../devtools_traits" }
 embedder_traits = { path = "../embedder_traits" }
 euclid = "0.20"
 gfx = { path = "../gfx" }
 gfx_traits = { path = "../gfx_traits" }
 http = "0.1"
-ipc-channel = "0.14"
+# ipc-channel = "0.14"
 keyboard-types = "0.5"
 layout_traits = { path = "../layout_traits" }
 log = "0.4"

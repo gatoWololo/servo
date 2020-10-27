@@ -5,8 +5,8 @@
 //! Memory profiling functions.
 
 use crate::time::duration_from_seconds;
-use ipc_channel::ipc::{self, IpcReceiver};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver};
+use rr_channel::ipc_channel::router::ROUTER;
 use profile_traits::mem::ReportsChan;
 use profile_traits::mem::{ProfilerChan, ProfilerMsg, ReportKind, Reporter, ReporterRequest};
 use std::borrow::ToOwned;
@@ -64,9 +64,9 @@ impl Profiler {
         // reporter can make measurements.
         let (system_reporter_sender, system_reporter_receiver) = ipc::channel().unwrap();
         ROUTER.add_route(
-            system_reporter_receiver.to_opaque(),
+            system_reporter_receiver,
             Box::new(|message| {
-                let request: ReporterRequest = message.to().unwrap();
+                let request: ReporterRequest = message.unwrap();
                 system_reporter::collect_reports(request)
             }),
         );

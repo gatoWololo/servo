@@ -22,8 +22,8 @@ use crate::task_source::dom_manipulation::DOMManipulationTaskSource;
 use crate::task_source::TaskSource;
 use crate::task_source::TaskSourceName;
 use dom_struct::dom_struct;
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc;
+use rr_channel::ipc_channel::router::ROUTER;
 use script_traits::{Job, JobError, JobResult, JobResultValue, JobType, ScriptMsg};
 use std::default::Default;
 use std::rc::Rc;
@@ -153,10 +153,9 @@ impl ServiceWorkerContainerMethods for ServiceWorkerContainer {
         let (job_result_sender, job_result_receiver) = ipc::channel().expect("ipc channel failure");
 
         ROUTER.add_route(
-            job_result_receiver.to_opaque(),
+            job_result_receiver,
             Box::new(move |message| {
-                let msg = message.to();
-                match msg {
+                match message {
                     Ok(msg) => handler.handle(msg),
                     Err(err) => warn!("Error receiving a JobResult: {:?}", err),
                 }

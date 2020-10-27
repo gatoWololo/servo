@@ -14,7 +14,7 @@ use crate::dom::storageevent::StorageEvent;
 use crate::dom::window::Window;
 use crate::task_source::TaskSource;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use net_traits::storage_thread::{StorageThreadMsg, StorageType};
 use net_traits::IpcSend;
 use profile_traits::ipc;

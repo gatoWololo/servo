@@ -4,8 +4,8 @@
 
 use crate::logging::CATEGORY;
 
-use crossbeam_channel::Receiver;
-use crossbeam_channel::Sender;
+use rr_channel::crossbeam_channel::Receiver;
+use rr_channel::crossbeam_channel::Sender;
 
 use euclid::default::Rotation3D;
 use euclid::default::Vector3D;

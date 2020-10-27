@@ -45,7 +45,8 @@ canvas = { path = "../canvas", default-features = false }
 canvas_traits = { path = "../canvas_traits" }
 compositing = { path = "../compositing", features = ["gl"] }
 constellation = { path = "../constellation" }
-crossbeam-channel = "0.4"
+# crossbeam-channel = "0.4"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel.git"}
 devtools = { path = "../devtools" }
 devtools_traits = { path = "../devtools_traits" }
 embedder_traits = { path = "../embedder_traits" }
@@ -55,7 +56,7 @@ gfx = { path = "../gfx" }
 gfx_traits = { path = "../gfx_traits" }
 gleam = "0.12"
 gstreamer = { version = "0.15", features = ["v1_16"], optional = true }
-ipc-channel = "0.14"
+# ipc-channel = "0.14"
 keyboard-types = "0.5"
 layout_thread_2013 = { path = "../layout_thread", optional = true }
 layout_thread_2020 = { path = "../layout_thread_2020", optional = true }

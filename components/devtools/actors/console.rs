@@ -20,7 +20,7 @@ use devtools_traits::EvaluateJSReply::{NullValue, NumberValue, VoidValue};
 use devtools_traits::{
     CachedConsoleMessageTypes, ConsoleAPI, DevtoolScriptControlMsg, LogLevel, PageError,
 };
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
 use msg::constellation_msg::TEST_PIPELINE_ID;
 use serde_json::{self, Map, Number, Value};
 use std::cell::RefCell;

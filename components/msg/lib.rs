@@ -12,5 +12,8 @@ extern crate malloc_size_of;
 extern crate malloc_size_of_derive;
 #[macro_use]
 extern crate serde;
+#[macro_use]
+extern crate rr_channel;
+
 
 pub mod constellation_msg;

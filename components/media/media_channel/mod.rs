@@ -11,6 +11,7 @@ use crate::GLPlayerMsg;
 use serde::{Deserialize, Serialize};
 use servo_config::opts;
 use std::fmt;
+use rr_channel::ipc_channel;
 
 lazy_static! {
     static ref IS_MULTIPROCESS: bool = opts::multiprocess();
@@ -71,7 +72,18 @@ where
         }
     }
 
-    pub fn to_opaque(self) -> ipc_channel::ipc::OpaqueIpcReceiver {
+    // Extra method needed since we changed the router API for ipc-channel.
+    // It moves `self` since that's what the to_opaque method below does (which is the functionality)
+    // we're trying to copy.
+    pub fn get_inner_receiver(self) -> ipc_channel::ipc::IpcReceiver<T> {
+        match self {
+            GLPlayerReceiver::Ipc(receiver) => receiver,
+            _ => unreachable!(),
+        }
+    }
+
+    pub fn to_opaque(self) ->
+                           ipc_channel::ipc::OpaqueIpcReceiver {
         match self {
             GLPlayerReceiver::Ipc(receiver) => receiver.to_opaque(),
             _ => unreachable!(),

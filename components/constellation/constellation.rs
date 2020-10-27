@@ -31,7 +31,7 @@
 //! to a forest whose roots are top-level browsing context.  The logical
 //! relationship between these types is:
 //!
-//! ```
+//!
 //! +------------+                      +------------+                 +---------+
 //! |  Browsing  | ------parent?------> |  Pipeline  | --event_loop--> |  Event  |
 //! |  Context   | ------current------> |            |                 |  Loop   |
@@ -41,7 +41,7 @@
 //! |            | <-top_level--------- |            |
 //! |            | <-browsing_context-- |            |
 //! +------------+                      +------------+
-//! ```
+//!
 //
 //! The constellation also maintains channels to threads, including:
 //!
@@ -111,7 +111,7 @@ use compositing::compositor_thread::CompositorProxy;
 use compositing::compositor_thread::Msg as ToCompositorMsg;
 use compositing::compositor_thread::WebrenderMsg;
 use compositing::{ConstellationMsg as FromCompositorMsg, SendableFrameTree};
-use crossbeam_channel::{after, never, unbounded, Receiver, Sender};
+use rr_channel::crossbeam_channel::{after, never, unbounded, Receiver, Sender};
 use devtools_traits::{
     ChromeToDevtoolsControlMsg, DevtoolsControlMsg, DevtoolsPageInfo, NavigationState,
     ScriptToDevtoolsControlMsg,
@@ -121,9 +121,9 @@ use embedder_traits::{MediaSessionEvent, MediaSessionPlaybackState};
 use euclid::{default::Size2D as UntypedSize2D, Size2D};
 use gfx::font_cache_thread::FontCacheThread;
 use gfx_traits::Epoch;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
-use ipc_channel::Error as IpcError;
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::Error as IpcError;
 use keyboard_types::webdriver::Event as WebDriverInputEvent;
 use keyboard_types::KeyboardEvent;
 use layout_traits::LayoutThreadFactory;
@@ -734,8 +734,8 @@ where
 {
     let (mpsc_sender, mpsc_receiver) = unbounded();
     ROUTER.add_route(
-        ipc_receiver.to_opaque(),
-        Box::new(move |message| drop(mpsc_sender.send(message.to::<T>()))),
+        ipc_receiver,
+        Box::new(move |message| drop(mpsc_sender.send(message))),
     );
     mpsc_receiver
 }
@@ -826,20 +826,20 @@ where
 
                 let compositor_proxy = state.compositor_proxy.clone();
                 ROUTER.add_route(
-                    webrender_ipc_receiver.to_opaque(),
+                    webrender_ipc_receiver,
                     Box::new(move |message| {
                         let _ = compositor_proxy.send(ToCompositorMsg::Webrender(
-                            WebrenderMsg::Layout(message.to().expect("conversion failure")),
+                            WebrenderMsg::Layout(message.expect("conversion failure")),
                         ));
                     }),
                 );
 
                 let compositor_proxy = state.compositor_proxy.clone();
                 ROUTER.add_route(
-                    webrender_image_ipc_receiver.to_opaque(),
+                    webrender_image_ipc_receiver,
                     Box::new(move |message| {
                         let _ = compositor_proxy.send(ToCompositorMsg::Webrender(
-                            WebrenderMsg::Net(message.to().expect("conversion failure")),
+                            WebrenderMsg::Net(message.expect("conversion failure")),
                         ));
                     }),
                 );

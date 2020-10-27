@@ -4,8 +4,9 @@
 
 #![deny(unsafe_code)]
 
-#[macro_use]
-extern crate crossbeam_channel;
+// #[macro_use]
+// extern crate crossbeam_channel;
+extern crate rr_channel;
 #[macro_use]
 extern crate log;
 

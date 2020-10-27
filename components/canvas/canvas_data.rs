@@ -16,7 +16,7 @@ use font_kit::source::SystemSource;
 use gfx::font::FontHandleMethods;
 use gfx::font_cache_thread::FontCacheThread;
 use gfx::font_context::FontContext;
-use ipc_channel::ipc::{IpcSender, IpcSharedMemory};
+use rr_channel::ipc_channel::ipc::{IpcSender, IpcSharedMemory};
 use num_traits::ToPrimitive;
 use servo_arc::Arc as ServoArc;
 use std::cell::RefCell;

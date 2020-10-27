@@ -10,13 +10,13 @@ use canvas_traits::webgl::WebGLPipeline;
 use compositing::compositor_thread::Msg as CompositorMsg;
 use compositing::CompositionPipeline;
 use compositing::CompositorProxy;
-use crossbeam_channel::{unbounded, Sender};
+use rr_channel::crossbeam_channel::{unbounded, Sender};
 use devtools_traits::{DevtoolsControlMsg, ScriptToDevtoolsControlMsg};
 use embedder_traits::EventLoopWaker;
 use gfx::font_cache_thread::FontCacheThread;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
-use ipc_channel::Error;
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::Error;
 use layout_traits::LayoutThreadFactory;
 use media::WindowGLContext;
 use metrics::PaintTimeMetrics;
@@ -254,9 +254,9 @@ impl Pipeline {
                         ipc::channel().expect("Pipeline script to devtools chan");
                     let devtools_chan = (*devtools_chan).clone();
                     ROUTER.add_route(
-                        script_to_devtools_port.to_opaque(),
+                        script_to_devtools_port,
                         Box::new(
-                            move |message| match message.to::<ScriptToDevtoolsControlMsg>() {
+                            move |message| match message {
                                 Err(e) => {
                                     error!("Cast to ScriptToDevtoolsControlMsg failed ({}).", e)
                                 },

@@ -33,8 +33,8 @@ use crate::dom::promise::Promise;
 use crate::script_runtime::JSContext;
 use crate::task::TaskOnce;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::{self, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use js::conversions::ConversionResult;
 use js::jsapi::JSObject;
 use js::jsval::{ObjectValue, UndefinedValue};
@@ -242,7 +242,7 @@ pub fn response_async<T: AsyncBluetoothListener + DomObject + 'static>(
         receiver: Trusted::new(receiver),
     }));
     ROUTER.add_route(
-        action_receiver.to_opaque(),
+        action_receiver,
         Box::new(move |message| {
             struct ListenerTask<T: AsyncBluetoothListener + DomObject> {
                 context: Arc<Mutex<BluetoothContext<T>>>,
@@ -261,7 +261,7 @@ pub fn response_async<T: AsyncBluetoothListener + DomObject + 'static>(
 
             let task = ListenerTask {
                 context: context.clone(),
-                action: message.to().unwrap(),
+                action: message.unwrap(),
             };
 
             let result = task_source.queue_unconditionally(task);

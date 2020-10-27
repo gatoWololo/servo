@@ -24,7 +24,8 @@ fxhash = "0.2"
 gfx = { path = "../gfx" }
 gfx_traits = { path = "../gfx_traits" }
 html5ever = "0.25"
-ipc-channel = "0.14"
+# ipc-channel = "0.14"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel.git"}
 libc = "0.2"
 log = "0.4"
 mitochondria = "1.1.2"

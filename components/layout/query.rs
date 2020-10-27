@@ -17,7 +17,7 @@ use crate::wrapper::LayoutNodeLayoutData;
 use app_units::Au;
 use euclid::default::{Point2D, Rect, Size2D, Vector2D};
 use euclid::Size2D as TypedSize2D;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use msg::constellation_msg::PipelineId;
 use script_layout_interface::rpc::TextIndexResponse;
 use script_layout_interface::rpc::{ContentBoxResponse, ContentBoxesResponse, LayoutRPC};

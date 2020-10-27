@@ -27,7 +27,7 @@ use crate::dom::textmetrics::TextMetrics;
 use canvas_traits::canvas::{Canvas2dMsg, CanvasId, CanvasMsg};
 use dom_struct::dom_struct;
 use euclid::default::{Point2D, Rect, Size2D};
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use servo_url::ServoUrl;
 use std::mem;
 

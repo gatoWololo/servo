@@ -20,8 +20,8 @@ use crate::dom::promise::Promise;
 use crate::script_thread::ScriptThread;
 use crate::task_source::TaskSource;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcSender;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::router::ROUTER;
 use profile_traits::ipc;
 use std::rc::Rc;
 use webxr_api::{self, Error as XRError, MockDeviceInit, MockDeviceMsg};
@@ -153,14 +153,13 @@ impl XRTestMethods for XRTest {
             .dom_manipulation_task_source_with_canceller();
         let (sender, receiver) = ipc::channel(global.time_profiler_chan().clone()).unwrap();
         ROUTER.add_route(
-            receiver.to_opaque(),
+            receiver.get_inner_receiver(),
             Box::new(move |message| {
                 let trusted = trusted
                     .take()
                     .expect("SimulateDeviceConnection callback called twice");
                 let this = this.clone();
                 let message = message
-                    .to()
                     .expect("SimulateDeviceConnection callback given incorrect payload");
 
                 let _ = task_source.queue_with_canceller(
@@ -208,7 +207,7 @@ impl XRTestMethods for XRTest {
                 .dom_manipulation_task_source_with_canceller();
 
             ROUTER.add_route(
-                receiver.to_opaque(),
+                receiver.get_inner_receiver(),
                 Box::new(move |_| {
                     len -= 1;
                     if len == 0 {

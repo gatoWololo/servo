@@ -28,7 +28,7 @@ use crate::script_thread::ScriptThread;
 use crate::task_source::TaskSource;
 use dom_struct::dom_struct;
 use html5ever::{LocalName, Prefix};
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use msg::constellation_msg::{BrowsingContextId, PipelineId, TopLevelBrowsingContextId};
 use profile_traits::ipc as ProfiledIpc;
 use script_layout_interface::message::ReflowGoal;

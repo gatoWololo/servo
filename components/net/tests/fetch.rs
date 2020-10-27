@@ -9,7 +9,7 @@ use crate::{
     create_embedder_proxy, fetch, make_server, make_ssl_server, new_fetch_context,
     DEFAULT_USER_AGENT,
 };
-use crossbeam_channel::{unbounded, Sender};
+use rr_channel::crossbeam_channel::{unbounded, Sender};
 use devtools_traits::HttpRequest as DevtoolsHttpRequest;
 use devtools_traits::HttpResponse as DevtoolsHttpResponse;
 use headers::StrictTransportSecurity;

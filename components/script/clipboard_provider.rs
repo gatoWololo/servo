@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use embedder_traits::EmbedderMsg;
-use ipc_channel::ipc::channel;
+use rr_channel::ipc_channel::ipc::channel;
 use script_traits::{ScriptMsg, ScriptToConstellationChan};
 
 pub trait ClipboardProvider {

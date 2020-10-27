@@ -10,7 +10,7 @@ use crate::script_runtime::ScriptThreadEventCategory;
 use crate::script_thread::ScriptThread;
 use crate::task::TaskBox;
 use crate::task_source::TaskSourceName;
-use crossbeam_channel::{self, Receiver, Sender};
+use rr_channel::crossbeam_channel::{self, Receiver, Sender};
 use msg::constellation_msg::PipelineId;
 use std::cell::Cell;
 use std::collections::{HashMap, HashSet, VecDeque};

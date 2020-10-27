@@ -11,13 +11,14 @@ name = "devtools"
 path = "lib.rs"
 
 [dependencies]
-crossbeam-channel = "0.4"
+# crossbeam-channel = "0.4"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel.git"}
 devtools_traits = { path = "../devtools_traits" }
 embedder_traits = { path = "../embedder_traits" }
 headers = "0.2"
 http = "0.1"
 hyper = "0.12"
-ipc-channel = "0.14"
+# ipc-channel = "0.14"
 log = "0.4"
 msg = { path = "../msg" }
 serde = "1.0"

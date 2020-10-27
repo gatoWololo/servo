@@ -11,7 +11,7 @@ use crate::fetch::methods::{main_fetch, Data, DoneChannel, FetchContext, Target}
 use crate::hsts::HstsList;
 use crate::http_cache::{CacheKey, HttpCache};
 use crate::resource_thread::AuthCache;
-use crossbeam_channel::{unbounded, Receiver, Sender};
+use rr_channel::crossbeam_channel::{unbounded, Receiver, Sender};
 use devtools_traits::{
     ChromeToDevtoolsControlMsg, DevtoolsControlMsg, HttpRequest as DevtoolsHttpRequest,
 };
@@ -33,8 +33,8 @@ use http::{HeaderMap, Request as HyperRequest};
 use hyper::header::TRANSFER_ENCODING;
 use hyper::{Body, Client, Method, Response as HyperResponse, StatusCode};
 use hyper_serde::Serde;
-use ipc_channel::ipc::{self, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use msg::constellation_msg::{HistoryStateId, PipelineId};
 use net_traits::pub_domains::reg_suffix;
 use net_traits::quality::{quality_to_value, Quality, QualityItem};
@@ -550,9 +550,9 @@ fn obtain_response(
         let devtools_bytes = devtools_bytes.clone();
 
         ROUTER.add_route(
-            body_port.to_opaque(),
+            body_port,
             Box::new(move |message| {
-                let bytes: Vec<u8> = match message.to().unwrap() {
+                let bytes: Vec<u8> = match message.unwrap() {
                     BodyChunkResponse::Chunk(bytes) => bytes,
                     BodyChunkResponse::Done => {
                         // Step 3, abort these parallel steps.

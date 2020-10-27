@@ -24,8 +24,8 @@ use crate::network_listener::{self, NetworkListener, PreInvoke, ResourceTimingLi
 use dom_struct::dom_struct;
 use euclid::default::Size2D;
 use html5ever::{LocalName, Prefix};
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc;
+use rr_channel::ipc_channel::router::ROUTER;
 use net_traits::image_cache::{
     ImageCache, ImageCacheResult, ImageOrMetadataAvailable, ImageResponse, PendingImageId,
     UsePlaceholder,
@@ -224,9 +224,9 @@ impl HTMLVideoElement {
             canceller: Some(canceller),
         };
         ROUTER.add_route(
-            action_receiver.to_opaque(),
+            action_receiver,
             Box::new(move |message| {
-                listener.notify_fetch(message.to().unwrap());
+                listener.notify_fetch(message.unwrap());
             }),
         );
         let global = self.global();

@@ -39,7 +39,7 @@ use euclid::default::{Rect, Size2D};
 use html5ever::{LocalName, Prefix};
 use image::png::PNGEncoder;
 use image::ColorType;
-use ipc_channel::ipc::{self as ipcchan, IpcSharedMemory};
+use rr_channel::ipc_channel::ipc::{self as ipcchan, IpcSharedMemory};
 use js::error::throw_type_error;
 use js::rust::HandleValue;
 use profile_traits::ipc;

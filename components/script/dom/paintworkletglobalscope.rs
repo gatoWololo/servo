@@ -24,7 +24,7 @@ use crate::dom::workletglobalscope::WorkletGlobalScope;
 use crate::dom::workletglobalscope::WorkletGlobalScopeInit;
 use crate::dom::workletglobalscope::WorkletTask;
 use crate::script_runtime::JSContext;
-use crossbeam_channel::{unbounded, Sender};
+use rr_channel::crossbeam_channel::{unbounded, Sender};
 use dom_struct::dom_struct;
 use euclid::Scale;
 use euclid::Size2D;

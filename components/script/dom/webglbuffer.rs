@@ -13,7 +13,7 @@ use crate::dom::webglrenderingcontext::{Operation, WebGLRenderingContext};
 use canvas_traits::webgl::webgl_channel;
 use canvas_traits::webgl::{WebGLBufferId, WebGLCommand, WebGLError, WebGLResult};
 use dom_struct::dom_struct;
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use std::cell::Cell;
 
 fn target_is_copy_buffer(target: u32) -> bool {

@@ -6,8 +6,8 @@
 //! view of a script thread. When an `EventLoop` is dropped, an `ExitScriptThread`
 //! message is sent to the script thread, asking it to shut down.
 
-use ipc_channel::ipc::IpcSender;
-use ipc_channel::Error;
+use rr_channel::ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::Error;
 use script_traits::ConstellationControlMsg;
 use std::marker::PhantomData;
 use std::rc::Rc;

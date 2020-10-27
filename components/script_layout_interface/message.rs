@@ -5,10 +5,10 @@
 use crate::rpc::LayoutRPC;
 use crate::{PendingImage, TrustedNodeAddress};
 use app_units::Au;
-use crossbeam_channel::{Receiver, Sender};
+use rr_channel::crossbeam_channel::{Receiver, Sender};
 use euclid::default::{Point2D, Rect};
 use gfx_traits::Epoch;
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::ipc::{IpcReceiver, IpcSender};
 use metrics::PaintTimeMetrics;
 use msg::constellation_msg::{BackgroundHangMonitorRegister, BrowsingContextId, PipelineId};
 use net_traits::image_cache::ImageCache;

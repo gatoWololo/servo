@@ -11,7 +11,7 @@ use crate::sizing::ContentSizes;
 use crate::style_ext::{ComputedValuesExt, PaddingBorderMargin};
 use crate::ContainingBlock;
 use canvas_traits::canvas::{CanvasId, CanvasMsg, FromLayoutMsg};
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
 use net_traits::image::base::Image;
 use net_traits::image_cache::{ImageOrMetadataAvailable, UsePlaceholder};
 use servo_arc::Arc as ServoArc;

@@ -10,7 +10,7 @@ use crate::dom::bindings::str::DOMString;
 use crate::dom::globalscope::GlobalScope;
 use bluetooth_traits::BluetoothRequest;
 use dom_struct::dom_struct;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use profile_traits::ipc;
 
 // https://webbluetoothcg.github.io/web-bluetooth/tests#test-runner

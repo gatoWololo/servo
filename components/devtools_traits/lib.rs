@@ -20,7 +20,7 @@ extern crate serde;
 
 use http::method::Method;
 use http::HeaderMap;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use msg::constellation_msg::{BrowsingContextId, PipelineId};
 use servo_url::ServoUrl;
 use std::net::TcpStream;

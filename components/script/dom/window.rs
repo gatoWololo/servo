@@ -76,15 +76,15 @@ use backtrace::Backtrace;
 use base64;
 use bluetooth_traits::BluetoothRequest;
 use canvas_traits::webgl::WebGLChan;
-use crossbeam_channel::{unbounded, Sender, TryRecvError};
+use rr_channel::crossbeam_channel::{unbounded, Sender, TryRecvError};
 use cssparser::{Parser, ParserInput, SourceLocation};
 use devtools_traits::{ScriptToDevtoolsControlMsg, TimelineMarker, TimelineMarkerType};
 use dom_struct::dom_struct;
 use embedder_traits::{EmbedderMsg, EventLoopWaker, PromptDefinition, PromptOrigin, PromptResult};
 use euclid::default::{Point2D as UntypedPoint2D, Rect as UntypedRect};
 use euclid::{Point2D, Rect, Scale, Size2D, Vector2D};
-use ipc_channel::ipc::IpcSender;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::router::ROUTER;
 use js::conversions::ToJSValConvertible;
 use js::jsapi::Heap;
 use js::jsapi::JSAutoRealm;
@@ -1770,9 +1770,9 @@ impl Window {
                     ProfiledIpc::channel(self.global().time_profiler_chan().clone()).unwrap();
                 let image_cache_chan = self.image_cache_chan.clone();
                 ROUTER.add_route(
-                    responder_listener.to_opaque(),
+                    responder_listener.get_inner_receiver(),
                     Box::new(move |message| {
-                        let _ = image_cache_chan.send((pipeline_id, message.to().unwrap()));
+                        let _ = image_cache_chan.send((pipeline_id, message.unwrap()));
                     }),
                 );
                 self.image_cache

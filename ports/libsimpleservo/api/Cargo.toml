@@ -8,7 +8,8 @@ publish = false
 
 [dependencies]
 getopts = "0.2.11"
-ipc-channel = "0.14"
+# ipc-channel = "0.14"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel.git"}
 libservo = { path = "../../../components/servo" }
 log = "0.4"
 servo-media = { git = "https://github.com/servo/media" }

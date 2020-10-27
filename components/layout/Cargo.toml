@@ -23,7 +23,8 @@ fnv = "1.0"
 gfx = { path = "../gfx" }
 gfx_traits = { path = "../gfx_traits" }
 html5ever = "0.25"
-ipc-channel = "0.14"
+# ipc-channel = "0.14"
+rr_channel = {git = "https://github.com/gatoWololo/rr_channel.git"}
 lazy_static = "1"
 libc = "0.2"
 log = "0.4"

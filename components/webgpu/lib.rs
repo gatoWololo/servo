@@ -13,7 +13,7 @@ pub mod identity;
 use arrayvec::ArrayVec;
 use euclid::default::Size2D;
 use identity::{IdentityRecyclerFactory, WebGPUMsg, WebGPUOpResult};
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender, IpcSharedMemory};
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver, IpcSender, IpcSharedMemory};
 use malloc_size_of::{MallocSizeOf, MallocSizeOfOps};
 use msg::constellation_msg::PipelineId;
 use serde::{Deserialize, Serialize};

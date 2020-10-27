@@ -11,7 +11,7 @@ use crate::script_runtime::{CommonScriptMsg, ScriptThreadEventCategory};
 use crate::script_thread::MainThreadScriptMsg;
 use crate::task::{TaskCanceller, TaskOnce};
 use crate::task_source::{TaskSource, TaskSourceName};
-use crossbeam_channel::Sender;
+use rr_channel::crossbeam_channel::Sender;
 use msg::constellation_msg::PipelineId;
 use servo_atoms::Atom;
 use std::fmt;

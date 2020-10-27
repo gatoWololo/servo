@@ -20,7 +20,7 @@ use crate::realms::{AlreadyInRealm, InRealm};
 use crate::script_runtime::JSContext;
 use dom_struct::dom_struct;
 use embedder_traits::{self, EmbedderMsg, PermissionPrompt, PermissionRequest};
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use js::conversions::ConversionResult;
 use js::jsapi::JSObject;
 use js::jsval::{ObjectValue, UndefinedValue};

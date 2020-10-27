@@ -30,14 +30,14 @@ use crate::actors::root::RootActor;
 use crate::actors::thread::ThreadActor;
 use crate::actors::worker::{WorkerActor, WorkerType};
 use crate::protocol::JsonPacketStream;
-use crossbeam_channel::{unbounded, Receiver, Sender};
+use rr_channel::crossbeam_channel::{unbounded, Receiver, Sender};
 use devtools_traits::{ChromeToDevtoolsControlMsg, ConsoleMessage, DevtoolsControlMsg};
 use devtools_traits::{
     DevtoolScriptControlMsg, DevtoolsPageInfo, LogLevel, NavigationState, NetworkEvent,
 };
 use devtools_traits::{PageError, ScriptToDevtoolsControlMsg, WorkerId};
 use embedder_traits::{EmbedderMsg, EmbedderProxy, PromptDefinition, PromptOrigin, PromptResult};
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
 use msg::constellation_msg::{BrowsingContextId, PipelineId};
 use servo_rand::RngCore;
 use std::borrow::ToOwned;

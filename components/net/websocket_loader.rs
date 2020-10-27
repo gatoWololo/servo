@@ -23,8 +23,8 @@ use futures03::future::TryFutureExt;
 use futures03::sink::SinkExt;
 use futures03::stream::StreamExt;
 use http::header::{HeaderMap, HeaderName, HeaderValue};
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use net_traits::request::{RequestBuilder, RequestMode};
 use net_traits::{CookieSource, MessageData};
 use net_traits::{WebSocketDomAction, WebSocketNetworkEvent};
@@ -167,9 +167,9 @@ fn setup_dom_listener(
     let (sender, receiver) = unbounded_channel();
 
     ROUTER.add_route(
-        dom_action_receiver.to_opaque(),
+        dom_action_receiver,
         Box::new(move |message| {
-            let dom_action = message.to().expect("Ws dom_action message to deserialize");
+            let dom_action = message.expect("Ws dom_action message to deserialize");
             trace!("handling WS DOM action: {:?}", dom_action);
             match dom_action {
                 WebSocketDomAction::SendMessage(MessageData::Text(data)) => {

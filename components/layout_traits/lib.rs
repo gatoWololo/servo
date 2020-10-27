@@ -9,9 +9,9 @@
 // The traits are here instead of in layout so
 //   that these modules won't have to depend on layout.
 
-use crossbeam_channel::{Receiver, Sender};
+use rr_channel::crossbeam_channel::{Receiver, Sender};
 use gfx::font_cache_thread::FontCacheThread;
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::ipc::{IpcReceiver, IpcSender};
 use metrics::PaintTimeMetrics;
 use msg::constellation_msg::TopLevelBrowsingContextId;
 use msg::constellation_msg::{BackgroundHangMonitorRegister, PipelineId};

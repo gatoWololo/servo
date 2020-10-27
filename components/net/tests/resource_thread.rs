@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::create_embedder_proxy;
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use net::resource_thread::new_core_resource_thread;
 use net::test::parse_hostsfile;
 use net_traits::CoreResourceMsg;

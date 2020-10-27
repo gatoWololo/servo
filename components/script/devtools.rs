@@ -21,7 +21,7 @@ use crate::script_module::ScriptFetchOptions;
 use crate::script_thread::Documents;
 use devtools_traits::{AutoMargins, ComputedNodeLayout, TimelineMarkerType};
 use devtools_traits::{EvaluateJSReply, Modification, NodeInfo, TimelineMarker};
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use js::jsval::UndefinedValue;
 use js::rust::wrappers::ObjectClassName;
 use msg::constellation_msg::PipelineId;

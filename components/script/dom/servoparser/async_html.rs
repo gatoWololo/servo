@@ -20,7 +20,7 @@ use crate::dom::node::Node;
 use crate::dom::processinginstruction::ProcessingInstruction;
 use crate::dom::servoparser::{create_element_for_token, ElementAttribute, ParsingAlgorithm};
 use crate::dom::virtualmethods::vtable_for;
-use crossbeam_channel::{unbounded, Receiver, Sender};
+use rr_channel::crossbeam_channel::{unbounded, Receiver, Sender};
 use html5ever::buffer_queue::BufferQueue;
 use html5ever::tendril::fmt::UTF8;
 use html5ever::tendril::{SendTendril, StrTendril, Tendril};

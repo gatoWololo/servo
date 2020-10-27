@@ -25,9 +25,9 @@ use http::{Error as HttpError, HeaderMap};
 use hyper::Error as HyperError;
 use hyper::StatusCode;
 use hyper_serde::Serde;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
-use ipc_channel::Error as IpcError;
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::Error as IpcError;
 use mime::Mime;
 use msg::constellation_msg::HistoryStateId;
 use servo_rand::RngCore;
@@ -479,10 +479,10 @@ pub fn fetch_async<F>(request: RequestBuilder, core_resource_thread: &CoreResour
 where
     F: Fn(FetchResponseMsg) + Send + 'static,
 {
-    let (action_sender, action_receiver) = ipc::channel().unwrap();
+    let (action_sender, action_receiver) = ipc::channel::<FetchResponseMsg>().unwrap();
     ROUTER.add_route(
-        action_receiver.to_opaque(),
-        Box::new(move |message| f(message.to().unwrap())),
+        action_receiver,
+        Box::new(move |message| f(message.expect("fetch_async error"))),
     );
     core_resource_thread
         .send(CoreResourceMsg::Fetch(

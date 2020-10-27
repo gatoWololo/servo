@@ -11,7 +11,7 @@ use crate::dom::worklet::WorkletExecutor;
 use crate::dom::workletglobalscope::WorkletGlobalScope;
 use crate::dom::workletglobalscope::WorkletGlobalScopeInit;
 use crate::script_runtime::JSContext;
-use crossbeam_channel::Sender;
+use rr_channel::crossbeam_channel::Sender;
 use dom_struct::dom_struct;
 use js::rust::Runtime;
 use msg::constellation_msg::PipelineId;

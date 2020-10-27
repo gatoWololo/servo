@@ -27,8 +27,8 @@ use crate::task_source::networking::NetworkingTaskSource;
 use crate::task_source::TaskSource;
 use crate::task_source::TaskSourceName;
 use encoding_rs::UTF_8;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use js::jsapi::Heap;
 use js::jsapi::JSObject;
 use js::jsapi::JS_ClearPendingException;
@@ -120,9 +120,9 @@ impl TransmitBodyConnectHandler {
         body_handler.reset_in_memory_done();
 
         ROUTER.add_route(
-            chunk_request_receiver.to_opaque(),
+            chunk_request_receiver,
             Box::new(move |message| {
-                let request = message.to().unwrap();
+                let request = message.unwrap();
                 match request {
                     BodyChunkRequest::Connect(sender) => {
                         body_handler.start_reading(sender);
@@ -399,9 +399,9 @@ impl ExtractedBody {
         );
 
         ROUTER.add_route(
-            chunk_request_receiver.to_opaque(),
+            chunk_request_receiver,
             Box::new(move |message| {
-                let request = message.to().unwrap();
+                let request = message.unwrap();
                 match request {
                     BodyChunkRequest::Connect(sender) => {
                         body_handler.start_reading(sender);

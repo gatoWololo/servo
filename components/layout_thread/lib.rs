@@ -9,7 +9,7 @@
 //! painted.
 
 #[macro_use]
-extern crate crossbeam_channel;
+extern crate rr_channel;
 #[macro_use]
 extern crate html5ever;
 #[macro_use]
@@ -25,7 +25,7 @@ mod dom_wrapper;
 
 use crate::dom_wrapper::{ServoLayoutDocument, ServoLayoutElement, ServoLayoutNode};
 use app_units::Au;
-use crossbeam_channel::{Receiver, Sender};
+use rr_channel::crossbeam_channel::{Receiver, Sender};
 use embedder_traits::resources::{self, Resource};
 use euclid::{default::Size2D as UntypedSize2D, Point2D, Rect, Scale, Size2D};
 use fnv::FnvHashMap;
@@ -35,8 +35,8 @@ use gfx::font_cache_thread::FontCacheThread;
 use gfx::font_context;
 use gfx_traits::{node_id_from_scroll_id, Epoch};
 use histogram::Histogram;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::router::ROUTER;
 use layout::construct::ConstructionResult;
 use layout::context::malloc_size_of_persistent_local_context;
 use layout::context::LayoutContext;

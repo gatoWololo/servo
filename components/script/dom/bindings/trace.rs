@@ -63,7 +63,7 @@ use canvas_traits::webgl::{WebGLFramebufferId, WebGLMsgSender, WebGLPipeline, We
 use canvas_traits::webgl::{WebGLReceiver, WebGLRenderbufferId, WebGLSLVersion, WebGLSender};
 use canvas_traits::webgl::{WebGLShaderId, WebGLSyncId, WebGLTextureId, WebGLVersion};
 use content_security_policy::CspList;
-use crossbeam_channel::{Receiver, Sender};
+use rr_channel::crossbeam_channel::{Receiver, Sender};
 use cssparser::RGBA;
 use devtools_traits::{CSSError, TimelineMarkerType, WorkerId};
 use embedder_traits::{EventLoopWaker, MediaMetadata};
@@ -76,7 +76,7 @@ use http::header::HeaderMap;
 use hyper::Method;
 use hyper::StatusCode;
 use indexmap::IndexMap;
-use ipc_channel::ipc::{IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::ipc::{IpcReceiver, IpcSender};
 use js::glue::{CallObjectTracer, CallScriptTracer, CallStringTracer, CallValueTracer};
 use js::jsapi::{
     GCTraceKindToAscii, Heap, JSObject, JSScript, JSString, JSTracer, JobQueue, TraceKind,

@@ -7,11 +7,11 @@
 use crate::compositor::CompositingReason;
 use crate::{ConstellationMsg, SendableFrameTree};
 use canvas::canvas_paint_thread::ImageUpdate;
-use crossbeam_channel::{Receiver, Sender};
+use rr_channel::crossbeam_channel::{Receiver, Sender};
 use embedder_traits::EventLoopWaker;
 use euclid::Rect;
 use gfx_traits::Epoch;
-use ipc_channel::ipc::IpcSender;
+use rr_channel::ipc_channel::ipc::IpcSender;
 use msg::constellation_msg::{PipelineId, TopLevelBrowsingContextId};
 use net_traits::image::base::Image;
 use profile_traits::mem;

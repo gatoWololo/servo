@@ -26,8 +26,8 @@ use dom_struct::dom_struct;
 use euclid::Length;
 use headers::ContentType;
 use http::header::{self, HeaderName, HeaderValue};
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc;
+use rr_channel::ipc_channel::router::ROUTER;
 use js::conversions::ToJSValConvertible;
 use js::jsval::UndefinedValue;
 use mime::{self, Mime};
@@ -572,9 +572,9 @@ impl EventSource {
             canceller: Some(global.task_canceller(TaskSourceName::Networking)),
         };
         ROUTER.add_route(
-            action_receiver.to_opaque(),
+            action_receiver,
             Box::new(move |message| {
-                listener.notify_fetch(message.to().unwrap());
+                listener.notify_fetch(message.unwrap());
             }),
         );
         let cancel_receiver = ev.canceller.borrow_mut().initialize();

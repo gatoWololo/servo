@@ -38,8 +38,8 @@ use crate::realms::InRealm;
 use crate::task_source::TaskSource;
 use dom_struct::dom_struct;
 use euclid::{RigidTransform3D, Transform3D, Vector3D};
-use ipc_channel::ipc::IpcReceiver;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc::IpcReceiver;
+use rr_channel::ipc_channel::router::ROUTER;
 use metrics::ToMs;
 use profile_traits::ipc;
 use std::cell::Cell;
@@ -175,10 +175,10 @@ impl XRSession {
             .task_manager()
             .dom_manipulation_task_source_with_canceller();
         ROUTER.add_route(
-            frame_receiver.to_opaque(),
+            frame_receiver,
             Box::new(move |message| {
                 #[allow(unused)]
-                let mut frame: Frame = message.to().unwrap();
+                let mut frame: Frame = message.unwrap();
                 #[cfg(feature = "xr-profile")]
                 {
                     let received = time::precise_time_ns();
@@ -215,12 +215,12 @@ impl XRSession {
         let (sender, receiver) = ipc::channel(global.time_profiler_chan().clone()).unwrap();
 
         ROUTER.add_route(
-            receiver.to_opaque(),
+            receiver.get_inner_receiver(),
             Box::new(move |message| {
                 let this = this.clone();
                 let _ = task_source.queue_with_canceller(
                     task!(xr_event_callback: move || {
-                        this.root().event_callback(message.to().unwrap());
+                        this.root().event_callback(message.unwrap());
                     }),
                     &canceller,
                 );

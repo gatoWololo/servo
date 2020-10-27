@@ -21,7 +21,7 @@ use crate::dom::node::{document_from_node, Node, NodeDamage};
 use arrayvec::ArrayVec;
 use dom_struct::dom_struct;
 use euclid::default::Size2D;
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use script_layout_interface::HTMLCanvasDataSource;
 use std::cell::Cell;
 use webgpu::{wgpu::id, wgt, WebGPU, WebGPURequest, PRESENTATION_BUFFER_COUNT};

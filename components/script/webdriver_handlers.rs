@@ -44,7 +44,7 @@ use crate::script_thread::{Documents, ScriptThread};
 use cookie::Cookie;
 use euclid::default::{Point2D, Rect, Size2D};
 use hyper_serde::Serde;
-use ipc_channel::ipc::{self, IpcSender};
+use rr_channel::ipc_channel::ipc::{self, IpcSender};
 use js::jsapi::{HandleValueArray, JSAutoRealm, JSContext, JSType, JS_IsExceptionPending};
 use js::jsval::UndefinedValue;
 use js::rust::wrappers::{JS_CallFunctionName, JS_GetProperty, JS_HasOwnProperty, JS_TypeOfValue};

@@ -40,8 +40,8 @@ use core::ffi::c_void;
 use dom_struct::dom_struct;
 use encoding_rs::Encoding;
 use html5ever::{LocalName, Prefix};
-use ipc_channel::ipc;
-use ipc_channel::router::ROUTER;
+use rr_channel::ipc_channel::ipc;
+use rr_channel::ipc_channel::router::ROUTER;
 use js::jsapi::{
     CanCompileOffThread, CompileOffThread1, FinishOffThreadScript, Heap, JSScript, OffThreadToken,
 };
@@ -565,9 +565,9 @@ fn fetch_a_classic_script(
     };
 
     ROUTER.add_route(
-        action_receiver.to_opaque(),
+        action_receiver,
         Box::new(move |message| {
-            listener.notify_fetch(message.to().unwrap());
+            listener.notify_fetch(message.unwrap());
         }),
     );
     doc.fetch_async(LoadType::Script(url), request, action_sender);

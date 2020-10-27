@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::resource_thread;
-use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
+use rr_channel::ipc_channel::ipc::{self, IpcReceiver, IpcSender};
 use net_traits::storage_thread::{StorageThreadMsg, StorageType};
 use servo_url::ServoUrl;
 use std::borrow::ToOwned;

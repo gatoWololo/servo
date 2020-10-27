@@ -7,7 +7,7 @@
 #![deny(unsafe_code)]
 
 use crate::canvas::CanvasId;
-use crossbeam_channel::Sender;
+use rr_channel::crossbeam_channel::Sender;
 use euclid::default::Size2D;
 
 #[macro_use]

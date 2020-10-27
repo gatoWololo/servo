@@ -104,7 +104,7 @@ version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ee49baf6cb617b853aa8d93bf420db2383fab46d314482ca2803b40d5fde979b"
 dependencies = [
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -213,8 +213,14 @@ checksum = "9a7d5b8723950951411ee34d271d99dddcc2035a16ab25310ea2c8cfd4369652"
 dependencies = [
  "libc",
  "termion",
- "winapi",
+ "winapi 0.3.9",
 ]
+
+[[package]]
+name = "autocfg"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1d49d90015b3c36167a20fe2810c5cd875ad504b39cff3d4eae7977e6b7c1cb2"
 
 [[package]]
 name = "autocfg"
@@ -227,25 +233,25 @@ name = "background_hang_monitor"
 version = "0.0.1"
 dependencies = [
  "backtrace",
- "crossbeam-channel",
- "ipc-channel",
  "lazy_static",
  "libc",
  "log",
  "mach",
  "msg",
  "nix",
+ "rr_channel",
  "serde_json",
  "unwind-sys",
 ]
 
 [[package]]
 name = "backtrace"
-version = "0.3.50"
-source = "git+https://github.com/servo/backtrace-rs?branch=uwp-fix#5366f72ca5be2e2341f418923a71b70acbb653ad"
+version = "0.3.53"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "707b586e0e2f247cbde68cdd2c3ce69ea7b7be43e1c5b426e37c9319c4b9838e"
 dependencies = [
  "addr2line",
- "cfg-if",
+ "cfg-if 1.0.0",
  "libc",
  "miniz_oxide 0.4.0",
  "object",
@@ -297,7 +303,7 @@ checksum = "c72a978d268b1d70b0e963217e60fdabd9523a941457a6c42a7315d15c7e89e5"
 dependencies = [
  "bitflags",
  "cexpr",
- "cfg-if",
+ "cfg-if 0.1.10",
  "clang-sys",
  "clap",
  "env_logger",
@@ -374,8 +380,8 @@ dependencies = [
  "bluetooth_traits",
  "device",
  "embedder_traits",
- "ipc-channel",
  "log",
+ "rr_channel",
  "servo_config",
  "servo_rand",
  "uuid",
@@ -386,8 +392,8 @@ name = "bluetooth_traits"
 version = "0.0.1"
 dependencies = [
  "embedder_traits",
- "ipc-channel",
  "regex",
+ "rr_channel",
  "serde",
 ]
 
@@ -458,7 +464,7 @@ version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4b5f8b148c1884e660514fb1205f36b595e96df4daac5ad526a23db44937de77"
 dependencies = [
- "crossbeam-utils",
+ "crossbeam-utils 0.7.2",
  "jobserver",
  "num_cpus",
 ]
@@ -541,7 +547,6 @@ dependencies = [
  "bitflags",
  "byteorder",
  "canvas_traits",
- "crossbeam-channel",
  "cssparser",
  "euclid",
  "fnv",
@@ -549,13 +554,13 @@ dependencies = [
  "gfx",
  "gleam 0.12.1",
  "half",
- "ipc-channel",
  "log",
  "lyon_geom 0.14.1",
  "num-traits",
  "pathfinder_geometry",
  "pixels",
  "raqote",
+ "rr_channel",
  "servo_arc",
  "servo_config",
  "sparkle",
@@ -577,14 +582,13 @@ dependencies = [
 name = "canvas_traits"
 version = "0.0.1"
 dependencies = [
- "crossbeam-channel",
  "cssparser",
  "euclid",
- "ipc-channel",
  "lazy_static",
  "malloc_size_of",
  "malloc_size_of_derive",
  "pixels",
+ "rr_channel",
  "serde",
  "serde_bytes",
  "servo_config",
@@ -642,6 +646,12 @@ name = "cfg-if"
 version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4785bdd1c96b2a846b2bd7cc02e86b6b3dbf14e7e53446c4f54c92a361040822"
+
+[[package]]
+name = "cfg-if"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "cfg_aliases"
@@ -714,7 +724,7 @@ version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3a093d6fed558e5fe24c3dfc85a68bb68f1c824f440d3ba5aca189e2998786b"
 dependencies = [
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -828,13 +838,11 @@ name = "compositing"
 version = "0.0.1"
 dependencies = [
  "canvas",
- "crossbeam-channel",
  "embedder_traits",
  "euclid",
  "gfx_traits",
  "gleam 0.12.1",
  "image",
- "ipc-channel",
  "keyboard-types",
  "libc",
  "log",
@@ -843,6 +851,7 @@ dependencies = [
  "num-traits",
  "pixels",
  "profile_traits",
+ "rr_channel",
  "script_traits",
  "servo-media",
  "servo_geometry",
@@ -871,7 +880,6 @@ dependencies = [
  "bluetooth_traits",
  "canvas_traits",
  "compositing",
- "crossbeam-channel",
  "devtools_traits",
  "embedder_traits",
  "euclid",
@@ -879,7 +887,6 @@ dependencies = [
  "gfx",
  "gfx_traits",
  "http 0.1.21",
- "ipc-channel",
  "keyboard-types",
  "layout_traits",
  "log",
@@ -889,6 +896,7 @@ dependencies = [
  "net",
  "net_traits",
  "profile_traits",
+ "rr_channel",
  "script_traits",
  "serde",
  "servo_config",
@@ -1054,7 +1062,16 @@ version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ba125de2af0df55319f41944744ad91c71113bf74a4646efff39afe1f6842db1"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
+]
+
+[[package]]
+name = "crossbeam-channel"
+version = "0.3.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c8ec7fcd21571dc78f96cc96243cab8d8f035247c3efd16c687be154c3fa9efa"
+dependencies = [
+ "crossbeam-utils 0.6.6",
 ]
 
 [[package]]
@@ -1063,8 +1080,8 @@ version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "09ee0cc8804d5393478d743b035099520087a5186f3b93fa58cec08fa62407b6"
 dependencies = [
- "cfg-if",
- "crossbeam-utils",
+ "cfg-if 0.1.10",
+ "crossbeam-utils 0.7.2",
 ]
 
 [[package]]
@@ -1074,7 +1091,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9f02af974daeee82218205558e51ec8768b48cf524bd01d550abe5573a608285"
 dependencies = [
  "crossbeam-epoch",
- "crossbeam-utils",
+ "crossbeam-utils 0.7.2",
  "maybe-uninit",
 ]
 
@@ -1084,9 +1101,9 @@ version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "058ed274caafc1f60c4997b5fc07bf7dc7cca454af7c6e81edffe5f33f70dace"
 dependencies = [
- "autocfg",
- "cfg-if",
- "crossbeam-utils",
+ "autocfg 1.0.0",
+ "cfg-if 0.1.10",
+ "crossbeam-utils 0.7.2",
  "lazy_static",
  "maybe-uninit",
  "memoffset",
@@ -1099,9 +1116,19 @@ version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "774ba60a54c213d409d5353bda12d49cd68d14e45036a285234c8d6f91f92570"
 dependencies = [
- "cfg-if",
- "crossbeam-utils",
+ "cfg-if 0.1.10",
+ "crossbeam-utils 0.7.2",
  "maybe-uninit",
+]
+
+[[package]]
+name = "crossbeam-utils"
+version = "0.6.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "04973fa96e96579258a5091af6003abde64af786b860f18622b82e026cca60e6"
+dependencies = [
+ "cfg-if 0.1.10",
+ "lazy_static",
 ]
 
 [[package]]
@@ -1110,8 +1137,8 @@ version = "0.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c3c7c73a2d1e9fc0886a08b93e98eb643461230d5f1925e4036204d5f2e261a8"
 dependencies = [
- "autocfg",
- "cfg-if",
+ "autocfg 1.0.0",
+ "cfg-if 0.1.10",
  "lazy_static",
 ]
 
@@ -1171,7 +1198,7 @@ checksum = "bc7ed48e89905e5e146bcc1951cc3facb9e44aea9adf5dc01078cda1bd24b662"
 dependencies = [
  "bitflags",
  "libloading 0.5.2",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -1289,15 +1316,14 @@ dependencies = [
 name = "devtools"
 version = "0.0.1"
 dependencies = [
- "crossbeam-channel",
  "devtools_traits",
  "embedder_traits",
  "headers",
  "http 0.1.21",
  "hyper",
- "ipc-channel",
  "log",
  "msg",
+ "rr_channel",
  "serde",
  "serde_json",
  "servo_config",
@@ -1313,10 +1339,10 @@ version = "0.0.1"
 dependencies = [
  "bitflags",
  "http 0.1.21",
- "ipc-channel",
  "malloc_size_of",
  "malloc_size_of_derive",
  "msg",
+ "rr_channel",
  "serde",
  "servo_url",
  "time",
@@ -1347,7 +1373,7 @@ version = "2.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "13aea89a5c93364a98e9b37b2fa237effbb694d5cfe01c5b70941f7eb087d5e3"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "dirs-sys",
 ]
 
@@ -1357,10 +1383,10 @@ version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "afa0b23de8fd801745c471deffa6e12d248f962c9fd4b4c33787b055599bde7b"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "libc",
  "redox_users",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -1432,7 +1458,7 @@ dependencies = [
  "libc",
  "serde",
  "serde_derive",
- "winapi",
+ "winapi 0.3.9",
  "wio",
 ]
 
@@ -1446,14 +1472,13 @@ checksum = "bb1f6b1ce1c140482ea30ddd3335fc0024ac7ee112895426e0a629a6c20adfe3"
 name = "embedder_traits"
 version = "0.0.1"
 dependencies = [
- "crossbeam-channel",
- "ipc-channel",
  "keyboard-types",
  "lazy_static",
  "log",
  "msg",
  "num-derive",
  "num-traits",
+ "rr_channel",
  "serde",
  "servo_url",
  "webrender_api",
@@ -1484,7 +1509,7 @@ version = "0.8.23"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e8ac63f94732332f44fe654443c46f6375d1939684c17b0afb6cb56b0456e171"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
 ]
 
 [[package]]
@@ -1582,7 +1607,7 @@ version = "1.0.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "766d0e77a2c1502169d4a93ff3b8c15a71fd946cd0126309752104e5f3c46d94"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "crc32fast",
  "libc",
  "miniz_oxide 0.4.0",
@@ -1622,7 +1647,7 @@ dependencies = [
  "pathfinder_simd",
  "servo-fontconfig",
  "walkdir",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -1676,6 +1701,12 @@ name = "fs_extra"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5f2a4a2034423744d2cc7ca2068453168dcdb82c438419e639a26bd87839c674"
+
+[[package]]
+name = "fuchsia-cprng"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a06f77d526c1a601b7c4cdd98f54b5eaabffc14d5f2f0296febdc7f357c6d3ba"
 
 [[package]]
 name = "fuchsia-zircon"
@@ -1843,7 +1874,7 @@ dependencies = [
  "libc",
  "log",
  "rustc_version",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -1877,7 +1908,7 @@ version = "0.1.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7abc8dd8451921606d809ba32e95b6111925cd2906060d2dcc29c070220503eb"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "libc",
  "wasi",
 ]
@@ -1899,13 +1930,13 @@ dependencies = [
  "freetype",
  "gfx_traits",
  "harfbuzz-sys",
- "ipc-channel",
  "lazy_static",
  "libc",
  "log",
  "malloc_size_of",
  "net_traits",
  "range",
+ "rr_channel",
  "serde",
  "servo-fontconfig",
  "servo_allocator",
@@ -1951,7 +1982,7 @@ dependencies = [
  "raw-window-handle",
  "smallvec 1.4.2",
  "spirv_cross",
- "winapi",
+ "winapi 0.3.9",
  "wio",
 ]
 
@@ -1970,7 +2001,7 @@ dependencies = [
  "raw-window-handle",
  "smallvec 1.4.2",
  "spirv_cross",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -2027,7 +2058,7 @@ dependencies = [
  "objc",
  "raw-window-handle",
  "smallvec 1.4.2",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -2203,7 +2234,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ce8664a114cd6ec16bece783d5eee59496919915b1f6884400ba4a953274a163"
 dependencies = [
  "bitflags",
- "cfg-if",
+ "cfg-if 0.1.10",
  "futures-channel",
  "futures-core",
  "futures-util",
@@ -2534,7 +2565,7 @@ version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e91b62f79061a0bc2e046024cb7ba44b08419ed238ecbd9adbd787434b9e8c25"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
 ]
 
 [[package]]
@@ -2542,7 +2573,7 @@ name = "hashglobe"
 version = "0.1.0"
 dependencies = [
  "libc",
- "rand",
+ "rand 0.7.2",
 ]
 
 [[package]]
@@ -2789,7 +2820,7 @@ version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5b88cd59ee5f71fea89a62248fc8f387d44400cefe05ef548466d61ced9029a7"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
  "hashbrown",
 ]
 
@@ -2839,16 +2870,15 @@ dependencies = [
 [[package]]
 name = "ipc-channel"
 version = "0.14.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3698b8affd5656032a074a7d40b3c2a29b71971f3e1ff6042b9d40724e20d97c"
+source = "git+https://github.com/gatoWololo/ipc-channel#77c67524ec15846cd0d1c5653870165160a4304d"
 dependencies = [
  "bincode",
- "crossbeam-channel",
+ "crossbeam-channel 0.4.3",
  "fnv",
  "lazy_static",
  "libc",
  "mio",
- "rand",
+ "rand 0.7.2",
  "serde",
  "tempfile",
  "uuid",
@@ -2938,6 +2968,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "kernel32-sys"
+version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7507624b29483431c0ba2d82aece8ca6cdba9382bff4ddd0f7490560c056098d"
+dependencies = [
+ "winapi 0.2.8",
+ "winapi-build",
+]
+
+[[package]]
 name = "keyboard-types"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2968,7 +3008,6 @@ dependencies = [
  "gfx",
  "gfx_traits",
  "html5ever",
- "ipc-channel",
  "lazy_static",
  "libc",
  "log",
@@ -2980,6 +3019,7 @@ dependencies = [
  "profile_traits",
  "range",
  "rayon",
+ "rr_channel",
  "script_layout_interface",
  "script_traits",
  "serde",
@@ -3014,7 +3054,6 @@ dependencies = [
  "gfx",
  "gfx_traits",
  "html5ever",
- "ipc-channel",
  "lazy_static",
  "libc",
  "log",
@@ -3026,6 +3065,7 @@ dependencies = [
  "range",
  "rayon",
  "rayon_croissant",
+ "rr_channel",
  "script_layout_interface",
  "script_traits",
  "serde",
@@ -3044,7 +3084,6 @@ version = "0.0.1"
 dependencies = [
  "app_units",
  "atomic_refcell",
- "crossbeam-channel",
  "embedder_traits",
  "euclid",
  "fnv",
@@ -3053,7 +3092,6 @@ dependencies = [
  "gfx_traits",
  "histogram",
  "html5ever",
- "ipc-channel",
  "layout_2013",
  "layout_traits",
  "lazy_static",
@@ -3067,6 +3105,7 @@ dependencies = [
  "profile_traits",
  "range",
  "rayon",
+ "rr_channel",
  "script",
  "script_layout_interface",
  "script_traits",
@@ -3089,7 +3128,6 @@ version = "0.0.1"
 dependencies = [
  "app_units",
  "atomic_refcell",
- "crossbeam-channel",
  "embedder_traits",
  "euclid",
  "fnv",
@@ -3097,7 +3135,6 @@ dependencies = [
  "gfx",
  "gfx_traits",
  "html5ever",
- "ipc-channel",
  "layout_2020",
  "layout_traits",
  "lazy_static",
@@ -3110,6 +3147,7 @@ dependencies = [
  "parking_lot 0.10.2",
  "profile_traits",
  "range",
+ "rr_channel",
  "script",
  "script_layout_interface",
  "script_traits",
@@ -3128,13 +3166,12 @@ dependencies = [
 name = "layout_traits"
 version = "0.0.1"
 dependencies = [
- "crossbeam-channel",
  "gfx",
- "ipc-channel",
  "metrics",
  "msg",
  "net_traits",
  "profile_traits",
+ "rr_channel",
  "script_traits",
  "servo_url",
  "webrender_api",
@@ -3201,7 +3238,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f2b111a074963af1d37a139918ac6d49ad1d0d5e47f72fd55388619691a7d753"
 dependencies = [
  "cc",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -3210,7 +3247,7 @@ version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3c4f51b790f5bdb65acb4cc94bb81d7b2ee60348a5431ac1467d390b017600b0"
 dependencies = [
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -3238,7 +3275,6 @@ dependencies = [
  "canvas_traits",
  "compositing",
  "constellation",
- "crossbeam-channel",
  "devtools",
  "devtools_traits",
  "embedder_traits",
@@ -3249,7 +3285,6 @@ dependencies = [
  "gfx_traits",
  "gleam 0.12.1",
  "gstreamer",
- "ipc-channel",
  "keyboard-types",
  "layout_thread_2013",
  "layout_thread_2020",
@@ -3261,6 +3296,7 @@ dependencies = [
  "net_traits",
  "profile",
  "profile_traits",
+ "rr_channel",
  "script",
  "script_layout_interface",
  "script_traits",
@@ -3344,7 +3380,7 @@ version = "0.4.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4fabed175da42fed1fa0746b0ea71f412aa9d35e76e95e59b192c64b9dc2bf8b"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
 ]
 
 [[package]]
@@ -3353,7 +3389,7 @@ version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28e1106f2fa156410c0feb373657bd8afc9e801ab1c3e71cca22ec8faf8d5ded"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "generator",
  "scoped-tls",
 ]
@@ -3417,13 +3453,13 @@ dependencies = [
  "accountable-refcell",
  "app_units",
  "content-security-policy",
- "crossbeam-channel",
  "cssparser",
  "euclid",
  "hashglobe",
  "hyper",
  "hyper_serde",
  "keyboard-types",
+ "rr_channel",
  "selectors",
  "serde",
  "serde_bytes",
@@ -3494,9 +3530,9 @@ version = "0.0.1"
 dependencies = [
  "euclid",
  "fnv",
- "ipc-channel",
  "lazy_static",
  "log",
+ "rr_channel",
  "serde",
  "servo-media",
  "servo_config",
@@ -3517,7 +3553,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6585fd95e7bb50d6cc31e20d4cf9afb4e2ba16c5846fc76793f11218da9c475b"
 dependencies = [
  "libc",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -3526,7 +3562,7 @@ version = "0.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b4fc2c02a7e374099d4ee95a193111f72d2110197fe200272371758f6c3643d8"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
 ]
 
 [[package]]
@@ -3563,12 +3599,12 @@ name = "metrics"
 version = "0.0.1"
 dependencies = [
  "gfx_traits",
- "ipc-channel",
  "log",
  "malloc_size_of",
  "malloc_size_of_derive",
  "msg",
  "profile_traits",
+ "rr_channel",
  "script_traits",
  "servo_config",
  "servo_url",
@@ -3580,10 +3616,10 @@ name = "metrics_tests"
 version = "0.0.1"
 dependencies = [
  "gfx_traits",
- "ipc-channel",
  "metrics",
  "msg",
  "profile_traits",
+ "rr_channel",
  "servo_url",
  "time",
 ]
@@ -3635,18 +3671,20 @@ dependencies = [
 [[package]]
 name = "mio"
 version = "0.6.22"
-source = "git+https://github.com/servo/mio.git?branch=servo-mio-0.6.22#f640fd662db03026ca2a1b21ac1e161ec6f8150b"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fce347092656428bc8eaf6201042cb551b8d67855af7374542a92a0fbfcac430"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "fuchsia-zircon",
  "fuchsia-zircon-sys",
  "iovec",
+ "kernel32-sys",
  "libc",
  "log",
  "miow",
  "net2",
  "slab",
- "winapi",
+ "winapi 0.2.8",
 ]
 
 [[package]]
@@ -3674,12 +3712,14 @@ dependencies = [
 
 [[package]]
 name = "miow"
-version = "0.3.5"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "07b88fb9795d4d36d62a012dfbf49a8f5cf12751f36d31a9dbe66d528e58979e"
+checksum = "8c1f2f3b1cf331de6896aabf6e9d55dca90356cc9960cca7eaaf408a355ae919"
 dependencies = [
- "socket2",
- "winapi",
+ "kernel32-sys",
+ "net2",
+ "winapi 0.2.8",
+ "ws2_32-sys",
 ]
 
 [[package]]
@@ -3740,18 +3780,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aad9dfe950c057b1bfe9c1f2aa51583a8468ef2a5baba2ebbe06d775efeb7729"
 dependencies = [
  "time",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
 name = "msg"
 version = "0.0.1"
 dependencies = [
- "ipc-channel",
  "lazy_static",
  "malloc_size_of",
  "malloc_size_of_derive",
  "parking_lot 0.10.2",
+ "rr_channel",
  "serde",
  "size_of_test",
  "webrender_api",
@@ -3805,7 +3845,6 @@ dependencies = [
  "bytes 0.4.12",
  "content-security-policy",
  "cookie",
- "crossbeam-channel",
  "data-url",
  "devtools_traits",
  "embedder_traits",
@@ -3818,7 +3857,6 @@ dependencies = [
  "hyper-openssl",
  "hyper_serde",
  "immeta",
- "ipc-channel",
  "lazy_static",
  "libflate",
  "log",
@@ -3834,6 +3872,7 @@ dependencies = [
  "pixels",
  "profile_traits",
  "rayon",
+ "rr_channel",
  "serde",
  "serde_json",
  "servo_allocator",
@@ -3857,9 +3896,9 @@ version = "0.2.34"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2ba7c918ac76704fb42afcbbb43891e72731f3dcca3bef2a19786297baf14af7"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "libc",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -3874,7 +3913,6 @@ dependencies = [
  "hyper",
  "hyper_serde",
  "image",
- "ipc-channel",
  "lazy_static",
  "log",
  "malloc_size_of",
@@ -3884,6 +3922,7 @@ dependencies = [
  "num-traits",
  "percent-encoding",
  "pixels",
+ "rr_channel",
  "serde",
  "servo_arc",
  "servo_rand",
@@ -3909,7 +3948,7 @@ checksum = "6c722bee1037d430d0f8e687bbdbf222f27cc6e4e68d5caf630857bb2b6dbdce"
 dependencies = [
  "bitflags",
  "cc",
- "cfg-if",
+ "cfg-if 0.1.10",
  "libc",
  "void",
 ]
@@ -3936,7 +3975,7 @@ version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b6b19411a9719e753aff12e5187b74d60d3dc449ec3f4dc21e3989c3f554bc95"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
  "num-traits",
 ]
 
@@ -3957,7 +3996,7 @@ version = "0.1.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3f6ea62e9d81a77cd3ee9a2a5b9b609447857f3d358704331e4ef39eb247fcba"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
  "num-traits",
 ]
 
@@ -3967,7 +4006,7 @@ version = "0.1.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dfb0800a0291891dd9f4fe7bd9c19384f98f7fbe0cd0f39a2c6b88b9868bbc00"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
  "num-integer",
  "num-traits",
 ]
@@ -3978,7 +4017,7 @@ version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5c000134b5dbf44adc5cb772486d335293351644b801551abe8f75c84cfa4aef"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
  "num-integer",
  "num-traits",
 ]
@@ -3989,7 +4028,7 @@ version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a5b4d7360f362cfb50dde8143501e6940b22f644be75a4cc90b2d81968908138"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
  "num-integer",
  "num-traits",
 ]
@@ -4000,7 +4039,7 @@ version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ac267bcc07f48ee5f8935ab0d24f316fb722d7a1292e2913f0cc196b29ffd611"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
 ]
 
 [[package]]
@@ -4054,9 +4093,9 @@ dependencies = [
 
 [[package]]
 name = "object"
-version = "0.20.0"
+version = "0.21.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1ab52be62400ca80aa00285d25253d7f7c437b7375c4de678f5405d3afe82ca5"
+checksum = "37fd5004feb2ce328a52b0b3d01dbf4ffff72583493900ed15f22d4111c51693"
 
 [[package]]
 name = "once_cell"
@@ -4083,7 +4122,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8d575eff3665419f9b83678ff2815858ad9d11567e082f5ac1814baba4e2bcb4"
 dependencies = [
  "bitflags",
- "cfg-if",
+ "cfg-if 0.1.10",
  "foreign-types",
  "lazy_static",
  "libc",
@@ -4102,7 +4141,7 @@ version = "0.9.58"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a842db4709b604f0fe5d1170ae3565899be2ad3d9cbc72dedc789ac0511f78de"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
  "cc",
  "libc",
  "pkg-config",
@@ -4117,7 +4156,7 @@ dependencies = [
  "libc",
  "libloading 0.6.1",
  "openxr-sys",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -4126,7 +4165,7 @@ version = "0.8.2"
 source = "git+https://github.com/servo/openxrs.git?branch=secondary-views-2#87c0186c88f6e2bc22dbbe0bf5c02afc60fc37ef"
 dependencies = [
  "libc",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -4191,13 +4230,13 @@ version = "0.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b876b1b9e7ac6e1a74a6da34d25c42e17e8862aa409cbbbdcfc8d86c6f3bc62b"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "cloudabi 0.0.3",
  "libc",
  "redox_syscall",
  "rustc_version",
  "smallvec 0.6.13",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -4206,12 +4245,12 @@ version = "0.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d58c7c768d4ba344e3e8d72518ac13e259d7c7ade24167003b8488e10b6740a3"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "cloudabi 0.0.3",
  "libc",
  "redox_syscall",
  "smallvec 1.4.2",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -4220,13 +4259,13 @@ version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c361aa727dd08437f2f1447be8b59a33b0edd15e0fcee698f935613d9efbca9b"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "cloudabi 0.1.0",
  "instant",
  "libc",
  "redox_syscall",
  "smallvec 1.4.2",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -4351,7 +4390,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "17367f0cc86f2d25802b2c26ee58a7b23faeccf78a396094c13dced0d0182526"
 dependencies = [
  "phf_shared",
- "rand",
+ "rand 0.7.2",
 ]
 
 [[package]]
@@ -4507,10 +4546,10 @@ checksum = "8f1383dff4092fe903ac180e391a8d4121cc48f08ccf850614b0290c6673b69d"
 name = "profile"
 version = "0.0.1"
 dependencies = [
- "ipc-channel",
  "libc",
  "profile_traits",
  "regex",
+ "rr_channel",
  "serde",
  "serde_json",
  "servo_allocator",
@@ -4522,9 +4561,9 @@ dependencies = [
 name = "profile_tests"
 version = "0.0.1"
 dependencies = [
- "ipc-channel",
  "profile",
  "profile_traits",
+ "rr_channel",
  "servo_config",
 ]
 
@@ -4532,9 +4571,8 @@ dependencies = [
 name = "profile_traits"
 version = "0.0.1"
 dependencies = [
- "crossbeam-channel",
- "ipc-channel",
  "log",
+ "rr_channel",
  "serde",
  "servo_config",
  "signpost",
@@ -4555,8 +4593,8 @@ checksum = "a44883e74aa97ad63db83c4bf8ca490f02b2fc02f92575e720c8551e843c945f"
 dependencies = [
  "env_logger",
  "log",
- "rand",
- "rand_core",
+ "rand 0.7.2",
+ "rand_core 0.5.1",
 ]
 
 [[package]]
@@ -4579,16 +4617,45 @@ dependencies = [
 
 [[package]]
 name = "rand"
+version = "0.6.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6d71dacdc3c88c1fde3885a3be3fbab9f35724e6ce99467f7d9c5026132184ca"
+dependencies = [
+ "autocfg 0.1.7",
+ "libc",
+ "rand_chacha 0.1.1",
+ "rand_core 0.4.2",
+ "rand_hc 0.1.0",
+ "rand_isaac 0.1.1",
+ "rand_jitter",
+ "rand_os",
+ "rand_pcg 0.1.2",
+ "rand_xorshift",
+ "winapi 0.3.9",
+]
+
+[[package]]
+name = "rand"
 version = "0.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3ae1b169243eaf61759b8475a998f0a385e42042370f3a7dbaf35246eacc8412"
 dependencies = [
  "getrandom",
  "libc",
- "rand_chacha",
- "rand_core",
- "rand_hc",
- "rand_pcg",
+ "rand_chacha 0.2.2",
+ "rand_core 0.5.1",
+ "rand_hc 0.2.0",
+ "rand_pcg 0.2.1",
+]
+
+[[package]]
+name = "rand_chacha"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "556d3a1ca6600bfcbab7c7c91ccb085ac7fbbcd70e008a98742e7847f4f7bcef"
+dependencies = [
+ "autocfg 0.1.7",
+ "rand_core 0.3.1",
 ]
 
 [[package]]
@@ -4598,8 +4665,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f4c8ed856279c9737206bf725bf36935d8666ead7aa69b52be55af369d193402"
 dependencies = [
  "ppv-lite86",
- "rand_core",
+ "rand_core 0.5.1",
 ]
+
+[[package]]
+name = "rand_core"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7a6fdeb83b075e8266dcc8762c22776f6877a63111121f5f8c7411e5be7eed4b"
+dependencies = [
+ "rand_core 0.4.2",
+]
+
+[[package]]
+name = "rand_core"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9c33a3c44ca05fa6f1807d8e6743f3824e8509beca625669633be0acbdf509dc"
 
 [[package]]
 name = "rand_core"
@@ -4612,11 +4694,29 @@ dependencies = [
 
 [[package]]
 name = "rand_hc"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7b40677c7be09ae76218dc623efbf7b18e34bced3f38883af07bb75630a21bc4"
+dependencies = [
+ "rand_core 0.3.1",
+]
+
+[[package]]
+name = "rand_hc"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ca3129af7b92a17112d59ad498c6f81eaf463253766b90396d39ea7a39d6613c"
 dependencies = [
- "rand_core",
+ "rand_core 0.5.1",
+]
+
+[[package]]
+name = "rand_isaac"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ded997c9d5f13925be2a6fd7e66bf1872597f759fd9dd93513dd7e92e5a5ee08"
+dependencies = [
+ "rand_core 0.3.1",
 ]
 
 [[package]]
@@ -4625,7 +4725,42 @@ version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8df6b0b3dc9991a10b2d91a86d1129314502169a1bf6afa67328945e02498b76"
 dependencies = [
- "rand_core",
+ "rand_core 0.5.1",
+]
+
+[[package]]
+name = "rand_jitter"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1166d5c91dc97b88d1decc3285bb0a99ed84b05cfd0bc2341bdf2d43fc41e39b"
+dependencies = [
+ "libc",
+ "rand_core 0.4.2",
+ "winapi 0.3.9",
+]
+
+[[package]]
+name = "rand_os"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7b75f676a1e053fc562eafbb47838d67c84801e38fc1ba459e8f180deabd5071"
+dependencies = [
+ "cloudabi 0.0.3",
+ "fuchsia-cprng",
+ "libc",
+ "rand_core 0.4.2",
+ "rdrand",
+ "winapi 0.3.9",
+]
+
+[[package]]
+name = "rand_pcg"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "abf9b09b01790cfe0364f52bf32995ea3c39f4d2dd011eac241d2914146d0b44"
+dependencies = [
+ "autocfg 0.1.7",
+ "rand_core 0.4.2",
 ]
 
 [[package]]
@@ -4634,7 +4769,16 @@ version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "16abd0c1b639e9eb4d7c50c0b8100b0d0f849be2349829c740fe8e6eb4816429"
 dependencies = [
- "rand_core",
+ "rand_core 0.5.1",
+]
+
+[[package]]
+name = "rand_xorshift"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cbf7e9e623549b0e21f6e97cf8ecf247c1a8fd2e8a992ae265314300b2455d5c"
+dependencies = [
+ "rand_core 0.3.1",
 ]
 
 [[package]]
@@ -4682,7 +4826,7 @@ version = "1.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "62f02856753d04e03e26929f820d0a0a337ebe71f849801eea335d464b349080"
 dependencies = [
- "autocfg",
+ "autocfg 1.0.0",
  "crossbeam-deque",
  "either",
  "rayon-core",
@@ -4696,7 +4840,7 @@ checksum = "e92e15d89083484e11353891f1af602cc661426deb9564c298b270c726973280"
 dependencies = [
  "crossbeam-deque",
  "crossbeam-queue",
- "crossbeam-utils",
+ "crossbeam-utils 0.7.2",
  "lazy_static",
  "num_cpus",
 ]
@@ -4709,6 +4853,15 @@ checksum = "3e4aafda434bd10fec689858e2b1d713d0b784b1e60df3761ac8fa727d7e8e27"
 dependencies = [
  "moite_moite",
  "rayon",
+]
+
+[[package]]
+name = "rdrand"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "678054eb77286b51581ba43620cc911abf02758c91f93f479767aed0f90458b2"
+dependencies = [
+ "rand_core 0.3.1",
 ]
 
 [[package]]
@@ -4773,7 +4926,7 @@ version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4a83fa3702a688b9359eccba92d153ac33fd2e8462f9e0e3fdf155239ea7792e"
 dependencies = [
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -4805,6 +4958,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "rr_channel"
+version = "0.1.0"
+source = "git+https://github.com/gatoWololo/rr_channel.git#80b1af39e0d51a4f353e561497cb9a091c3403c7"
+dependencies = [
+ "bincode",
+ "crossbeam-channel 0.3.9",
+ "env_logger",
+ "ipc-channel",
+ "lazy_static",
+ "log",
+ "rand 0.6.5",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "rust-argon2"
 version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4813,7 +4982,7 @@ dependencies = [
  "base64 0.11.0",
  "blake2b_simd",
  "constant_time_eq",
- "crossbeam-utils",
+ "crossbeam-utils 0.7.2",
 ]
 
 [[package]]
@@ -4871,7 +5040,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8f05ba609c234e60bee0d547fe94a4c7e9da733d1c962cf6e59efa4cd9c8bc75"
 dependencies = [
  "lazy_static",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -4907,7 +5076,6 @@ dependencies = [
  "chrono",
  "content-security-policy",
  "cookie",
- "crossbeam-channel",
  "cssparser",
  "deny_public_fields",
  "devtools_traits",
@@ -4926,7 +5094,6 @@ dependencies = [
  "hyper_serde",
  "image",
  "indexmap",
- "ipc-channel",
  "itertools",
  "jstraceable_derive",
  "keyboard-types",
@@ -4955,6 +5122,7 @@ dependencies = [
  "ref_filter_map",
  "ref_slice",
  "regex",
+ "rr_channel",
  "script_layout_interface",
  "script_plugins",
  "script_traits",
@@ -4997,12 +5165,10 @@ dependencies = [
  "app_units",
  "atomic_refcell",
  "canvas_traits",
- "crossbeam-channel",
  "euclid",
  "fxhash",
  "gfx_traits",
  "html5ever",
- "ipc-channel",
  "libc",
  "malloc_size_of",
  "malloc_size_of_derive",
@@ -5012,6 +5178,7 @@ dependencies = [
  "parking_lot 0.10.2",
  "profile_traits",
  "range",
+ "rr_channel",
  "script_traits",
  "selectors",
  "servo_arc",
@@ -5051,7 +5218,6 @@ dependencies = [
  "bluetooth_traits",
  "canvas_traits",
  "cookie",
- "crossbeam-channel",
  "devtools_traits",
  "embedder_traits",
  "euclid",
@@ -5059,7 +5225,6 @@ dependencies = [
  "http 0.1.21",
  "hyper",
  "hyper_serde",
- "ipc-channel",
  "keyboard-types",
  "libc",
  "log",
@@ -5070,6 +5235,7 @@ dependencies = [
  "net_traits",
  "pixels",
  "profile_traits",
+ "rr_channel",
  "serde",
  "servo_atoms",
  "servo_url",
@@ -5213,7 +5379,7 @@ dependencies = [
  "surfman",
  "tinyfiledialogs",
  "webxr",
- "winapi",
+ "winapi 0.3.9",
  "winit",
  "winres",
 ]
@@ -5252,7 +5418,6 @@ dependencies = [
 name = "servo-gst-plugin"
 version = "0.0.1"
 dependencies = [
- "crossbeam-channel",
  "euclid",
  "glib",
  "gst-plugin-version-helper",
@@ -5265,6 +5430,7 @@ dependencies = [
  "lazy_static",
  "libservo",
  "log",
+ "rr_channel",
  "servo-media",
  "sparkle",
  "surfman",
@@ -5276,7 +5442,7 @@ dependencies = [
 [[package]]
 name = "servo-media"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "servo-media-audio",
  "servo-media-player",
@@ -5288,7 +5454,7 @@ dependencies = [
 [[package]]
 name = "servo-media-audio"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "boxfnonce",
  "byte-slice-cast",
@@ -5310,10 +5476,10 @@ dependencies = [
 [[package]]
 name = "servo-media-dummy"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "boxfnonce",
- "ipc-channel",
+ "rr_channel",
  "servo-media",
  "servo-media-audio",
  "servo-media-player",
@@ -5325,7 +5491,7 @@ dependencies = [
 [[package]]
 name = "servo-media-gstreamer"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "boxfnonce",
  "byte-slice-cast",
@@ -5340,11 +5506,11 @@ dependencies = [
  "gstreamer-sys",
  "gstreamer-video",
  "gstreamer-webrtc",
- "ipc-channel",
  "lazy_static",
  "log",
  "mime",
  "regex",
+ "rr_channel",
  "servo-media",
  "servo-media-audio",
  "servo-media-gstreamer-render",
@@ -5361,7 +5527,7 @@ dependencies = [
 [[package]]
 name = "servo-media-gstreamer-render"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "gstreamer",
  "gstreamer-video",
@@ -5371,7 +5537,7 @@ dependencies = [
 [[package]]
 name = "servo-media-gstreamer-render-android"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "glib",
  "gstreamer",
@@ -5384,7 +5550,7 @@ dependencies = [
 [[package]]
 name = "servo-media-gstreamer-render-unix"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "glib",
  "gstreamer",
@@ -5397,9 +5563,9 @@ dependencies = [
 [[package]]
 name = "servo-media-player"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
- "ipc-channel",
+ "rr_channel",
  "serde",
  "serde_derive",
  "servo-media-streams",
@@ -5409,7 +5575,7 @@ dependencies = [
 [[package]]
 name = "servo-media-streams"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "lazy_static",
  "uuid",
@@ -5418,12 +5584,12 @@ dependencies = [
 [[package]]
 name = "servo-media-traits"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 
 [[package]]
 name = "servo-media-webrtc"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "boxfnonce",
  "lazy_static",
@@ -5437,7 +5603,7 @@ name = "servo_allocator"
 version = "0.0.1"
 dependencies = [
  "jemalloc-sys",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -5501,7 +5667,7 @@ dependencies = [
 [[package]]
 name = "servo_media_derive"
 version = "0.1.0"
-source = "git+https://github.com/servo/media#cdf82da4cb59d1dae7bfb0b1396d5ebd53310540"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "proc-macro2 1.0.17",
  "quote 1.0.2",
@@ -5514,9 +5680,9 @@ version = "0.0.1"
 dependencies = [
  "lazy_static",
  "log",
- "rand",
- "rand_core",
- "rand_isaac",
+ "rand 0.7.2",
+ "rand_core 0.5.1",
+ "rand_isaac 0.2.0",
  "uuid",
 ]
 
@@ -5560,7 +5726,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "170a36ea86c864a3f16dd2687712dd6646f7019f301e57537c7f4dc9f5916770"
 dependencies = [
  "block-buffer 0.9.0",
- "cfg-if",
+ "cfg-if 0.1.10",
  "cpuid-bool",
  "digest 0.9.0",
  "opaque-debug 0.3.0",
@@ -5615,17 +5781,17 @@ dependencies = [
  "core-foundation 0.6.4",
  "getopts",
  "gl_generator 0.14.0",
- "ipc-channel",
  "libc",
  "libloading 0.5.2",
  "libservo",
  "log",
+ "rr_channel",
  "serde_json",
  "servo-media",
  "surfman",
  "webxr",
  "webxr-api",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -5641,7 +5807,7 @@ dependencies = [
  "log",
  "simpleservo",
  "surfman",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -5715,18 +5881,6 @@ dependencies = [
  "wayland-client",
  "wayland-commons",
  "wayland-protocols",
-]
-
-[[package]]
-name = "socket2"
-version = "0.3.12"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "03088793f677dce356f3ccc2edb1b314ad191ab702a5de3faf49304f7e104918"
-dependencies = [
- "cfg-if",
- "libc",
- "redox_syscall",
- "winapi",
 ]
 
 [[package]]
@@ -5972,7 +6126,7 @@ dependencies = [
  "objc",
  "parking_lot 0.10.2",
  "wayland-sys 0.24.0",
- "winapi",
+ "winapi 0.3.9",
  "winit",
  "wio",
  "x11",
@@ -6058,12 +6212,12 @@ version = "3.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7a6e24d9338a0a5be79593e2fa15a648add6138caa803e2d5bc782c371732ca9"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "libc",
- "rand",
+ "rand 0.7.2",
  "redox_syscall",
  "remove_dir_all",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -6161,7 +6315,7 @@ checksum = "db8dcfca086c1143c9270ac42a2bbd8a7ee477b78ac8e45b19abfb0cbede4b6f"
 dependencies = [
  "libc",
  "redox_syscall",
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -6282,7 +6436,7 @@ version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fb2d1b8f4548dbf5e1f7818512e9c406860678f29c300cdf0ebac72d1a3a1671"
 dependencies = [
- "crossbeam-utils",
+ "crossbeam-utils 0.7.2",
  "futures 0.1.28",
 ]
 
@@ -6346,7 +6500,7 @@ version = "0.1.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "09bc590ec4ba8ba87652da2068d150dcada2cfa2e07faae270a5e0409aa51351"
 dependencies = [
- "crossbeam-utils",
+ "crossbeam-utils 0.7.2",
  "futures 0.1.28",
  "lazy_static",
  "log",
@@ -6391,7 +6545,7 @@ checksum = "df720b6581784c118f0eb4310796b12b1d242a7eb95f716a8367855325c25f89"
 dependencies = [
  "crossbeam-deque",
  "crossbeam-queue",
- "crossbeam-utils",
+ "crossbeam-utils 0.7.2",
  "futures 0.1.28",
  "lazy_static",
  "log",
@@ -6406,7 +6560,7 @@ version = "0.2.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "93044f2d313c95ff1cb7809ce9a7a05735b012288a888b62d4434fd58c94f296"
 dependencies = [
- "crossbeam-utils",
+ "crossbeam-utils 0.7.2",
  "futures 0.1.28",
  "slab",
  "tokio-executor",
@@ -6460,7 +6614,7 @@ version = "0.1.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a41f40ed0e162c911ac6fcb53ecdc8134c46905fdbbae8c50add462a538b495f"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "tracing-core",
 ]
 
@@ -6505,7 +6659,7 @@ dependencies = [
  "input_buffer",
  "log",
  "native-tls",
- "rand",
+ "rand 0.7.2",
  "sha-1 0.9.1",
  "url",
  "utf-8",
@@ -6645,7 +6799,7 @@ version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9fde2f6a4bea1d6e007c4ad38c6839fa71cbb63b6dbf5b595aa38dc9b1093c11"
 dependencies = [
- "rand",
+ "rand 0.7.2",
  "serde",
 ]
 
@@ -6680,7 +6834,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "777182bc735b6424e1a57516d35ed72cb8019d85c8c9bf536dccb3445c1a2f7d"
 dependencies = [
  "same-file",
- "winapi",
+ "winapi 0.3.9",
  "winapi-util",
 ]
 
@@ -6731,7 +6885,7 @@ version = "0.2.62"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3c7d40d09cdbf0f4895ae58cf57d92e1e57a9dd8ed2e8390514b54a47cc5551"
 dependencies = [
- "cfg-if",
+ "cfg-if 0.1.10",
  "wasm-bindgen-macro",
 ]
 
@@ -6876,16 +7030,15 @@ dependencies = [
  "base64 0.10.1",
  "compositing",
  "cookie",
- "crossbeam-channel",
  "euclid",
  "hyper",
  "image",
- "ipc-channel",
  "keyboard-types",
  "log",
  "msg",
  "net_traits",
  "pixels",
+ "rr_channel",
  "script_traits",
  "serde",
  "serde_json",
@@ -6902,10 +7055,10 @@ version = "0.0.1"
 dependencies = [
  "arrayvec 0.5.1",
  "euclid",
- "ipc-channel",
  "log",
  "malloc_size_of",
  "msg",
+ "rr_channel",
  "serde",
  "servo_config",
  "smallvec 0.6.13",
@@ -6926,7 +7079,7 @@ dependencies = [
  "bitflags",
  "build-parallel",
  "byteorder",
- "cfg-if",
+ "cfg-if 0.1.10",
  "core-foundation 0.9.0",
  "core-graphics 0.22.0",
  "core-text",
@@ -7013,7 +7166,7 @@ source = "git+https://github.com/servo/webxr#7763f4826fb04a1b48dbf502e48ca9d6ff3
 dependencies = [
  "android_injected_glue",
  "bindgen",
- "crossbeam-channel",
+ "crossbeam-channel 0.4.3",
  "euclid",
  "gl_generator 0.13.1",
  "gvr-sys",
@@ -7025,18 +7178,18 @@ dependencies = [
  "surfman-chains",
  "time",
  "webxr-api",
- "winapi",
+ "winapi 0.3.9",
  "wio",
 ]
 
 [[package]]
 name = "webxr-api"
 version = "0.0.1"
-source = "git+https://github.com/servo/webxr#7763f4826fb04a1b48dbf502e48ca9d6ff3b6378"
+source = "git+https://github.com/gatowololo/webxr#bec85743e1b1821bed12aa797d558c2c1596073a"
 dependencies = [
  "euclid",
- "ipc-channel",
  "log",
+ "rr_channel",
  "serde",
  "time",
 ]
@@ -7089,6 +7242,12 @@ dependencies = [
 
 [[package]]
 name = "winapi"
+version = "0.2.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "167dc9d6949a9b857f3451275e911c3f44255842c1f7a76f33c55103a909087a"
+
+[[package]]
+name = "winapi"
 version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
@@ -7096,6 +7255,12 @@ dependencies = [
  "winapi-i686-pc-windows-gnu",
  "winapi-x86_64-pc-windows-gnu",
 ]
+
+[[package]]
+name = "winapi-build"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2d315eee3b34aca4797b2da6b13ed88266e6d612562a0c46390af8299fc699bc"
 
 [[package]]
 name = "winapi-i686-pc-windows-gnu"
@@ -7109,7 +7274,7 @@ version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "70ec6ce85bb158151cae5e5c87f95a8e97d2c0c4b001223f33a334e3ce5de178"
 dependencies = [
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -7138,7 +7303,7 @@ dependencies = [
  "percent-encoding",
  "smithay-client-toolkit",
  "wayland-client",
- "winapi",
+ "winapi 0.3.9",
  "x11-dl",
 ]
 
@@ -7157,7 +7322,7 @@ version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5d129932f4644ac2396cb456385cbf9e63b5b30c6e8dc4820bdca4eb082037a5"
 dependencies = [
- "winapi",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -7181,10 +7346,20 @@ dependencies = [
  "log",
  "mio",
  "mio-extras",
- "rand",
+ "rand 0.7.2",
  "sha-1 0.8.2",
  "slab",
  "url",
+]
+
+[[package]]
+name = "ws2_32-sys"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d59cefebd0c892fa2dd6de581e937301d8552cb44489cdff035c6187cb63fa5e"
+dependencies = [
+ "winapi 0.2.8",
+ "winapi-build",
 ]
 
 [[package]]
@@ -7270,3 +7445,13 @@ dependencies = [
  "podio",
  "time",
 ]
+
+[[patch.unused]]
+name = "backtrace"
+version = "0.3.50"
+source = "git+https://github.com/servo/backtrace-rs?branch=uwp-fix#5366f72ca5be2e2341f418923a71b70acbb653ad"
+
+[[patch.unused]]
+name = "mio"
+version = "0.6.22"
+source = "git+https://github.com/servo/mio.git?branch=servo-mio-0.6.22#f640fd662db03026ca2a1b21ac1e161ec6f8150b"
