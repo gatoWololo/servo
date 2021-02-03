@@ -23,7 +23,7 @@ use simpleservo::{
 use std::os::raw::{c_char, c_int, c_void};
 use std::ptr::{null, null_mut};
 use std::sync::Arc;
-use std::thread;
+use rr_channel::detthread;
 
 struct HostCallbacks {
     callbacks: GlobalRef,
@@ -685,7 +685,7 @@ fn redirect_stdout_to_logcat() {
 
     // Then we spawn a thread whose only job is to read from the other side of the
     // pipe and redirect to the logs.
-    let _detached = thread::spawn(move || {
+    let _detached = detthread::spawn(move || {
         const BUF_LENGTH: usize = 512;
         let mut buf = vec![b'\0' as c_char; BUF_LENGTH];
 

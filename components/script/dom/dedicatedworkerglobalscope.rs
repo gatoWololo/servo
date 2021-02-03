@@ -336,7 +336,7 @@ impl DedicatedWorkerGlobalScope {
         let parent = current_global.runtime_handle();
         let current_global_https_state = current_global.get_https_state();
 
-        thread::Builder::new()
+        rr_channel::detthread::Builder::new()
             .name(name)
             .spawn(move || {
                 thread_state::initialize(ThreadState::SCRIPT | ThreadState::IN_WORKER);

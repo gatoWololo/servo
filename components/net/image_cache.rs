@@ -21,7 +21,7 @@ use std::collections::hash_map::Entry::{Occupied, Vacant};
 use std::collections::HashMap;
 use std::mem;
 use std::sync::{Arc, Mutex};
-use std::thread;
+use rr_channel::detthread;
 use webrender_api::units::DeviceIntSize;
 use webrender_api::ImageDescriptorFlags;
 
@@ -644,7 +644,7 @@ impl ImageCache for ImageCacheImpl {
                         };
 
                         let local_store = self.store.clone();
-                        thread::spawn(move || {
+                        detthread::spawn(move || {
                             let msg = decode_bytes_sync(key, &*bytes, cors_status);
                             debug!("Image decoded");
                             local_store.lock().unwrap().handle_decoder(msg);

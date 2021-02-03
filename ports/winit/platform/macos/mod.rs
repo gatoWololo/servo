@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use std::ptr;
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 
 pub fn deinit(clean_shutdown: bool) {
@@ -27,7 +27,7 @@ pub fn deinit(clean_shutdown: bool) {
                 if thread_count == 1 {
                     break;
                 }
-                thread::sleep(Duration::from_millis(1000));
+                std::thread::sleep(Duration::from_millis(1000));
                 println!("{} threads are still running.", thread_count);
             }
         }

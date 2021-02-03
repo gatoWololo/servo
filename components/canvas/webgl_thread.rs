@@ -56,7 +56,7 @@ use std::collections::HashMap;
 use std::rc::Rc;
 use std::slice;
 use std::sync::{Arc, Mutex};
-use std::thread;
+use rr_channel::detthread;
 use surfman;
 use surfman::Adapter;
 use surfman::Connection;
@@ -312,7 +312,7 @@ impl WebGLThread {
     /// Perform all initialization required to run an instance of WebGLThread
     /// in parallel on its own dedicated thread.
     pub(crate) fn run_on_own_thread(init: WebGLThreadInit) {
-        thread::Builder::new()
+        detthread::Builder::new()
             .name("WebGL thread".to_owned())
             .spawn(move || {
                 let mut data = WebGLThread::new(init);

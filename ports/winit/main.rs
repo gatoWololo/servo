@@ -14,6 +14,7 @@
 //!
 //! [winit]: https://github.com/rust-windowing/winit
 
+use servo_media::player::rr_channel::init_tivo_thread_root;
 #[cfg(not(target_os = "android"))]
 include!("main2.rs");
 

@@ -169,12 +169,12 @@ fn test_cookie_host_prefix() {
 
 #[cfg(target_os = "windows")]
 fn delay_to_ensure_different_timestamp() {
-    use std::thread;
+    use rr_channel::detthread;
     use std::time::Duration;
 
     // time::now()'s resolution on some platforms isn't granular enought to ensure
     // that two back-to-back calls to Cookie::new_wrapped generate different timestamps .
-    thread::sleep(Duration::from_millis(500));
+    std::thread::sleep(Duration::from_millis(500));
 }
 
 #[cfg(not(target_os = "windows"))]

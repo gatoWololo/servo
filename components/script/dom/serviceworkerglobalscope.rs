@@ -301,7 +301,7 @@ impl ServiceWorkerGlobalScope {
 
         let serialized_worker_url = script_url.to_string();
         let origin = scope_url.origin();
-        thread::Builder::new()
+        rr_channel::detthread::Builder::new()
             .name(format!("ServiceWorker for {}", serialized_worker_url))
             .spawn(move || {
                 thread_state::initialize(ThreadState::SCRIPT | ThreadState::IN_WORKER);

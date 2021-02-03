@@ -105,7 +105,7 @@ use std::str::FromStr;
 use std::sync::atomic::AtomicU64;
 use std::sync::atomic::Ordering;
 use std::sync::Mutex;
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 use std::time::Instant;
 
@@ -113,6 +113,7 @@ use webxr::glwindow::GlWindow as WebXRWindow;
 use webxr::glwindow::GlWindowDiscovery as WebXRDiscovery;
 use webxr::glwindow::GlWindowMode as WebXRMode;
 use webxr::glwindow::GlWindowRenderTarget as WebXRRenderTarget;
+use std::thread;
 
 pub struct ServoWebSrc {
     sender: Sender<ServoWebSrcMsg>,
@@ -500,7 +501,7 @@ impl ObjectSubclass for ServoWebSrc {
     fn new() -> Self {
         let (sender, receiver) = crossbeam_channel::unbounded();
         let sender_clone = sender.clone();
-        thread::spawn(move || ServoThread::new(sender_clone, receiver).run());
+        detdetthread::spawn(move || ServoThread::new(sender_clone, receiver).run());
         let info = Mutex::new(None);
         let outcaps = Mutex::new(None);
         let url = Mutex::new(None);
@@ -676,7 +677,7 @@ impl BaseSrcImpl for ServoWebSrc {
             // Delay by at most a second
             let delay = 1_000_000.min(next_frame_micros - elapsed_micros);
             debug!("Waiting for {}micros", delay);
-            thread::sleep(Duration::from_micros(delay));
+            std::thread::sleep(Duration::from_micros(delay));
             debug!("Done waiting");
         }
 

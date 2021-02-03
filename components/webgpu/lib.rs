@@ -298,7 +298,7 @@ impl WebGPU {
             },
         };
 
-        if let Err(e) = std::thread::Builder::new()
+        if let Err(e) = rr_channel::detthread::Builder::new()
             .name("WGPU".to_owned())
             .spawn(move || {
                 WGPU::new(

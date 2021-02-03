@@ -81,7 +81,7 @@ fn redirect_stdout_stderr(handler: LogHandlerFn) -> Result<(), String> {
 //              Ok() - stdout and stderr redirects.
 //              Err(str) - The Err value can contain the string value of GetLastError.
 fn do_redirect_stdout_stderr(handler: LogHandlerFn) -> Result<(), ()> {
-    use std::thread;
+    use rr_channel::detthread;
     use winapi::shared;
     use winapi::um::handleapi;
     use winapi::um::minwinbase;
@@ -160,7 +160,7 @@ fn do_redirect_stdout_stderr(handler: LogHandlerFn) -> Result<(), ()> {
 
         // Spawn a thread.  The thread will redirect all STDOUT and STDERR messages
         // to the provided handler function.
-        let _handler = thread::spawn(move || loop {
+        let _handler = detthread::spawn(move || loop {
             let mut read_buf: [i8; BUF_LENGTH] = [0; BUF_LENGTH];
 
             let result = libc::read(

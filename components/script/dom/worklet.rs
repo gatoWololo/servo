@@ -60,7 +60,7 @@ use std::rc::Rc;
 use std::sync::atomic::AtomicIsize;
 use std::sync::atomic::Ordering;
 use std::sync::Arc;
-use std::thread;
+use rr_channel::detthread;
 use style::thread_state::{self, ThreadState};
 use swapper::swapper;
 use swapper::Swapper;
@@ -458,7 +458,7 @@ impl WorkletThread {
     fn spawn(role: WorkletThreadRole, init: WorkletThreadInit) -> Sender<WorkletControl> {
         let (control_sender, control_receiver) = unbounded();
         // TODO: name this thread
-        thread::spawn(move || {
+        detthread::spawn(move || {
             // TODO: add a new IN_WORKLET thread state?
             // TODO: set interrupt handler?
             // TODO: configure the JS runtime (e.g. discourage GC, encourage agressive JIT)

@@ -13,7 +13,7 @@
 use servo_remutex::{ReentrantMutex, ReentrantMutexGuard};
 use std::cell::RefCell;
 use std::sync::Arc;
-use std::thread;
+use rr_channel::detthread;
 
 #[test]
 fn smoke() {
@@ -37,7 +37,7 @@ fn is_mutex() {
     let m = Arc::new(ReentrantMutex::new(RefCell::new(0)));
     let m2 = m.clone();
     let lock = m.lock().unwrap();
-    let child = thread::spawn(move || {
+    let child = detthread::spawn(move || {
         let lock = m2.lock().unwrap();
         assert_eq!(*lock.borrow(), 4950);
     });
@@ -55,7 +55,7 @@ fn trylock_works() {
     let m2 = m.clone();
     let _lock = m.try_lock().unwrap();
     let _lock2 = m.try_lock().unwrap();
-    thread::spawn(move || {
+    detthread::spawn(move || {
         let lock = m2.try_lock();
         assert!(lock.is_err());
     })
@@ -75,7 +75,7 @@ impl<'a> Drop for Answer<'a> {
 fn poison_works() {
     let m = Arc::new(ReentrantMutex::new(RefCell::new(0)));
     let mc = m.clone();
-    let result = thread::spawn(move || {
+    let result = detthread::spawn(move || {
         let lock = mc.lock().unwrap();
         *lock.borrow_mut() = 1;
         let lock2 = mc.lock().unwrap();

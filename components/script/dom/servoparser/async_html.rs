@@ -35,7 +35,7 @@ use std::borrow::Cow;
 use std::cell::Cell;
 use std::collections::vec_deque::VecDeque;
 use std::collections::HashMap;
-use std::thread;
+use rr_channel::detthread;
 use style::context::QuirksMode as ServoQuirksMode;
 
 type ParseNodeId = usize;
@@ -255,7 +255,7 @@ impl Tokenizer {
         // Create new thread for HtmlTokenizer. This is where parser actions
         // will be generated from the input provided. These parser actions are then passed
         // onto the main thread to be executed.
-        thread::Builder::new()
+        detthread::Builder::new()
             .name(String::from("HTML Parser"))
             .spawn(move || {
                 run(

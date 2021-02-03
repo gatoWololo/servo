@@ -23,7 +23,7 @@ use std::cell::{RefCell, RefMut};
 use std::collections::HashMap;
 use std::hash::BuildHasherDefault;
 use std::sync::{Arc, Mutex};
-use std::thread;
+use rr_channel::detthread;
 use style::context::RegisteredSpeculativePainter;
 use style::context::SharedStyleContext;
 
@@ -88,7 +88,7 @@ pub struct LayoutContext<'a> {
 
 impl<'a> Drop for LayoutContext<'a> {
     fn drop(&mut self) {
-        if !thread::panicking() {
+        if !std::thread::panicking() {
             assert!(self.pending_images.lock().unwrap().is_empty());
         }
     }

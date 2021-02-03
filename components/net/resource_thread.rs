@@ -49,7 +49,7 @@ use std::io::prelude::*;
 use std::ops::Deref;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, RwLock};
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 
 /// Returns a tuple of (public, private) senders to the new threads.
@@ -92,7 +92,7 @@ pub fn new_core_resource_thread(
     let (private_setup_chan, private_setup_port) = ipc::channel().unwrap();
     let (report_chan, report_port) = ipc::channel().unwrap();
 
-    thread::Builder::new()
+    detthread::Builder::new()
         .name("ResourceManager".to_owned())
         .spawn(move || {
             let resource_manager = CoreResourceManager::new(
@@ -515,7 +515,13 @@ pub struct CoreResourceThreadPool {
 impl CoreResourceThreadPool {
     pub fn new(num_threads: usize) -> CoreResourceThreadPool {
         let pool = rayon::ThreadPoolBuilder::new()
-            .num_threads(num_threads)
+            .num_threads(num_threads).
+            spawn_handler(|thread| {
+                // Use our custom spawn function to assign a name to the thread.
+                // Should we somehow propagate the panic here?
+                detthread::spawn(|| thread.run());
+                Ok(())
+            })
             .build()
             .unwrap();
         let state = Arc::new(Mutex::new(ThreadPoolState::new()));
@@ -584,7 +590,7 @@ impl CoreResourceThreadPool {
                     break;
                 }
             }
-            thread::sleep(Duration::from_millis(100));
+            std::thread::sleep(Duration::from_millis(100));
         }
     }
 }

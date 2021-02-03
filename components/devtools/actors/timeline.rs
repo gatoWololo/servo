@@ -18,7 +18,7 @@ use std::cell::RefCell;
 use std::error::Error;
 use std::net::TcpStream;
 use std::sync::{Arc, Mutex};
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 
 pub struct TimelineActor {
@@ -157,7 +157,7 @@ impl TimelineActor {
             return;
         }
 
-        thread::Builder::new()
+        detthread::Builder::new()
             .name("PullTimelineMarkers".to_owned())
             .spawn(move || loop {
                 if !*is_recording.lock().unwrap() {
@@ -172,7 +172,7 @@ impl TimelineActor {
                     break;
                 }
 
-                thread::sleep(Duration::from_millis(DEFAULT_TIMELINE_DATA_PULL_TIMEOUT));
+                std::thread::sleep(Duration::from_millis(DEFAULT_TIMELINE_DATA_PULL_TIMEOUT));
             })
             .expect("Thread spawning failed");
     }

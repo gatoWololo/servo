@@ -46,7 +46,7 @@ use std::collections::HashMap;
 use std::io::Read;
 use std::net::{Shutdown, TcpListener, TcpStream};
 use std::sync::{Arc, Mutex};
-use std::thread;
+use rr_channel::detthread;
 
 mod actor;
 /// Corresponds to http://mxr.mozilla.org/mozilla-central/source/toolkit/devtools/server/actors/
@@ -119,7 +119,7 @@ pub fn start_server(port: u16, embedder: EmbedderProxy) -> Sender<DevtoolsContro
     let (sender, receiver) = unbounded();
     {
         let sender = sender.clone();
-        thread::Builder::new()
+        detthread::Builder::new()
             .name("Devtools".to_owned())
             .spawn(move || run_server(sender, receiver, port, embedder))
             .expect("Thread spawning failed");
@@ -572,7 +572,7 @@ fn run_server(
         }
     }
 
-    thread::Builder::new()
+    detthread::Builder::new()
         .name("DevtoolsClientAcceptor".to_owned())
         .spawn(move || {
             // accept connections and process them, spawning a new thread for each one
@@ -600,7 +600,7 @@ fn run_server(
                 let id = next_id;
                 next_id = StreamId(id.0 + 1);
                 accepted_connections.push(stream.try_clone().unwrap());
-                thread::Builder::new()
+                detthread::Builder::new()
                     .name("DevtoolsClientHandler".to_owned())
                     .spawn(move || handle_client(actors, stream.try_clone().unwrap(), id))
                     .expect("Thread spawning failed");

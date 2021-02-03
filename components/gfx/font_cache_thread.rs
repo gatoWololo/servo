@@ -25,6 +25,7 @@ use std::sync::{Arc, Mutex};
 use std::{f32, fmt, mem, thread};
 use style::font_face::{EffectiveSources, Source};
 use style::values::computed::font::FamilyName;
+use rr_channel::detthread;
 
 /// A list of font templates that make up a given font family.
 pub struct FontTemplates {
@@ -443,7 +444,7 @@ impl FontCacheThread {
         let (chan, port) = ipc::channel().unwrap();
 
         let channel_to_self = chan.clone();
-        thread::Builder::new()
+        detthread::Builder::new()
             .name("FontCacheThread".to_owned())
             .spawn(move || {
                 // TODO: Allow users to specify these.

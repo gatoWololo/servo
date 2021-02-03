@@ -17,7 +17,7 @@ use msg::constellation_msg::{
 };
 use std::cell::Cell;
 use std::collections::{HashMap, VecDeque};
-use std::thread;
+use rr_channel::detthread;
 use std::time::{Duration, Instant};
 
 #[derive(Clone)]
@@ -34,7 +34,7 @@ impl HangMonitorRegister {
         monitoring_enabled: bool,
     ) -> Box<dyn BackgroundHangMonitorRegister> {
         let (sender, port) = unbounded();
-        let _ = thread::Builder::new()
+        let _ = detthread::Builder::new()
             .spawn(move || {
                 let mut monitor = BackgroundHangMonitorWorker::new(
                     constellation_chan,
@@ -88,7 +88,7 @@ impl BackgroundHangMonitorRegister for HangMonitorRegister {
 
         bhm_chan.send(MonitoredComponentMsg::Register(
             sampler,
-            thread::current().name().map(str::to_owned),
+            std::thread::current().name().map(str::to_owned),
             transient_hang_timeout,
             permanent_hang_timeout,
             exit_signal,

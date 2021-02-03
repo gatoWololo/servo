@@ -16,7 +16,7 @@ use std::f32;
 use std::ops::Range;
 use std::panic::{self, PanicInfo};
 use std::sync::{Mutex, MutexGuard};
-use std::thread;
+use rr_channel::detthread;
 use std::u32;
 use style::values::computed::Length;
 

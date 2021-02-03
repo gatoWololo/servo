@@ -25,7 +25,7 @@ use servo_rand::{self, Rng};
 use std::borrow::ToOwned;
 use std::collections::{HashMap, HashSet};
 use std::string::String;
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 
 // A transaction not completed within 30 seconds shall time out. Such a transaction shall be considered to have failed.
@@ -70,7 +70,7 @@ impl BluetoothThreadFactory for IpcSender<BluetoothRequest> {
             BluetoothAdapter::init_mock()
         }
         .ok();
-        thread::Builder::new()
+        detthread::Builder::new()
             .name("BluetoothThread".to_owned())
             .spawn(move || {
                 BluetoothManager::new(receiver, adapter, embedder_proxy).start();
@@ -607,7 +607,7 @@ impl BluetoothManager {
         if let Ok(ref session) = adapter.create_discovery_session() {
             if session.start_discovery().is_ok() {
                 if !is_mock_adapter(&adapter) {
-                    thread::sleep(Duration::from_millis(DISCOVERY_TIMEOUT_MS));
+                    std::thread::sleep(Duration::from_millis(DISCOVERY_TIMEOUT_MS));
                 }
             }
             let _ = session.stop_discovery();
@@ -669,7 +669,7 @@ impl BluetoothManager {
                         if is_mock_adapter(&adapter) {
                             break;
                         }
-                        thread::sleep(Duration::from_millis(CONNECTION_TIMEOUT_MS));
+                        std::thread::sleep(Duration::from_millis(CONNECTION_TIMEOUT_MS));
                     }
                     // TODO: Step 5.1.4: Use the exchange MTU procedure.
                 }
@@ -692,7 +692,7 @@ impl BluetoothManager {
                 let _ = d.disconnect();
                 for _ in 0..MAXIMUM_TRANSACTION_TIME {
                     if d.is_connected().unwrap_or(true) {
-                        thread::sleep(Duration::from_millis(CONNECTION_TIMEOUT_MS))
+                        std::thread::sleep(Duration::from_millis(CONNECTION_TIMEOUT_MS))
                     } else {
                         return Ok(());
                     }

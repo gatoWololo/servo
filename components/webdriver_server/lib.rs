@@ -45,7 +45,7 @@ use std::collections::{BTreeMap, HashMap};
 use std::fmt;
 use std::mem;
 use std::net::{SocketAddr, SocketAddrV4};
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 use style_traits::CSSPixel;
 use uuid::Uuid;
@@ -108,7 +108,7 @@ fn cookie_msg_to_cookie(cookie: cookie::Cookie) -> Cookie {
 
 pub fn start_server(port: u16, constellation_chan: Sender<ConstellationMsg>) {
     let handler = Handler::new(constellation_chan);
-    thread::Builder::new()
+    detthread::Builder::new()
         .name("WebdriverHttpServer".to_owned())
         .spawn(move || {
             let address = SocketAddrV4::new("0.0.0.0".parse().unwrap(), port);
@@ -423,7 +423,7 @@ impl Handler {
                 debug!("Focused context is {}", x);
                 return Ok(x);
             }
-            thread::sleep(Duration::from_millis(interval));
+            std::thread::sleep(Duration::from_millis(interval));
         }
 
         debug!("Timed out getting focused context.");
@@ -725,10 +725,10 @@ impl Handler {
 
         let timeout = self.resize_timeout;
         let constellation_chan = self.constellation_chan.clone();
-        thread::spawn(move || {
+        detthread::spawn(move || {
             // On timeout, we send a GetWindowSize message to the constellation,
             // which will give the current window size.
-            thread::sleep(Duration::from_millis(timeout as u64));
+            std::thread::sleep(Duration::from_millis(timeout as u64));
             let cmd_msg = WebDriverCommandMsg::GetWindowSize(top_level_browsing_context_id, sender);
             constellation_chan
                 .send(ConstellationMsg::WebDriverCommand(cmd_msg))
@@ -1559,7 +1559,7 @@ impl Handler {
                 break;
             };
 
-            thread::sleep(Duration::from_millis(interval));
+            std::thread::sleep(Duration::from_millis(interval));
         }
 
         let img = match img {

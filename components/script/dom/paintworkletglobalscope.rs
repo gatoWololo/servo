@@ -60,7 +60,7 @@ use std::ptr::null_mut;
 use std::rc::Rc;
 use std::sync::Arc;
 use std::sync::Mutex;
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 use style_traits::CSSPixel;
 use style_traits::DevicePixel;
@@ -613,6 +613,6 @@ impl PaintWorkletGlobalScopeMethods for PaintWorkletGlobalScope {
     /// to make sure a certain timeout is triggered.
     /// check-tidy: no specs after this line
     fn Sleep(&self, ms: u64) {
-        thread::sleep(Duration::from_millis(ms));
+        std::thread::sleep(Duration::from_millis(ms));
     }
 }

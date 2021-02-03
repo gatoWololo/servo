@@ -13,7 +13,7 @@ use std::mem;
 use std::process;
 use std::ptr;
 use std::sync::atomic::{AtomicPtr, Ordering};
-use std::thread;
+use rr_channel::detthread;
 use unwind_sys::{
     unw_cursor_t, unw_get_reg, unw_init_local, unw_step, UNW_ESUCCESS, UNW_REG_IP, UNW_REG_SP,
 };
@@ -112,7 +112,7 @@ impl PosixSemaphore {
                 Err(os_error) => {
                     let err = os_error.raw_os_error().expect("no os error");
                     if err == libc::EINTR {
-                        thread::yield_now();
+                        std::thread::yield_now();
                         continue;
                     }
                     return Err(os_error);

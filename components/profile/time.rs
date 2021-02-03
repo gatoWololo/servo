@@ -18,6 +18,7 @@ use std::io::{self, Write};
 use std::path::Path;
 use std::time::Duration;
 use std::{f64, thread, u32, u64};
+use rr_channel::detthread;
 
 pub trait Formattable {
     fn format(&self, output: &Option<OutputOptions>) -> String;
@@ -173,7 +174,7 @@ impl Profiler {
             Some(ref option) => {
                 // Spawn the time profiler thread
                 let outputoption = option.clone();
-                thread::Builder::new()
+                detthread::Builder::new()
                     .name("Time profiler".to_owned())
                     .spawn(move || {
                         let trace = file_path.as_ref().and_then(|p| TraceDump::new(p).ok());
@@ -187,10 +188,10 @@ impl Profiler {
                     &OutputOptions::Stdout(period) => {
                         // Spawn a timer thread
                         let chan = chan.clone();
-                        thread::Builder::new()
+                        detthread::Builder::new()
                             .name("Time profiler timer".to_owned())
                             .spawn(move || loop {
-                                thread::sleep(duration_from_seconds(period));
+                                std::thread::sleep(duration_from_seconds(period));
                                 if chan.send(ProfilerMsg::Print).is_err() {
                                     break;
                                 }
@@ -203,7 +204,7 @@ impl Profiler {
                 // this is when the -p option hasn't been specified
                 if file_path.is_some() {
                     // Spawn the time profiler
-                    thread::Builder::new()
+                    detthread::Builder::new()
                         .name("Time profiler".to_owned())
                         .spawn(move || {
                             let trace = file_path.as_ref().and_then(|p| TraceDump::new(p).ok());
@@ -213,7 +214,7 @@ impl Profiler {
                         .expect("Thread spawning failed");
                 } else {
                     // No-op to handle messages when the time profiler is not printing:
-                    thread::Builder::new()
+                    detthread::Builder::new()
                         .name("Time profiler".to_owned())
                         .spawn(move || loop {
                             match port.recv() {

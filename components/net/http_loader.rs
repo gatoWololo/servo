@@ -62,7 +62,7 @@ use std::sync::{Arc as StdArc, Condvar, Mutex, RwLock};
 use std::time::{Duration, SystemTime};
 use time::{self, Tm};
 use tokio::prelude::{future, Future, Sink, Stream};
-use tokio::runtime::Runtime;
+use tokio::runtime::{Runtime, Builder};
 use tokio::sync::mpsc::{channel, Receiver as TokioReceiver, Sender as TokioSender};
 
 lazy_static! {

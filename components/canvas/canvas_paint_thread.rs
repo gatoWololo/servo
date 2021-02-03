@@ -12,7 +12,7 @@ use rr_channel::ipc_channel::ipc::{self, IpcSender};
 use rr_channel::ipc_channel::router::ROUTER;
 use std::borrow::ToOwned;
 use std::collections::HashMap;
-use std::thread;
+use rr_channel::detthread;
 use webrender_api::{ImageData, ImageDescriptor, ImageKey};
 
 pub enum AntialiasMode {
@@ -61,7 +61,7 @@ impl<'a> CanvasPaintThread<'a> {
         let (ipc_sender, ipc_receiver) = ipc::channel::<CanvasMsg>().unwrap();
         let msg_receiver = ROUTER.route_ipc_receiver_to_new_crossbeam_receiver(ipc_receiver);
         let (create_sender, create_receiver) = unbounded();
-        thread::Builder::new()
+        detthread::Builder::new()
             .name("CanvasThread".to_owned())
             .spawn(move || {
                 let mut canvas_paint_thread = CanvasPaintThread::new(webrender_api, font_cache_thread);

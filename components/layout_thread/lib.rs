@@ -96,7 +96,7 @@ use std::ops::{Deref, DerefMut};
 use std::process;
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex, MutexGuard};
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 use style::animation::{AnimationSetKey, DocumentAnimationSet, ElementAnimationSet};
 use style::context::SharedStyleContext;
@@ -287,7 +287,7 @@ impl LayoutThreadFactory for LayoutThread {
         trace_layout: bool,
         dump_flow_tree: bool,
     ) {
-        thread::Builder::new()
+        detthread::Builder::new()
             .name(format!("LayoutThread {:?}", id))
             .spawn(move || {
                 thread_state::initialize(ThreadState::LAYOUT);

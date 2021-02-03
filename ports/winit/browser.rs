@@ -25,7 +25,7 @@ use std::fs::File;
 use std::io::Write;
 use std::mem;
 use std::rc::Rc;
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 use tinyfiledialogs::{self, MessageBoxIcon, OkCancel, YesNo};
 
@@ -319,7 +319,7 @@ where
                             }
                         }
                     } else {
-                        thread::Builder::new()
+                        detthread::Builder::new()
                             .name("display alert dialog".to_owned())
                             .spawn(move || {
                                 match definition {
@@ -569,7 +569,7 @@ fn prompt_user(_prompt: PermissionPrompt) -> PermissionRequest {
 fn platform_get_selected_devices(devices: Vec<String>) -> Option<String> {
     let picker_name = "Choose a device";
 
-    thread::Builder::new()
+    detthread::Builder::new()
         .name(picker_name.to_owned())
         .spawn(move || {
             let dialog_rows: Vec<&str> = devices.iter().map(|s| s.as_ref()).collect();
@@ -604,7 +604,7 @@ fn get_selected_files(patterns: Vec<FilterPattern>, multiple_files: bool) -> Opt
     } else {
         "Pick a file"
     };
-    thread::Builder::new()
+    detthread::Builder::new()
         .name(picker_name.to_owned())
         .spawn(move || {
             let mut filters = vec![];

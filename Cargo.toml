@@ -12,10 +12,12 @@ exclude = [".cargo"]
 [profile.release]
 opt-level = 3
 # Uncomment to profile on Linux:
-# debug = true
+debug = true
 # lto = false
 
 [patch.crates-io]
+tokio = {path = "../tokio-0.1.22/"}
+
 # If you need to temporarily test Servo with a local fork of some upstream
 # crate, add that here. Use the form:
 #
@@ -26,8 +28,19 @@ opt-level = 3
 #     [patch."https://github.com/servo/<repository>"]
 #     <crate> = { path = "/path/to/local/checkout" }
 
+
+# It doesn't wanna use my patch for webxr-api... Not sure why.
+# Git dependencies also don't need webxr/webxr-api but paths do?
 [patch."https://github.com/servo/webxr"]
 webxr-api = { git = "https://github.com/gatoWololo/webxr/"}
+
+[patch."https://github.com/servo/webrender"]
+webrender = { path = "../webrender/webrender/" }
+webrender_api = { path = "../webrender/webrender_api/" }
+
+[patch."https://github.com/gatowololo/rr_channel"]
+rr_channel = {path = "../rr_channel"}
+#rr_channel = { git = "https:///github.com//gatoWololo/rr_channel", branch = "servo_development"}
 
 [patch."https://github.com/servo/media"]
 servo-media = {git = "https://github.com/gatoWololo/servo-media"}
@@ -45,6 +58,6 @@ backtrace = { git = "https://github.com/servo/backtrace-rs", branch = "uwp-fix" 
 raqote = { git = "https://github.com/jdm/raqote", branch = "fkup" }
 
 # https://github.com/servo/servo/issues/27515#issuecomment-671474054
-[patch."https://github.com/servo/webrender"]
-webrender = { git = "https://github.com/jdm/webrender", branch = "crash-backtrace" }
-webrender_api = { git = "https://github.com/jdm/webrender", branch = "crash-backtrace" }
+#[patch."https://github.com/servo/webrender"]
+#webrender = { git = "https://github.com/jdm/webrender", branch = "crash-backtrace" }
+#webrender_api = { git = "https://github.com/jdm/webrender", branch = "crash-backtrace" }

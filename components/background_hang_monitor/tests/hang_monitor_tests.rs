@@ -17,7 +17,7 @@ use msg::constellation_msg::{MonitoredComponentId, MonitoredComponentType};
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
 use std::sync::Mutex;
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 
 lazy_static! {
@@ -49,7 +49,7 @@ fn test_hang_monitoring() {
     background_hang_monitor.notify_activity(hang_annotation);
 
     // Sleep until the "transient" timeout has been reached.
-    thread::sleep(Duration::from_millis(10));
+    std::thread::sleep(Duration::from_millis(10));
 
     // Check for a transient hang alert.
     match background_hang_monitor_receiver.recv().unwrap() {
@@ -61,7 +61,7 @@ fn test_hang_monitoring() {
     }
 
     // Sleep until the "permanent" timeout has been reached.
-    thread::sleep(Duration::from_millis(1000));
+    std::thread::sleep(Duration::from_millis(1000));
 
     // Check for a permanent hang alert.
     match background_hang_monitor_receiver.recv().unwrap() {
@@ -77,7 +77,7 @@ fn test_hang_monitoring() {
     assert!(background_hang_monitor_receiver.try_recv().is_err());
 
     // Sleep for a while.
-    thread::sleep(Duration::from_millis(10));
+    std::thread::sleep(Duration::from_millis(10));
 
     // Check for a transient hang alert.
     match background_hang_monitor_receiver.recv().unwrap() {
@@ -92,7 +92,7 @@ fn test_hang_monitoring() {
     background_hang_monitor.notify_wait();
 
     // Sleep for a while.
-    thread::sleep(Duration::from_millis(100));
+    std::thread::sleep(Duration::from_millis(100));
 
     // The component is still waiting, but not hanging.
     assert!(background_hang_monitor_receiver.try_recv().is_err());
@@ -101,7 +101,7 @@ fn test_hang_monitoring() {
     background_hang_monitor.notify_activity(hang_annotation);
 
     // Sleep for a while.
-    thread::sleep(Duration::from_millis(10));
+    std::thread::sleep(Duration::from_millis(10));
 
     // We're getting new hang alerts for the latest task.
     match background_hang_monitor_receiver.recv().unwrap() {
@@ -120,7 +120,7 @@ fn test_hang_monitoring() {
     drop(background_hang_monitor);
 
     // Sleep until the "max-timeout" has been reached.
-    thread::sleep(Duration::from_millis(1000));
+    std::thread::sleep(Duration::from_millis(1000));
 
     // Still no new alerts because the hang monitor has shut-down already.
     assert!(background_hang_monitor_receiver.try_recv().is_err());
@@ -154,7 +154,7 @@ fn test_hang_monitoring_unregister() {
     background_hang_monitor.unregister();
 
     // Sleep until the "transient" timeout has been reached.
-    thread::sleep(Duration::from_millis(10));
+    std::thread::sleep(Duration::from_millis(10));
 
     // No new alert yet
     assert!(background_hang_monitor_receiver.try_recv().is_err());
@@ -208,7 +208,7 @@ fn test_hang_monitoring_exit_signal() {
 
         // Assert we get the exit signal.
         while !closing.load(Ordering::SeqCst) {
-            thread::sleep(Duration::from_millis(10));
+            std::thread::sleep(Duration::from_millis(10));
         }
     }
 }

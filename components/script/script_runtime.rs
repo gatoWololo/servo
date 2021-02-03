@@ -86,7 +86,7 @@ use std::os::raw::c_void;
 use std::ptr;
 use std::rc::Rc;
 use std::sync::Mutex;
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 use style::thread_state::{self, ThreadState};
 use time::{now, Tm};
@@ -427,7 +427,7 @@ impl Drop for JSEngineSetup {
         *JS_ENGINE.lock().unwrap() = None;
 
         while !self.0.can_shutdown() {
-            thread::sleep(Duration::from_millis(50));
+            std::thread::sleep(Duration::from_millis(50));
         }
     }
 }

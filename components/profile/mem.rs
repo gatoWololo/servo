@@ -12,7 +12,7 @@ use profile_traits::mem::{ProfilerChan, ProfilerMsg, ReportKind, Reporter, Repor
 use std::borrow::ToOwned;
 use std::cmp::Ordering;
 use std::collections::HashMap;
-use std::thread;
+use rr_channel::detthread;
 use std::time::Instant;
 
 pub struct Profiler {
@@ -36,10 +36,10 @@ impl Profiler {
         // Create the timer thread if a period was provided.
         if let Some(period) = period {
             let chan = chan.clone();
-            thread::Builder::new()
+            detthread::Builder::new()
                 .name("Memory profiler timer".to_owned())
                 .spawn(move || loop {
-                    thread::sleep(duration_from_seconds(period));
+                    std::thread::sleep(duration_from_seconds(period));
                     if chan.send(ProfilerMsg::Print).is_err() {
                         break;
                     }
@@ -49,7 +49,7 @@ impl Profiler {
 
         // Always spawn the memory profiler. If there is no timer thread it won't receive regular
         // `Print` events, but it will still receive the other events.
-        thread::Builder::new()
+        detthread::Builder::new()
             .name("Memory profiler".to_owned())
             .spawn(move || {
                 let mut mem_profiler = Profiler::new(port);

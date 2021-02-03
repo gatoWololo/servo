@@ -2,12 +2,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use ipc_channel::ipc;
+use rr_channel::ipc_channel::ipc;
 use profile::time;
 use profile_traits::ipc as ProfiledIpc;
 use profile_traits::time::{ProfilerCategory, ProfilerData, ProfilerMsg};
 use servo_config::opts::OutputOptions;
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 
 #[test]
@@ -47,8 +47,8 @@ fn time_profiler_stats_test() {
 fn channel_profiler_test() {
     let chan = time::Profiler::create(&Some(OutputOptions::Stdout(5.0)), None);
     let (profiled_sender, profiled_receiver) = ProfiledIpc::channel(chan.clone()).unwrap();
-    thread::spawn(move || {
-        thread::sleep(Duration::from_secs(2));
+    detthread::spawn(move || {
+        std::thread::sleep(Duration::from_secs(2));
         profiled_sender.send(43).unwrap();
     });
 
@@ -72,8 +72,8 @@ fn channel_profiler_test() {
 fn bytes_channel_profiler_test() {
     let chan = time::Profiler::create(&Some(OutputOptions::Stdout(5.0)), None);
     let (profiled_sender, profiled_receiver) = ProfiledIpc::bytes_channel(chan.clone()).unwrap();
-    thread::spawn(move || {
-        thread::sleep(Duration::from_secs(2));
+    detthread::spawn(move || {
+        std::thread::sleep(Duration::from_secs(2));
         profiled_sender.send(&[1, 2, 3]).unwrap();
     });
 

@@ -11,7 +11,7 @@ use js::jsapi::JSTracer;
 use js::jsapi::UnhideScriptedCaller;
 use js::rust::Runtime;
 use std::cell::RefCell;
-use std::thread;
+use rr_channel::detthread;
 
 thread_local!(static STACK: RefCell<Vec<StackEntry>> = RefCell::new(Vec::new()));
 
@@ -76,7 +76,7 @@ impl Drop for AutoEntryScript {
         });
 
         // Step 5
-        if !thread::panicking() && incumbent_global().is_none() {
+        if !std::thread::panicking() && incumbent_global().is_none() {
             self.global.perform_a_microtask_checkpoint();
         }
     }

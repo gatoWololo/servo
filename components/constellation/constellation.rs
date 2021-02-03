@@ -178,7 +178,7 @@ use std::mem::replace;
 use std::process;
 use std::rc::{Rc, Weak};
 use std::sync::{Arc, Mutex};
-use std::thread;
+use rr_channel::detthread;
 use style_traits::viewport::ViewportConstraints;
 use style_traits::CSSPixel;
 use webgpu::{self, WebGPU, WebGPURequest};
@@ -648,7 +648,7 @@ impl Log for FromScriptLogger {
     fn log(&self, record: &Record) {
         if let Some(entry) = log_entry(record) {
             debug!("Sending log entry {:?}.", entry);
-            let thread_name = thread::current().name().map(ToOwned::to_owned);
+            let thread_name = std::thread::current().name().map(ToOwned::to_owned);
             let msg = FromScriptMsg::LogEntry(thread_name, entry);
             let chan = self
                 .script_to_constellation_chan
@@ -691,7 +691,7 @@ impl Log for FromCompositorLogger {
         if let Some(entry) = log_entry(record) {
             debug!("Sending log entry {:?}.", entry);
             let top_level_id = TopLevelBrowsingContextId::installed();
-            let thread_name = thread::current().name().map(ToOwned::to_owned);
+            let thread_name = std::thread::current().name().map(ToOwned::to_owned);
             let msg = FromCompositorMsg::LogEntry(top_level_id, thread_name, entry);
             let chan = self
                 .constellation_chan
@@ -710,7 +710,7 @@ impl Log for FromCompositorLogger {
 /// so cannot be used over an IPC channel.
 fn log_entry(record: &Record) -> Option<LogEntry> {
     match record.level() {
-        Level::Error if thread::panicking() => Some(LogEntry::Panic(
+        Level::Error if std::thread::panicking() => Some(LogEntry::Panic(
             format!("{}", record.args()),
             format!("{:?}", Backtrace::new()),
         )),
@@ -763,7 +763,7 @@ where
         // service worker manager to communicate with constellation
         let (swmanager_sender, swmanager_receiver) = ipc::channel().expect("ipc channel failure");
 
-        thread::Builder::new()
+        detthread::Builder::new()
             .name("Constellation".to_owned())
             .spawn(move || {
                 let (ipc_script_sender, ipc_script_receiver) =

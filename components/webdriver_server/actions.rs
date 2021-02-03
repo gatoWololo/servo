@@ -10,7 +10,7 @@ use script_traits::webdriver_msg::WebDriverScriptCommand;
 use script_traits::{MouseButton, MouseEventType, WebDriverCommandMsg};
 use std::cmp;
 use std::collections::HashSet;
-use std::thread;
+use rr_channel::detthread;
 use std::time::{Duration, Instant};
 use webdriver::actions::{ActionSequence, ActionsType, GeneralAction, NullActionItem};
 use webdriver::actions::{KeyAction, KeyActionItem, KeyDownAction, KeyUpAction};
@@ -420,7 +420,7 @@ impl Handler {
 
         // Step 10
         if duration > 0 {
-            thread::sleep(Duration::from_millis(POINTERMOVE_INTERVAL));
+            std::thread::sleep(Duration::from_millis(POINTERMOVE_INTERVAL));
         }
 
         // Step 11
@@ -504,7 +504,7 @@ impl Handler {
             }
 
             // Step 9
-            thread::sleep(Duration::from_millis(POINTERMOVE_INTERVAL));
+            std::thread::sleep(Duration::from_millis(POINTERMOVE_INTERVAL));
         }
     }
 }

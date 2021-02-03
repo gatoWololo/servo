@@ -8,7 +8,7 @@ use crate::media_channel::{glplayer_channel, GLPlayerSender};
 use crate::{GLPlayerMsg, GLPlayerMsgForward};
 use fnv::FnvHashMap;
 use std::sync::{Arc, Mutex};
-use std::thread;
+use rr_channel::detthread;
 use webrender_traits::{WebrenderExternalImageRegistry, WebrenderImageHandlerType};
 
 /// A GLPlayerThread manages the life cycle and message demultiplexing of
@@ -33,7 +33,7 @@ impl GLPlayerThread {
         external_images: Arc<Mutex<WebrenderExternalImageRegistry>>,
     ) -> GLPlayerSender<GLPlayerMsg> {
         let (sender, receiver) = glplayer_channel::<GLPlayerMsg>().unwrap();
-        thread::Builder::new()
+        detthread::Builder::new()
             .name("GLPlayerThread".to_owned())
             .spawn(move || {
                 let mut renderer = GLPlayerThread::new(external_images);

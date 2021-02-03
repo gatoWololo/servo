@@ -158,7 +158,7 @@ use std::rc::Rc;
 use std::result::Result;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
-use std::thread;
+use rr_channel::detthread;
 use std::time::{Duration, SystemTime};
 use style::dom::OpaqueNode;
 use style::thread_state::{self, ThreadState};
@@ -766,7 +766,7 @@ impl ScriptThreadFactory for ScriptThread {
 
         let (sender, receiver) = unbounded();
         let layout_chan = sender.clone();
-        thread::Builder::new()
+        detthread::Builder::new()
             .name(format!("ScriptThread {:?}", state.id))
             .spawn(move || {
                 thread_state::initialize(ThreadState::SCRIPT);
@@ -2592,7 +2592,7 @@ impl ScriptThread {
             "Setting activity of {} to be {:?} in {:?}.",
             id,
             activity,
-            thread::current().name()
+            std::thread::current().name()
         );
         let document = self.documents.borrow().find_document(id);
         if let Some(document) = document {

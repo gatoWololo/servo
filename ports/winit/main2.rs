@@ -31,7 +31,7 @@ use std::env;
 use std::io::Write;
 use std::panic;
 use std::process;
-use std::thread;
+use rr_channel::detthread;
 
 pub mod platform {
     #[cfg(target_os = "macos")]
@@ -51,7 +51,7 @@ fn install_crash_handler() {}
 fn install_crash_handler() {
     use libc::_exit;
     use sig::ffi::Sig;
-    use std::thread;
+    use rr_channel::detthread;
 
     extern "C" fn handler(sig: i32) {
         use std::sync::atomic;
@@ -60,7 +60,7 @@ fn install_crash_handler() {
             let stdout = std::io::stdout();
             let mut stdout = stdout.lock();
             let _ = write!(&mut stdout, "Stack trace");
-            if let Some(name) = thread::current().name() {
+            if let Some(name) = std::thread::current().name() {
                 let _ = write!(&mut stdout, " for thread \"{}\"", name);
             }
             let _ = write!(&mut stdout, "\n");
@@ -79,7 +79,7 @@ fn install_crash_handler() {
 
 pub fn main() {
     install_crash_handler();
-
+    init_tivo_thread_root();
     resources::init();
 
     // Parse the command line options and store them globally
@@ -146,7 +146,7 @@ pub fn main() {
                 None => "Box<Any>",
             },
         };
-        let current_thread = thread::current();
+        let current_thread = std::thread::current();
         let name = current_thread.name().unwrap_or("<unnamed>");
         let stdout = std::io::stdout();
         let mut stdout = stdout.lock();

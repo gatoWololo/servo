@@ -29,7 +29,7 @@ use std::os::raw::c_char;
 use std::os::raw::c_int;
 use std::os::raw::c_void;
 use std::rc::Rc;
-use std::thread;
+use rr_channel::detthread;
 use std::time::Duration;
 use std::time::Instant;
 use webxr::magicleap::MagicLeapDiscovery;
@@ -338,7 +338,7 @@ pub unsafe extern "C" fn discard_servo(servo: *mut ServoInstance) {
             if Instant::now() > finish {
                 warn!("Incomplete shutdown.");
             }
-            thread::sleep(SHUTDOWN_POLL_INTERVAL);
+            std::thread::sleep(SHUTDOWN_POLL_INTERVAL);
         }
         deinit();
     }
@@ -509,7 +509,7 @@ fn redirect_stdout_to_log(logger: MLLogger) {
 
     // Then we spawn a thread whose only job is to read from the other side of the
     // pipe and redirect to the logs.
-    let _detached = thread::spawn(move || {
+    let _detached = detthread::spawn(move || {
         const BUF_LENGTH: usize = 512;
         let mut buf = vec![b'\0' as c_char; BUF_LENGTH];
 

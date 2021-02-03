@@ -498,7 +498,7 @@ impl ServiceWorkerManagerFactory for ServiceWorkerManager {
         let from_constellation = ROUTER.route_ipc_receiver_to_new_crossbeam_receiver(receiver);
         let resource_port = ROUTER.route_ipc_receiver_to_new_crossbeam_receiver(resource_port);
         let _ = resource_sender.send(CoreResourceMsg::NetworkMediator(resource_chan, origin));
-        if thread::Builder::new()
+        if rr_channel::detthread::Builder::new()
             .name("ServiceWorkerManager".to_owned())
             .spawn(move || {
                 ServiceWorkerManager::new(
