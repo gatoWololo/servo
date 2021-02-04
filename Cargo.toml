@@ -15,9 +15,6 @@ opt-level = 3
 debug = true
 # lto = false
 
-[patch.crates-io]
-tokio = {path = "../tokio-0.1.22/"}
-
 # If you need to temporarily test Servo with a local fork of some upstream
 # crate, add that here. Use the form:
 #
@@ -28,19 +25,24 @@ tokio = {path = "../tokio-0.1.22/"}
 #     [patch."https://github.com/servo/<repository>"]
 #     <crate> = { path = "/path/to/local/checkout" }
 
+[patch.crates-io]
+#tokio = {path = "../tokio-0.1.22/"}
+tokio = { git = "https://github.com/gatoWololo/tokio-0.1.22"}
 
-# It doesn't wanna use my patch for webxr-api... Not sure why.
-# Git dependencies also don't need webxr/webxr-api but paths do?
 [patch."https://github.com/servo/webxr"]
 webxr-api = { git = "https://github.com/gatoWololo/webxr/"}
 
 [patch."https://github.com/servo/webrender"]
-webrender = { path = "../webrender/webrender/" }
-webrender_api = { path = "../webrender/webrender_api/" }
+webrender = { git = "https://github.com/gatoWololo/webrender" }
+webrender_api = { git = "https://github.com/gatoWololo/webrender" }
+#webrender = { path = "../webrender/webrender/" }
+#webrender_api = { path = "../webrender/webrender_api/" }
 
 [patch."https://github.com/gatowololo/rr_channel"]
-rr_channel = {path = "../rr_channel"}
-#rr_channel = { git = "https:///github.com//gatoWololo/rr_channel", branch = "servo_development"}
+#rr_channel = {path = "../rr_channel"}
+# Notice extra '/' on git https address. This is needed as Cargo does not currently allow pointing
+# to a different branch if the address is the same.
+rr_channel = { git = "https:///github.com//gatoWololo/rr_channel", branch = "servo_development"}
 
 [patch."https://github.com/servo/media"]
 servo-media = {git = "https://github.com/gatoWololo/servo-media"}
