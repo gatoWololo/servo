@@ -233,7 +233,7 @@ dependencies = [
  "mach",
  "msg",
  "nix",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde_json",
  "unwind-sys",
 ]
@@ -272,6 +272,12 @@ name = "base64"
 version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7d5ca2cd0adc3f48f9e9ea5a6bbdf9ccc0bfade884847e484d452414c7ccffb3"
+
+[[package]]
+name = "base64"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "904dfeac50f3cdaba28fc6f57fdcddb75f49ed61346676a78c4ffe55877802fd"
 
 [[package]]
 name = "binary-space-partition"
@@ -375,7 +381,7 @@ dependencies = [
  "device",
  "embedder_traits",
  "log",
- "rr_channel 0.1.0",
+ "rr_channel",
  "servo_config",
  "servo_rand",
  "uuid",
@@ -387,7 +393,7 @@ version = "0.0.1"
 dependencies = [
  "embedder_traits",
  "regex",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
 ]
 
@@ -454,11 +460,11 @@ dependencies = [
 
 [[package]]
 name = "build-parallel"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4b5f8b148c1884e660514fb1205f36b595e96df4daac5ad526a23db44937de77"
+checksum = "b8e3ff9db740167616e528c509b3618046fc05d337f8f3182d300f4aa977d2bb"
 dependencies = [
- "crossbeam-utils 0.7.2",
+ "crossbeam-utils 0.8.1",
  "jobserver",
  "num_cpus",
 ]
@@ -554,7 +560,7 @@ dependencies = [
  "pathfinder_geometry",
  "pixels",
  "raqote",
- "rr_channel 0.1.0",
+ "rr_channel",
  "servo_arc",
  "servo_config",
  "sparkle",
@@ -582,7 +588,7 @@ dependencies = [
  "malloc_size_of",
  "malloc_size_of_derive",
  "pixels",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "serde_bytes",
  "servo_config",
@@ -845,7 +851,7 @@ dependencies = [
  "num-traits",
  "pixels",
  "profile_traits",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script_traits",
  "servo-media",
  "servo_geometry",
@@ -858,6 +864,12 @@ dependencies = [
  "webrender_surfman",
  "webxr",
 ]
+
+[[package]]
+name = "const_fn"
+version = "0.4.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "28b9d6de7f49e22cf97ad17fc4036ece69300032f45f78f30b4a4482cdc3f4a6"
 
 [[package]]
 name = "constant_time_eq"
@@ -890,7 +902,7 @@ dependencies = [
  "net",
  "net_traits",
  "profile_traits",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script_traits",
  "serde",
  "servo_config",
@@ -1079,14 +1091,35 @@ dependencies = [
 ]
 
 [[package]]
+name = "crossbeam-channel"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dca26ee1f8d361640700bde38b2c37d8c22b3ce2d360e1fc1c74ea4b0aa7d775"
+dependencies = [
+ "cfg-if 1.0.0",
+ "crossbeam-utils 0.8.1",
+]
+
+[[package]]
 name = "crossbeam-deque"
 version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9f02af974daeee82218205558e51ec8768b48cf524bd01d550abe5573a608285"
 dependencies = [
- "crossbeam-epoch",
+ "crossbeam-epoch 0.8.2",
  "crossbeam-utils 0.7.2",
  "maybe-uninit",
+]
+
+[[package]]
+name = "crossbeam-deque"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "94af6efb46fef72616855b036a624cf27ba656ffc9be1b9a3c931cfc7749a9a9"
+dependencies = [
+ "cfg-if 1.0.0",
+ "crossbeam-epoch 0.9.1",
+ "crossbeam-utils 0.8.1",
 ]
 
 [[package]]
@@ -1100,7 +1133,21 @@ dependencies = [
  "crossbeam-utils 0.7.2",
  "lazy_static",
  "maybe-uninit",
- "memoffset",
+ "memoffset 0.5.4",
+ "scopeguard",
+]
+
+[[package]]
+name = "crossbeam-epoch"
+version = "0.9.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a1aaa739f95311c2c7887a76863f500026092fb1dce0161dab577e559ef3569d"
+dependencies = [
+ "cfg-if 1.0.0",
+ "const_fn",
+ "crossbeam-utils 0.8.1",
+ "lazy_static",
+ "memoffset 0.6.1",
  "scopeguard",
 ]
 
@@ -1133,6 +1180,17 @@ checksum = "c3c7c73a2d1e9fc0886a08b93e98eb643461230d5f1925e4036204d5f2e261a8"
 dependencies = [
  "autocfg",
  "cfg-if 0.1.10",
+ "lazy_static",
+]
+
+[[package]]
+name = "crossbeam-utils"
+version = "0.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "02d96d1e189ef58269ebe5b97953da3274d83a93af647c2ddd6f9dab28cedb8d"
+dependencies = [
+ "autocfg",
+ "cfg-if 1.0.0",
  "lazy_static",
 ]
 
@@ -1317,7 +1375,7 @@ dependencies = [
  "hyper",
  "log",
  "msg",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "serde_json",
  "servo_config",
@@ -1336,7 +1394,7 @@ dependencies = [
  "malloc_size_of",
  "malloc_size_of_derive",
  "msg",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "servo_url",
  "time",
@@ -1472,7 +1530,7 @@ dependencies = [
  "msg",
  "num-derive",
  "num-traits",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "servo_url",
  "webrender_api",
@@ -1924,7 +1982,7 @@ dependencies = [
  "malloc_size_of",
  "net_traits",
  "range",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "servo-fontconfig",
  "servo_allocator",
@@ -2187,9 +2245,9 @@ checksum = "9b919933a397b79c37e33b77bb2aa3dc8eb6e165ad809e58ff75bc7db2e34574"
 
 [[package]]
 name = "glslopt"
-version = "0.1.5"
+version = "0.1.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ade35abcc6d6d49b294b2f39ea0c55ef616b682f4385553c77739f82bf163277"
+checksum = "e6c6fe80551c01b577d6f63f2227c485c0cb6827defeaa13dacbf84b42012853"
 dependencies = [
  "cc",
 ]
@@ -3007,7 +3065,7 @@ dependencies = [
  "profile_traits",
  "range",
  "rayon",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script_layout_interface",
  "script_traits",
  "serde",
@@ -3053,7 +3111,7 @@ dependencies = [
  "range",
  "rayon",
  "rayon_croissant",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script_layout_interface",
  "script_traits",
  "serde",
@@ -3093,7 +3151,7 @@ dependencies = [
  "profile_traits",
  "range",
  "rayon",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script",
  "script_layout_interface",
  "script_traits",
@@ -3135,7 +3193,7 @@ dependencies = [
  "parking_lot 0.10.2",
  "profile_traits",
  "range",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script",
  "script_layout_interface",
  "script_traits",
@@ -3159,7 +3217,7 @@ dependencies = [
  "msg",
  "net_traits",
  "profile_traits",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script_traits",
  "servo_url",
  "webrender_api",
@@ -3284,7 +3342,7 @@ dependencies = [
  "net_traits",
  "profile",
  "profile_traits",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script",
  "script_layout_interface",
  "script_traits",
@@ -3447,7 +3505,7 @@ dependencies = [
  "hyper",
  "hyper_serde",
  "keyboard-types",
- "rr_channel 0.1.0",
+ "rr_channel",
  "selectors",
  "serde",
  "serde_bytes",
@@ -3520,7 +3578,7 @@ dependencies = [
  "fnv",
  "lazy_static",
  "log",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "servo-media",
  "servo_config",
@@ -3549,6 +3607,15 @@ name = "memoffset"
 version = "0.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b4fc2c02a7e374099d4ee95a193111f72d2110197fe200272371758f6c3643d8"
+dependencies = [
+ "autocfg",
+]
+
+[[package]]
+name = "memoffset"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "157b4208e3059a8f9e78d559edc658e13df41410cb3ae03979c83130067fdd87"
 dependencies = [
  "autocfg",
 ]
@@ -3592,7 +3659,7 @@ dependencies = [
  "malloc_size_of_derive",
  "msg",
  "profile_traits",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script_traits",
  "servo_config",
  "servo_url",
@@ -3607,7 +3674,7 @@ dependencies = [
  "metrics",
  "msg",
  "profile_traits",
- "rr_channel 0.1.0",
+ "rr_channel",
  "servo_url",
  "time",
 ]
@@ -3779,7 +3846,7 @@ dependencies = [
  "malloc_size_of",
  "malloc_size_of_derive",
  "parking_lot 0.10.2",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "size_of_test",
  "webrender_api",
@@ -3860,7 +3927,7 @@ dependencies = [
  "pixels",
  "profile_traits",
  "rayon",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "serde_json",
  "servo_allocator",
@@ -3910,7 +3977,7 @@ dependencies = [
  "num-traits",
  "percent-encoding",
  "pixels",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "servo_arc",
  "servo_rand",
@@ -4300,6 +4367,7 @@ dependencies = [
 [[package]]
 name = "peek-poke"
 version = "0.2.0"
+source = "git+https://github.com/gatoWololo/webrender#a02af3c1b4f1bf33dd9a4a4978ab45a60d74c0e1"
 dependencies = [
  "euclid",
  "peek-poke-derive",
@@ -4308,6 +4376,7 @@ dependencies = [
 [[package]]
 name = "peek-poke-derive"
 version = "0.2.1"
+source = "git+https://github.com/gatoWololo/webrender#a02af3c1b4f1bf33dd9a4a4978ab45a60d74c0e1"
 dependencies = [
  "proc-macro2 1.0.17",
  "quote 1.0.2",
@@ -4535,7 +4604,7 @@ dependencies = [
  "libc",
  "profile_traits",
  "regex",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "serde_json",
  "servo_allocator",
@@ -4549,7 +4618,7 @@ version = "0.0.1"
 dependencies = [
  "profile",
  "profile_traits",
- "rr_channel 0.1.0",
+ "rr_channel",
  "servo_config",
 ]
 
@@ -4558,7 +4627,7 @@ name = "profile_traits"
 version = "0.0.1"
 dependencies = [
  "log",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "servo_config",
  "signpost",
@@ -4702,25 +4771,25 @@ dependencies = [
 
 [[package]]
 name = "rayon"
-version = "1.3.1"
+version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "62f02856753d04e03e26929f820d0a0a337ebe71f849801eea335d464b349080"
+checksum = "8b0d8e0819fadc20c74ea8373106ead0600e3a67ef1fe8da56e39b9ae7275674"
 dependencies = [
  "autocfg",
- "crossbeam-deque",
+ "crossbeam-deque 0.8.0",
  "either",
  "rayon-core",
 ]
 
 [[package]]
 name = "rayon-core"
-version = "1.7.1"
+version = "1.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e92e15d89083484e11353891f1af602cc661426deb9564c298b270c726973280"
+checksum = "9ab346ac5921dc62ffa9f89b7a773907511cdfa5490c572ae9be1be33e8afa4a"
 dependencies = [
- "crossbeam-deque",
- "crossbeam-queue",
- "crossbeam-utils 0.7.2",
+ "crossbeam-channel 0.5.0",
+ "crossbeam-deque 0.8.0",
+ "crossbeam-utils 0.8.1",
  "lazy_static",
  "num_cpus",
 ]
@@ -4819,11 +4888,11 @@ dependencies = [
 
 [[package]]
 name = "ron"
-version = "0.6.0"
+version = "0.6.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a91260f321dbf3b5a16ff91c451dc9eb644ce72775a6812f9c3dfffe63818f8f"
+checksum = "064ea8613fb712a19faf920022ec8ddf134984f100090764a4e1d768f3827f1f"
 dependencies = [
- "base64 0.12.0",
+ "base64 0.13.0",
  "bitflags",
  "serde",
 ]
@@ -4831,20 +4900,7 @@ dependencies = [
 [[package]]
 name = "rr_channel"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo//rr_channel#aa503b67d50b10387fd4c937f66aa7461cca175b"
-dependencies = [
- "bincode",
- "crossbeam-channel 0.3.9",
- "ipc-channel",
- "lazy_static",
- "log",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "rr_channel"
-version = "0.1.0"
+source = "git+https://github.com//gatoWololo/rr_channel?branch=servo_development#801ceb49e37500956ee742d551f0637c56fba2d3"
 dependencies = [
  "bincode",
  "crossbeam-channel 0.3.9",
@@ -5004,7 +5060,7 @@ dependencies = [
  "ref_filter_map",
  "ref_slice",
  "regex",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script_layout_interface",
  "script_plugins",
  "script_traits",
@@ -5060,7 +5116,7 @@ dependencies = [
  "parking_lot 0.10.2",
  "profile_traits",
  "range",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script_traits",
  "selectors",
  "servo_arc",
@@ -5117,7 +5173,7 @@ dependencies = [
  "net_traits",
  "pixels",
  "profile_traits",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "servo_atoms",
  "servo_url",
@@ -5255,7 +5311,7 @@ dependencies = [
  "libc",
  "libservo",
  "log",
- "rr_channel 0.1.0",
+ "rr_channel",
  "servo-media",
  "shellwords",
  "sig",
@@ -5313,7 +5369,7 @@ dependencies = [
  "lazy_static",
  "libservo",
  "log",
- "rr_channel 0.1.0",
+ "rr_channel",
  "servo-media",
  "sparkle",
  "surfman",
@@ -5325,7 +5381,7 @@ dependencies = [
 [[package]]
 name = "servo-media"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "servo-media-audio",
  "servo-media-player",
@@ -5337,7 +5393,7 @@ dependencies = [
 [[package]]
 name = "servo-media-audio"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "boxfnonce",
  "byte-slice-cast",
@@ -5359,10 +5415,10 @@ dependencies = [
 [[package]]
 name = "servo-media-dummy"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "boxfnonce",
- "rr_channel 0.1.0",
+ "rr_channel",
  "servo-media",
  "servo-media-audio",
  "servo-media-player",
@@ -5374,7 +5430,7 @@ dependencies = [
 [[package]]
 name = "servo-media-gstreamer"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "boxfnonce",
  "byte-slice-cast",
@@ -5393,7 +5449,7 @@ dependencies = [
  "log",
  "mime",
  "regex",
- "rr_channel 0.1.0",
+ "rr_channel",
  "servo-media",
  "servo-media-audio",
  "servo-media-gstreamer-render",
@@ -5410,7 +5466,7 @@ dependencies = [
 [[package]]
 name = "servo-media-gstreamer-render"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "gstreamer",
  "gstreamer-video",
@@ -5420,7 +5476,7 @@ dependencies = [
 [[package]]
 name = "servo-media-gstreamer-render-android"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "glib",
  "gstreamer",
@@ -5433,7 +5489,7 @@ dependencies = [
 [[package]]
 name = "servo-media-gstreamer-render-unix"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "glib",
  "gstreamer",
@@ -5446,9 +5502,9 @@ dependencies = [
 [[package]]
 name = "servo-media-player"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "serde_derive",
  "servo-media-streams",
@@ -5458,7 +5514,7 @@ dependencies = [
 [[package]]
 name = "servo-media-streams"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "lazy_static",
  "uuid",
@@ -5467,12 +5523,12 @@ dependencies = [
 [[package]]
 name = "servo-media-traits"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 
 [[package]]
 name = "servo-media-webrtc"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "boxfnonce",
  "lazy_static",
@@ -5550,7 +5606,7 @@ dependencies = [
 [[package]]
 name = "servo_media_derive"
 version = "0.1.0"
-source = "git+https://github.com/gatoWololo/servo-media#d06ba0824e816d695b391f6f33bd778a01c32d98"
+source = "git+https://github.com/gatoWololo/servo-media#dec94294263730bb0c5456c4bdf04d3d90972704"
 dependencies = [
  "proc-macro2 1.0.17",
  "quote 1.0.2",
@@ -5668,7 +5724,7 @@ dependencies = [
  "libloading 0.5.2",
  "libservo",
  "log",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde_json",
  "servo-media",
  "surfman",
@@ -6244,6 +6300,7 @@ dependencies = [
 [[package]]
 name = "tokio"
 version = "0.1.22"
+source = "git+https://github.com/gatoWololo/tokio-0.1.22#27f98d45247e3cd2f9b81309bee80c4fb2880065"
 dependencies = [
  "bytes 0.4.12",
  "futures 0.1.28",
@@ -6257,7 +6314,7 @@ dependencies = [
  "tokio-reactor",
  "tokio-sync",
  "tokio-tcp",
- "tokio-threadpool 0.1.18",
+ "tokio-threadpool 0.1.18 (git+https://github.com/gatoWololo/tokio-threadpool-0.1.18)",
  "tokio-timer",
  "tokio-udp",
  "tokio-uds",
@@ -6421,15 +6478,16 @@ dependencies = [
 [[package]]
 name = "tokio-threadpool"
 version = "0.1.18"
+source = "git+https://github.com/gatoWololo/tokio-threadpool-0.1.18#963c53f38612aa9d199c776a0ed31ecbfe2ccc49"
 dependencies = [
- "crossbeam-deque",
+ "crossbeam-deque 0.7.3",
  "crossbeam-queue",
  "crossbeam-utils 0.7.2",
  "futures 0.1.28",
  "lazy_static",
  "log",
  "num_cpus",
- "rr_channel 0.1.0",
+ "rr_channel",
  "slab",
  "tokio-executor",
 ]
@@ -6440,7 +6498,7 @@ version = "0.1.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "df720b6581784c118f0eb4310796b12b1d242a7eb95f716a8367855325c25f89"
 dependencies = [
- "crossbeam-deque",
+ "crossbeam-deque 0.7.3",
  "crossbeam-queue",
  "crossbeam-utils 0.7.2",
  "futures 0.1.28",
@@ -6935,7 +6993,7 @@ dependencies = [
  "msg",
  "net_traits",
  "pixels",
- "rr_channel 0.1.0",
+ "rr_channel",
  "script_traits",
  "serde",
  "serde_json",
@@ -6955,7 +7013,7 @@ dependencies = [
  "log",
  "malloc_size_of",
  "msg",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "servo_config",
  "smallvec 0.6.13",
@@ -6968,6 +7026,7 @@ dependencies = [
 [[package]]
 name = "webrender"
 version = "0.61.0"
+source = "git+https://github.com/gatoWololo/webrender#a02af3c1b4f1bf33dd9a4a4978ab45a60d74c0e1"
 dependencies = [
  "backtrace",
  "base64 0.10.1",
@@ -6995,7 +7054,7 @@ dependencies = [
  "plane-split",
  "rayon",
  "ron 0.5.1",
- "rr_channel 0.1.0 (git+https://github.com/gatoWololo//rr_channel)",
+ "rr_channel",
  "serde",
  "serde_json",
  "sig",
@@ -7012,6 +7071,7 @@ dependencies = [
 [[package]]
 name = "webrender_api"
 version = "0.61.0"
+source = "git+https://github.com/gatoWololo/webrender#a02af3c1b4f1bf33dd9a4a4978ab45a60d74c0e1"
 dependencies = [
  "app_units",
  "bitflags",
@@ -7032,6 +7092,7 @@ dependencies = [
 [[package]]
 name = "webrender_build"
 version = "0.0.1"
+source = "git+https://github.com/gatoWololo/webrender#a02af3c1b4f1bf33dd9a4a4978ab45a60d74c0e1"
 dependencies = [
  "bitflags",
  "lazy_static",
@@ -7080,11 +7141,11 @@ dependencies = [
 [[package]]
 name = "webxr-api"
 version = "0.0.1"
-source = "git+https://github.com/gatoWololo/webxr/#bec85743e1b1821bed12aa797d558c2c1596073a"
+source = "git+https://github.com/gatowololo/webxr#bec85743e1b1821bed12aa797d558c2c1596073a"
 dependencies = [
  "euclid",
  "log",
- "rr_channel 0.1.0",
+ "rr_channel",
  "serde",
  "time",
 ]
@@ -7109,7 +7170,7 @@ dependencies = [
  "gfx-memory",
  "naga",
  "parking_lot 0.11.0",
- "ron 0.6.0",
+ "ron 0.6.4",
  "serde",
  "smallvec 1.4.2",
  "thiserror",
@@ -7223,6 +7284,7 @@ dependencies = [
 [[package]]
 name = "wr_malloc_size_of"
 version = "0.0.1"
+source = "git+https://github.com/gatoWololo/webrender#a02af3c1b4f1bf33dd9a4a4978ab45a60d74c0e1"
 dependencies = [
  "app_units",
  "euclid",
