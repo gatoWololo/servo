@@ -32,6 +32,8 @@ use std::io::Write;
 use std::panic;
 use std::process;
 use rr_channel::detthread;
+use rr_channel::detthread::init_tivo_thread_root_with_router;
+use tracing_subscriber;
 
 pub mod platform {
     #[cfg(target_os = "macos")]
@@ -78,8 +80,13 @@ fn install_crash_handler() {
 }
 
 pub fn main() {
+    tracing_subscriber::fmt::Subscriber::builder()
+        .with_env_filter(EnvFilter::from_default_env())
+        .with_target(false)
+        .without_time()
+        .init();
     install_crash_handler();
-    init_tivo_thread_root();
+    init_tivo_thread_root_with_router();
     resources::init();
 
     // Parse the command line options and store them globally
