@@ -807,7 +807,12 @@ where
         let filter = max(env_logger.filter(), con_logger.filter());
         let logger = BothLogger(env_logger, con_logger);
 
-        log::set_boxed_logger(Box::new(logger)).expect("Failed to set logger.");
+        match log::set_boxed_logger(Box::new(logger)) {
+            Ok(_) => {}
+            Err(_) => {
+                warn!("Unable to set log. Moving on?");
+            }
+        }
         log::set_max_level(filter);
     }
 

@@ -62,6 +62,7 @@ tinyfiledialogs = "3.0"
 webxr = { git = "https://github.com/servo/webxr", features = ["ipc", "glwindow", "headless"] }
 winit = "0.19"
 rr_channel = {git = "https://github.com/gatoWololo/rr_channel.git"}
+tracing-subscriber = "0.2"
 
 [target.'cfg(any(target_os = "linux", target_os = "windows"))'.dependencies]
 image = "0.23"

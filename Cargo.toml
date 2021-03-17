@@ -39,10 +39,10 @@ webrender_api = { git = "https://github.com/gatoWololo/webrender" }
 #webrender_api = { path = "../webrender/webrender_api/" }
 
 [patch."https://github.com/gatowololo/rr_channel"]
-#rr_channel = {path = "../rr_channel"}
+rr_channel = {path = "../rr_channel"}
 # Notice extra '/' on git https address. This is needed as Cargo does not currently allow pointing
 # to a different branch if the address is the same.
-rr_channel = { git = "https:///github.com//gatoWololo/rr_channel", branch = "servo_development"}
+#rr_channel = { git = "https:///github.com//gatoWololo/rr_channel", branch = "servo_development"}
 
 [patch."https://github.com/servo/media"]
 servo-media = {git = "https://github.com/gatoWololo/servo-media"}

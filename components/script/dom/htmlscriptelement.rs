@@ -66,6 +66,7 @@ use std::process::Command;
 use std::rc::Rc;
 use std::sync::{Arc, Mutex};
 use style::str::{StaticStringVec, HTML_SPACE_CHARACTERS};
+use rr_channel::detthread::{init_foreign_thread, DetThreadId, generate_new_child_id};
 use uuid::Uuid;
 
 pub struct OffThreadCompilationContext {
@@ -77,6 +78,7 @@ pub struct OffThreadCompilationContext {
     canceller: TaskCanceller,
     script_text: String,
     fetch_options: ScriptFetchOptions,
+    child_id: DetThreadId,
 }
 
 /// A wrapper to mark OffThreadToken as Send,
@@ -93,6 +95,7 @@ unsafe extern "C" fn off_thread_compilation_callback(
     callback_data: *mut c_void,
 ) {
     let mut context = Box::from_raw(callback_data as *mut OffThreadCompilationContext);
+    init_foreign_thread(context.child_id);
     let token = OffThreadCompilationToken(token);
 
     let url = context.url.clone();
@@ -101,6 +104,7 @@ unsafe extern "C" fn off_thread_compilation_callback(
     let script_kind = context.script_kind.clone();
     let script = replace(&mut context.script_text, String::new());
     let fetch_options = context.fetch_options.clone();
+
 
     // Continue with <https://html.spec.whatwg.org/multipage/#fetch-a-classic-script>
     let _ = context.task_source.queue_with_canceller(
@@ -440,6 +444,7 @@ impl FetchResponseListener for ClassicContext {
                 canceller: global.task_canceller(TaskSourceName::DOMManipulation),
                 script_text: source_string,
                 fetch_options: self.fetch_options.clone(),
+                child_id: generate_new_child_id(),
             });
 
             unsafe {
